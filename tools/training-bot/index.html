@@ -1,11 +1,6 @@
 <title>مستشار أفريكارد التدريبي</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap">
 <style>
-/* ── TOKENS ───────────────────────────────────────────
-   Layout : fixed chat UI, full-height, message bubbles
-   Color  : deep navy · gold accent · white surfaces
-   Type   : Cairo — Arabic-native, conversational feel
-──────────────────────────────────────────────────────*/
 :root {
   --bg:       #f0f4fb;
   --surface:  #ffffff;
@@ -51,73 +46,99 @@ body{
 
 /* TOP BAR */
 .topbar{
-  background:var(--blue);color:#fff;
+  background:linear-gradient(135deg,#003a70 0%,#004B8D 60%,#005fa8 100%);
+  color:#fff;
   display:flex;align-items:center;gap:12px;
-  padding:12px 20px;flex-shrink:0;
-  border-bottom:2px solid rgba(255,255,255,.1);
+  padding:10px 16px;flex-shrink:0;
+  border-bottom:2px solid rgba(201,162,39,.35);
+  box-shadow:0 2px 12px rgba(0,0,0,.18);
 }
 .bot-avatar{
-  width:40px;height:40px;border-radius:50%;
+  width:42px;height:42px;border-radius:50%;
   background:linear-gradient(135deg,#e8c547,#C9A227);
   display:flex;align-items:center;justify-content:center;
-  font-size:1.1rem;font-weight:900;color:var(--blue);flex-shrink:0;
+  font-size:1.35rem;flex-shrink:0;
+  box-shadow:0 0 0 2px rgba(255,255,255,.25);
 }
-.bot-info{flex:1;}
-.bot-name{font-weight:800;font-size:.95rem;}
-.bot-status{font-size:.72rem;opacity:.7;display:flex;align-items:center;gap:4px;}
-.status-dot{width:7px;height:7px;border-radius:50%;background:#4cff90;display:inline-block;}
-.topbar-logo{font-size:.75rem;opacity:.55;letter-spacing:.04em;text-align:left;}
+.bot-info{flex:1;min-width:0;}
+.bot-name{font-weight:900;font-size:.92rem;letter-spacing:.01em;}
+.bot-sub{font-size:.68rem;opacity:.65;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.bot-status{font-size:.7rem;opacity:.75;display:flex;align-items:center;gap:4px;margin-top:2px;}
+.status-dot{width:6px;height:6px;border-radius:50%;background:#4cff90;display:inline-block;flex-shrink:0;}
+.topbar-brand{text-align:left;flex-shrink:0;}
+.topbar-brand-name{font-size:.78rem;font-weight:800;color:var(--gold);letter-spacing:.03em;}
+.topbar-brand-url{font-size:.62rem;opacity:.5;letter-spacing:.04em;}
+
+/* TRUST BAR */
+.trust-bar{
+  background:linear-gradient(90deg,var(--gold-lt),#fff,var(--gold-lt));
+  border-bottom:1px solid rgba(201,162,39,.2);
+  padding:5px 16px;
+  display:flex;align-items:center;justify-content:center;gap:16px;
+  flex-shrink:0;overflow:hidden;
+}
+.trust-item{
+  display:flex;align-items:center;gap:5px;
+  font-size:.68rem;color:var(--muted);font-weight:600;white-space:nowrap;
+}
+.trust-item span{font-size:.85rem;}
+@media(max-width:400px){.trust-item:nth-child(3){display:none;}}
 
 /* CHAT AREA */
 .chat-area{
-  flex:1;overflow-y:auto;padding:20px 16px;
-  display:flex;flex-direction:column;gap:14px;
+  flex:1;overflow-y:auto;padding:16px 14px;
+  display:flex;flex-direction:column;gap:12px;
   scroll-behavior:smooth;
 }
 
 /* MESSAGES */
-.msg-row{display:flex;gap:10px;align-items:flex-end;}
+.msg-row{display:flex;gap:8px;align-items:flex-end;}
 .msg-row.user{flex-direction:row-reverse;}
 .msg-avatar{
-  width:32px;height:32px;border-radius:50%;flex-shrink:0;
+  width:30px;height:30px;border-radius:50%;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
-  font-size:.75rem;font-weight:800;
+  font-size:.85rem;
 }
-.msg-avatar.bot{background:linear-gradient(135deg,var(--blue),#0066cc);color:#fff;}
-.msg-avatar.user{background:linear-gradient(135deg,#e8c547,#C9A227);color:#004B8D;}
+.msg-avatar.bot{
+  background:linear-gradient(135deg,#003a70,#0066cc);
+  color:#fff;font-size:1rem;
+}
+.msg-avatar.user{background:linear-gradient(135deg,#e8c547,#C9A227);color:#004B8D;font-weight:800;font-size:.72rem;}
 
 .bubble{
-  max-width:78%;border-radius:18px;padding:12px 16px;
-  font-size:.9rem;line-height:1.7;
+  max-width:80%;border-radius:18px;padding:11px 15px;
+  font-size:.88rem;line-height:1.75;
 }
 .msg-row.bot .bubble{
   background:var(--bubble-bot);border:1px solid var(--border);
   border-bottom-right-radius:4px;
-  box-shadow:0 1px 6px rgba(0,0,0,.07);
+  box-shadow:0 1px 8px rgba(0,0,0,.06);
 }
 .msg-row.user .bubble{
   background:var(--bubble-user);color:var(--bubble-user-fg);
   border-bottom-left-radius:4px;
 }
-.bubble p+p{margin-top:8px;}
-.bubble strong{font-weight:800;}
+.bubble p+p{margin-top:7px;}
+.bubble strong{font-weight:900;}
+.bubble em{color:var(--gold);font-style:normal;font-weight:700;}
 
 /* QUICK REPLIES */
 .quick-replies{
-  display:flex;flex-wrap:wrap;gap:8px;
-  padding:0 16px 4px 16px;
+  display:flex;flex-wrap:wrap;gap:7px;
+  padding:2px 14px 8px;
   flex-direction:row-reverse;
 }
 .qr{
-  background:var(--blue-lt);border:1px solid rgba(0,75,141,.25);
-  color:var(--blue2);border-radius:20px;padding:7px 16px;
-  font-family:'Cairo',sans-serif;font-size:.84rem;font-weight:700;
-  cursor:pointer;transition:background .15s,border-color .15s;
+  background:var(--blue-lt);border:1.5px solid rgba(0,75,141,.2);
+  color:var(--blue2);border-radius:20px;padding:6px 14px;
+  font-family:'Cairo',sans-serif;font-size:.82rem;font-weight:700;
+  cursor:pointer;transition:all .15s;
 }
-.qr:hover{background:var(--blue);color:#fff;border-color:var(--blue);}
+.qr:hover{background:var(--blue);color:#fff;border-color:var(--blue);transform:translateY(-1px);}
+.qr:active{transform:scale(.96);}
 
-/* TYPING INDICATOR */
-.typing{display:flex;gap:5px;align-items:center;padding:12px 16px;}
+/* TYPING */
+.typing{display:flex;gap:5px;align-items:center;padding:10px 14px;}
 .typing span{
   width:7px;height:7px;border-radius:50%;background:var(--muted);
   animation:bounce .9s ease-in-out infinite;
@@ -129,64 +150,99 @@ body{
 /* REPORT CARD */
 .report-card{
   background:var(--surface);border:1px solid var(--border);
-  border-radius:16px;overflow:hidden;margin-top:4px;
+  border-radius:16px;overflow:hidden;margin-top:2px;
+  box-shadow:0 4px 20px rgba(0,0,0,.08);
 }
 .report-header{
-  background:linear-gradient(135deg,var(--blue),#0066cc);
-  color:#fff;padding:16px 20px;
+  background:linear-gradient(135deg,#003a70 0%,#004B8D 50%,#0060aa 100%);
+  color:#fff;padding:16px 18px;position:relative;overflow:hidden;
 }
-.report-header h3{font-size:1.05rem;font-weight:900;margin-bottom:2px;}
-.report-header p{font-size:.78rem;opacity:.8;}
-.report-body{padding:16px 20px;display:flex;flex-direction:column;gap:12px;}
-.report-score-row{display:flex;align-items:center;gap:12px;}
+.report-header::before{
+  content:'';position:absolute;top:-20px;left:-20px;
+  width:100px;height:100px;border-radius:50%;
+  background:rgba(201,162,39,.12);
+}
+.report-header::after{
+  content:'';position:absolute;bottom:-30px;right:10px;
+  width:120px;height:120px;border-radius:50%;
+  background:rgba(255,255,255,.04);
+}
+.report-header h3{font-size:1rem;font-weight:900;margin-bottom:3px;position:relative;}
+.report-header p{font-size:.75rem;opacity:.75;position:relative;}
+.report-header-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(201,162,39,.2);border:1px solid rgba(201,162,39,.4);
+  border-radius:20px;padding:2px 10px;
+  font-size:.65rem;font-weight:700;color:#e8c547;
+  margin-bottom:8px;
+}
+.report-body{padding:14px 16px;display:flex;flex-direction:column;gap:12px;}
+.report-score-row{display:flex;align-items:center;gap:14px;}
 .report-score-circle{
-  width:64px;height:64px;border-radius:50%;flex-shrink:0;
+  width:68px;height:68px;border-radius:50%;flex-shrink:0;
   background:conic-gradient(var(--gold) var(--pct), var(--border) 0);
   display:flex;align-items:center;justify-content:center;
   position:relative;
 }
 .report-score-circle::before{
-  content:'';position:absolute;inset:8px;border-radius:50%;background:var(--surface);
+  content:'';position:absolute;inset:9px;border-radius:50%;background:var(--surface);
 }
-.report-score-num{position:relative;font-size:.85rem;font-weight:900;color:var(--gold);}
-.report-score-info h4{font-size:.9rem;font-weight:800;margin-bottom:2px;}
-.report-score-info p{font-size:.78rem;color:var(--muted);}
+.report-score-num{position:relative;font-size:.88rem;font-weight:900;color:var(--gold);}
+.report-score-info h4{font-size:.88rem;font-weight:800;margin-bottom:3px;}
+.report-score-info p{font-size:.74rem;color:var(--muted);line-height:1.5;}
 .report-section{border-top:1px solid var(--border);padding-top:12px;}
-.report-section-title{font-size:.72rem;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin-bottom:8px;}
-.cert-list{display:flex;flex-direction:column;gap:6px;}
+.report-section-title{
+  font-size:.68rem;letter-spacing:.1em;color:var(--muted);
+  text-transform:uppercase;margin-bottom:9px;font-weight:700;
+}
+.cert-list{display:flex;flex-direction:column;gap:7px;}
 .cert-item{
   display:flex;align-items:flex-start;gap:10px;
   background:var(--surface2);border-radius:10px;padding:10px 12px;
+  border:1px solid var(--border);
+  transition:border-color .15s;
 }
-.cert-icon{font-size:1rem;flex-shrink:0;margin-top:1px;}
-.cert-name{font-size:.84rem;font-weight:700;margin-bottom:1px;}
-.cert-body{font-size:.76rem;color:var(--muted);}
+.cert-item:hover{border-color:rgba(0,75,141,.25);}
+.cert-icon{font-size:1.1rem;flex-shrink:0;margin-top:1px;}
+.cert-name{font-size:.83rem;font-weight:700;margin-bottom:2px;line-height:1.4;}
+.cert-body{font-size:.74rem;color:var(--muted);line-height:1.5;}
 .cert-priority{
-  display:inline-block;font-size:.65rem;font-weight:700;border-radius:8px;
-  padding:1px 7px;margin-right:4px;
+  display:inline-block;font-size:.63rem;font-weight:800;border-radius:8px;
+  padding:1px 8px;margin-left:4px;letter-spacing:.02em;
 }
 .pri-high{background:rgba(181,56,90,.1);color:var(--rose);}
 .pri-med{background:rgba(0,75,141,.1);color:var(--blue2);}
 .pri-opt{background:rgba(26,122,74,.1);color:var(--green);}
+
+/* WA BUTTON */
 .wa-mini{
   display:flex;align-items:center;justify-content:center;gap:8px;
-  background:linear-gradient(135deg,#25d366,#128c7e);
-  color:#fff;text-decoration:none;border-radius:10px;padding:11px;
-  font-family:'Cairo',sans-serif;font-size:.85rem;font-weight:800;
-  margin-top:4px;
+  background:linear-gradient(135deg,#25d366,#1aab55);
+  color:#fff;text-decoration:none;border-radius:12px;padding:13px;
+  font-family:'Cairo',sans-serif;font-size:.88rem;font-weight:800;
+  margin-top:2px;box-shadow:0 3px 12px rgba(37,211,102,.3);
+  transition:transform .15s,box-shadow .15s;
+}
+.wa-mini:hover{transform:translateY(-2px);box-shadow:0 5px 18px rgba(37,211,102,.4);}
+
+/* REPORT FOOTER */
+.report-footer{
+  border-top:1px solid var(--border);padding:10px 16px;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  font-size:.67rem;color:var(--muted);background:var(--surface2);
 }
 
 /* INPUT BAR */
 .input-bar{
   background:var(--surface);border-top:1px solid var(--border);
-  padding:12px 16px;display:flex;gap:10px;align-items:flex-end;
+  padding:10px 14px;display:flex;gap:10px;align-items:flex-end;
   flex-shrink:0;
 }
 .input-bar textarea{
   flex:1;background:var(--surface2);border:1.5px solid var(--border);
   border-radius:14px;padding:10px 14px;resize:none;
-  font-family:'Cairo',sans-serif;font-size:.9rem;color:var(--fg);
-  min-height:44px;max-height:120px;line-height:1.5;direction:rtl;
+  font-family:'Cairo',sans-serif;font-size:.88rem;color:var(--fg);
+  min-height:44px;max-height:110px;line-height:1.5;direction:rtl;
   transition:border-color .18s;
 }
 .input-bar textarea:focus{outline:none;border-color:var(--blue);}
@@ -196,31 +252,54 @@ body{
   background:var(--blue);color:#fff;cursor:pointer;
   display:flex;align-items:center;justify-content:center;
   flex-shrink:0;transition:opacity .18s,transform .1s;font-size:1.1rem;
+  box-shadow:0 2px 8px rgba(0,75,141,.3);
 }
-.send-btn:hover{opacity:.85;}
+.send-btn:hover{opacity:.88;}
 .send-btn:active{transform:scale(.93);}
-.send-btn:disabled{opacity:.35;cursor:not-allowed;}
+.send-btn:disabled{opacity:.3;cursor:not-allowed;box-shadow:none;}
 
 /* RESTART */
-.restart-pill{
-  text-align:center;padding:4px 0;
-}
+.restart-pill{text-align:center;padding:6px 0 2px;}
 .restart-pill button{
   background:none;border:1px solid var(--border);color:var(--muted);
   border-radius:20px;padding:5px 16px;font-family:'Cairo',sans-serif;
-  font-size:.78rem;cursor:pointer;
+  font-size:.76rem;cursor:pointer;transition:all .15s;
+}
+.restart-pill button:hover{border-color:var(--blue);color:var(--blue);}
+
+/* PROGRESS */
+.progress-bar{
+  height:2px;background:var(--border);flex-shrink:0;
+}
+.progress-fill{
+  height:100%;background:linear-gradient(90deg,var(--gold),var(--blue2));
+  transition:width .4s ease;width:0%;
 }
 </style>
 
 <!-- TOP BAR -->
 <div class="topbar">
-  <div class="bot-avatar">م</div>
+  <div class="bot-avatar">🎓</div>
   <div class="bot-info">
     <div class="bot-name">مستشار أفريكارد التدريبي</div>
-    <div class="bot-status"><span class="status-dot"></span>متاح الآن</div>
+    <div class="bot-sub">تقييم مهني · توصية شهادات · خطة تدريبية</div>
+    <div class="bot-status"><span class="status-dot"></span>متاح الآن · استجابة فورية</div>
   </div>
-  <div class="topbar-logo">أفريكارد<br>africahrd.com</div>
+  <div class="topbar-brand">
+    <div class="topbar-brand-name">أفريكارد</div>
+    <div class="topbar-brand-url">africahrd.com</div>
+  </div>
 </div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><span>🌍</span>خدمة إقليمية</div>
+  <div class="trust-item"><span>🏅</span>شهادات معتمدة</div>
+  <div class="trust-item"><span>🔒</span>مجاني وآمن</div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
 
 <!-- CHAT -->
 <div class="chat-area" id="chat"></div>
@@ -233,7 +312,6 @@ body{
 </div>
 
 <script>
-// ─── KNOWLEDGE BASE ──────────────────────────────────────
 const CERTS = {
   communication:[
     {name:'شهادة التواصل الفعال والذكاء العاطفي — أفريكارد',body:'ورشة مجانية معتمدة مع شهادة حضور رقمية.',pri:'high'},
@@ -272,12 +350,12 @@ const CERTS = {
   ],
 };
 
-// ─── CONVERSATION FLOW ───────────────────────────────────
 const FLOW = [
-  // 0
+  // 0 — welcome
   {
-    bot:['مرحباً بك! 👋\n\nأنا مستشارك التدريبي في **أفريكارد**.\n\nأساعدك في تحديد احتياجك التدريبي الحقيقي وأهم الشهادات المهنية التي تحتاجها — سواء كنت فرداً أو مؤسسة.\n\nنبدأ؟ 🎯'],
-    quickReplies:['نعم، ابدأ معي','أريد تقييم لمؤسستي'],
+    bot:['مرحباً بك 👋\n\nأنا **مستشارك التدريبي في أفريكارد**.\n\nخلال دقيقتين سأساعدك في تحديد احتياجك التدريبي الحقيقي، واقتراح أهم الشهادات المهنية التي تُعزز مسارك — سواء كنت فرداً يطوّر نفسه، أو مؤسسة تبني كوادرها.\n\nنبدأ؟ 🎯'],
+    quickReplies:['نعم، ابدأ معي','أريد تقييماً لمؤسستي'],
+    progress: 5,
     next:(input,ctx)=>{
       if(/مؤسس|شركة|منظمة|فريق|موظف/.test(input)){ ctx.isOrg=true; return 'org_name'; }
       return 1;
@@ -285,14 +363,16 @@ const FLOW = [
   },
   // 1 — name
   {
-    bot:['ممتاز! قبل أن نبدأ، ما اسمك الكريم؟'],
+    bot:['ممتاز!\n\nما اسمك الكريم؟'],
     freeText:true,
+    progress: 15,
     next:(input,ctx)=>{ ctx.name=input.trim(); return 2; }
   },
   // 2 — field
   {
-    bot:(ctx)=>[`أهلاً بك ${ctx.name}! 😊\n\nفي أي مجال تعمل أو تدرس؟`],
+    bot:(ctx)=>[`أهلاً **${ctx.name}** 😊\n\nفي أي مجال تعمل أو تتخصص؟`],
     quickReplies:['التعليم والأكاديميا','الإعلام والصحافة','الموارد البشرية','التدريب والتطوير','التقنية','الصحة والطب','الهندسة','القيادة والإدارة','غير ذلك'],
+    progress: 30,
     next:(input,ctx)=>{
       const map = {
         'التعليم':'education','أكاديم':'education','معلم':'education','أستاذ':'education',
@@ -316,12 +396,14 @@ const FLOW = [
   {
     bot:['وما الدور الذي تؤديه حالياً؟'],
     quickReplies:['مدرب أو معلم','مدير أو قائد فريق','موظف يبحث عن تطوير','طالب أو خريج','صاحب مشروع'],
+    progress: 45,
     next:(input,ctx)=>{ ctx.role=input; return 4; }
   },
   // 4 — goal
   {
-    bot:['ما الذي تريد تحقيقه من التدريب؟ حدد الأهم بالنسبة لك:'],
+    bot:['ما الهدف الأساسي الذي تسعى إليه من التدريب؟'],
     quickReplies:['تطوير مهارات التواصل','بناء قدرات تدريبية','الانتقال للتعليم الرقمي','تعزيز الثقة والإلقاء','الحصول على شهادة معتمدة','تطوير مهارات قيادية','إجراء بحوث احترافية'],
+    progress: 60,
     next:(input,ctx)=>{
       ctx.goal=input;
       const goalMap = {
@@ -341,8 +423,9 @@ const FLOW = [
   },
   // 5 — level
   {
-    bot:['وكيف تقيّم مستواك الحالي في هذا المجال؟'],
+    bot:['كيف تقيّم مستواك الحالي في هذا المجال؟'],
     quickReplies:['مبتدئ — أبدأ من الصفر','متوسط — لديّ أساس جيد','متقدم — أبحث عن الاحتراف'],
+    progress: 75,
     next:(input,ctx)=>{
       ctx.level = input.includes('مبتدئ') ? 'beginner' : input.includes('متوسط') ? 'mid' : 'advanced';
       return 6;
@@ -350,50 +433,50 @@ const FLOW = [
   },
   // 6 — time
   {
-    bot:['آخر سؤال: كم الوقت الذي تستطيع تخصيصه للتدريب أسبوعياً؟'],
+    bot:['آخر سؤال: كم ساعة أسبوعياً تستطيع تخصيصها للتدريب؟'],
     quickReplies:['ساعة إلى ساعتين','٣ إلى ٥ ساعات','٦ ساعات فأكثر'],
-    next:(input,ctx)=>{
-      ctx.time = input;
-      return 'report';
-    }
+    progress: 90,
+    next:(input,ctx)=>{ ctx.time=input; return 'report'; }
   },
-  // ORG
+  // ORG FLOW
   {
     id:'org_name',
-    bot:['ممتاز! ما اسم مؤسستك أو شركتك؟'],
+    bot:['ممتاز! ما اسم مؤسستك؟'],
     freeText:true,
+    progress: 20,
     next:(input,ctx)=>{ ctx.orgName=input.trim(); ctx.name=input.trim(); return 'org_size'; }
   },
   {
     id:'org_size',
-    bot:(ctx)=>[`شكراً لـ **${ctx.orgName}**! 🏢\n\nكم عدد الموظفين أو المستهدفين بالتدريب؟`],
+    bot:(ctx)=>[`شكراً لـ **${ctx.orgName}** 🏢\n\nكم عدد الموظفين أو المستهدفين بالتدريب؟`],
     quickReplies:['أقل من ١٠','١٠–٥٠','٥٠–٢٠٠','أكثر من ٢٠٠'],
+    progress: 45,
     next:(input,ctx)=>{ ctx.orgSize=input; return 'org_sector'; }
   },
   {
     id:'org_sector',
     bot:['ما القطاع الذي تعمل فيه مؤسستك؟'],
     quickReplies:['التعليم والتدريب','الصحة','الحكومي','الخاص / الأعمال','المنظمات غير الربحية'],
+    progress: 65,
     next:(input,ctx)=>{ ctx.orgSector=input; ctx.field='hr'; ctx.isOrg=true; return 'org_goal'; }
   },
   {
     id:'org_goal',
     bot:['ما الهدف الرئيسي من تدريب موظفيكم؟'],
     quickReplies:['تطوير مهارات التواصل والقيادة','بناء كوادر تدريبية داخلية','رفع كفاءة استخدام التقنية','التحضير للحصول على شهادات مهنية','تحسين الأداء المؤسسي العام'],
+    progress: 85,
     next:(input,ctx)=>{ ctx.orgGoal=input; return 'report'; }
   },
 ];
 
-// ─── ENGINE ──────────────────────────────────────────────
+// ENGINE
 const ARABIC_NUMS = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
 function toAr(n){ return String(n).split('').map(d=>ARABIC_NUMS[+d]).join(''); }
-
 function getStep(id){ return FLOW.find(s=>s.id===id) || FLOW[id]; }
 
 function pickCerts(ctx){
   const keys = [ctx.field, ctx.field2, ctx.isOrg?'leadership':null].filter(Boolean);
-  const seen = new Set();
-  const out  = [];
+  const seen=new Set(), out=[];
   for(const k of keys){
     if(CERTS[k]) for(const c of CERTS[k]){
       if(!seen.has(c.name)){ seen.add(c.name); out.push(c); }
@@ -413,19 +496,23 @@ function computeScore(ctx){
 }
 
 function buildReport(ctx){
-  const certs = pickCerts(ctx);
-  const score = computeScore(ctx);
-  const label = score>=80?'احتياج تدريبي عالٍ':score>=65?'احتياج تدريبي واضح':'احتياج تدريبي معتدل';
-  const pct = `${score*3.6}deg`;
-  const priLabel = {high:'أولوية عالية',med:'موصى به',opt:'تكميلي'};
-  const priClass = {high:'pri-high',med:'pri-med',opt:'pri-opt'};
-  const whoLine = ctx.isOrg
-    ? `تقرير مؤسسة: **${ctx.orgName}** · القطاع: ${ctx.orgSector}`
-    : `تقرير شخصي: **${ctx.name}** · المجال: ${ctx.fieldRaw}`;
+  const certs=pickCerts(ctx);
+  const score=computeScore(ctx);
+  const label=score>=80?'احتياج تدريبي عالٍ':score>=65?'احتياج تدريبي واضح':'احتياج تدريبي معتدل';
+  const pct=`${score*3.6}deg`;
+  const priLabel={high:'أولوية عالية',med:'موصى به',opt:'تكميلي'};
+  const priClass={high:'pri-high',med:'pri-med',opt:'pri-opt'};
+  const certIcon={high:'🥇',med:'🥈',opt:'🥉'};
+  const whoLine=ctx.isOrg
+    ?`مؤسسة: <strong>${ctx.orgName}</strong> · القطاع: ${ctx.orgSector}`
+    :`<strong>${ctx.name}</strong> · المجال: ${ctx.fieldRaw}`;
+  const now=new Date();
+  const dateStr=`${now.getFullYear()}/${String(now.getMonth()+1).padStart(2,'0')}/${String(now.getDate()).padStart(2,'0')}`;
 
   return `<div class="report-card">
     <div class="report-header">
-      <h3>📋 تقرير الاحتياج التدريبي</h3>
+      <div class="report-header-badge">📋 تقرير أفريكارد التدريبي</div>
+      <h3>${label}</h3>
       <p>${whoLine}</p>
     </div>
     <div class="report-body">
@@ -435,16 +522,16 @@ function buildReport(ctx){
         </div>
         <div class="report-score-info">
           <h4>${label}</h4>
-          <p>${ctx.isOrg ? 'بناءً على حجم المؤسسة والقطاع والأهداف' : 'بناءً على مجالك ومستواك وهدفك'}</p>
+          <p>${ctx.isOrg?'بناءً على حجم المؤسسة والقطاع والأهداف':'بناءً على مجالك ومستواك وهدفك التدريبي'}</p>
         </div>
       </div>
 
       <div class="report-section">
-        <div class="report-section-title">أهم الشهادات المهنية الموصى بها</div>
+        <div class="report-section-title">الشهادات المهنية الموصى بها</div>
         <div class="cert-list">
           ${certs.map(c=>`
             <div class="cert-item">
-              <span class="cert-icon">🏅</span>
+              <span class="cert-icon">${certIcon[c.pri]}</span>
               <div>
                 <div class="cert-name">
                   <span class="cert-priority ${priClass[c.pri]}">${priLabel[c.pri]}</span>
@@ -463,52 +550,60 @@ function buildReport(ctx){
         </a>
       </div>
     </div>
+    <div class="report-footer">
+      <span>🌍 أفريكارد للتدريب وتنمية الموارد البشرية</span>
+      <span>·</span>
+      <span>africahrd.com</span>
+      <span>·</span>
+      <span>${dateStr}</span>
+    </div>
   </div>`;
 }
 
-// ─── UI CORE ─────────────────────────────────────────────
-const chatEl  = document.getElementById('chat');
-const qaEl    = document.getElementById('quick-area');
-const inputEl = document.getElementById('user-input');
-const sendEl  = document.getElementById('send-btn');
-let currentStep = 0;
-const ctx = {};
+// UI CORE
+const chatEl=document.getElementById('chat');
+const qaEl=document.getElementById('quick-area');
+const inputEl=document.getElementById('user-input');
+const sendEl=document.getElementById('send-btn');
+const progressEl=document.getElementById('progress');
+let currentStep=0;
+const ctx={};
 
-function scrollBot(){ chatEl.scrollTop = chatEl.scrollHeight; }
+function setProgress(pct){ if(progressEl) progressEl.style.width=(pct||0)+'%'; }
+function scrollBot(){ chatEl.scrollTop=chatEl.scrollHeight; }
 
-function addMsg(who, html, isHtml=false){
-  const row = document.createElement('div');
-  row.className = 'msg-row '+who;
-  const av = document.createElement('div');
-  av.className = 'msg-avatar '+who;
-  av.textContent = who==='bot' ? 'م' : 'أ';
-  const bub = document.createElement('div');
-  bub.className = 'bubble';
-  if(isHtml){ bub.innerHTML = html; }
-  else {
-    const lines = html.split('\n').filter(l=>l.trim());
-    bub.innerHTML = lines.map(l=>`<p>${l.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')}</p>`).join('');
+function addMsg(who,html,isHtml=false){
+  const row=document.createElement('div');
+  row.className='msg-row '+who;
+  const av=document.createElement('div');
+  av.className='msg-avatar '+who;
+  av.textContent=who==='bot'?'🎓':'أ';
+  const bub=document.createElement('div');
+  bub.className='bubble';
+  if(isHtml){ bub.innerHTML=html; }
+  else{
+    const lines=html.split('\n').filter(l=>l.trim());
+    bub.innerHTML=lines.map(l=>`<p>${l.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')}</p>`).join('');
   }
   if(who==='bot'){ row.appendChild(av); row.appendChild(bub); }
-  else { row.appendChild(bub); row.appendChild(av); }
+  else{ row.appendChild(bub); row.appendChild(av); }
   chatEl.appendChild(row);
   scrollBot();
 }
 
 function showTyping(){
-  const row = document.createElement('div');
+  const row=document.createElement('div');
   row.className='msg-row bot'; row.id='typing-row';
-  row.innerHTML='<div class="msg-avatar bot">م</div><div class="bubble"><div class="typing"><span></span><span></span><span></span></div></div>';
+  row.innerHTML='<div class="msg-avatar bot">🎓</div><div class="bubble"><div class="typing"><span></span><span></span><span></span></div></div>';
   chatEl.appendChild(row); scrollBot();
 }
 function hideTyping(){ document.getElementById('typing-row')?.remove(); }
-
 function clearQuick(){ qaEl.innerHTML=''; }
 
-function showQuick(opts, onChoose){
+function showQuick(opts,onChoose){
   clearQuick();
   opts.forEach(opt=>{
-    const btn = document.createElement('button');
+    const btn=document.createElement('button');
     btn.className='qr'; btn.textContent=opt;
     btn.addEventListener('click',()=>{ clearQuick(); onChoose(opt); });
     qaEl.appendChild(btn);
@@ -517,71 +612,70 @@ function showQuick(opts, onChoose){
 }
 
 function setInput(enabled){
-  inputEl.disabled = !enabled;
-  sendEl.disabled  = !enabled;
+  inputEl.disabled=!enabled;
+  sendEl.disabled=!enabled;
   if(enabled) setTimeout(()=>inputEl.focus(),100);
 }
 
 function deliverStep(stepId){
-  const step = getStep(stepId);
+  const step=getStep(stepId);
   if(!step) return;
+  if(step.progress!=null) setProgress(step.progress);
 
-  const msgs = typeof step.bot === 'function' ? step.bot(ctx) : step.bot;
-
+  const msgs=typeof step.bot==='function'?step.bot(ctx):step.bot;
   showTyping();
-  let delay = 700;
+  let delay=650;
   msgs.forEach((msg,i)=>{
     setTimeout(()=>{
       if(i===msgs.length-1) hideTyping();
-      addMsg('bot', msg);
-      if(i<msgs.length-1){ showTyping(); }
-    }, delay*(i+1));
+      addMsg('bot',msg);
+      if(i<msgs.length-1) showTyping();
+    },delay*(i+1));
   });
 
   setTimeout(()=>{
     if(step.quickReplies){
       setInput(false);
-      showQuick(step.quickReplies, input=>{
-        addMsg('user', input);
-        advance(step, input);
+      showQuick(step.quickReplies,input=>{
+        addMsg('user',input);
+        advance(step,input);
       });
-    } else if(step.freeText || step.id==='report' || stepId==='report'){
+    } else if(step.freeText||step.id==='report'||stepId==='report'){
       if(stepId!=='report') setInput(true);
     }
-  }, delay*(msgs.length+0.5));
+  },delay*(msgs.length+0.5));
 }
 
-function advance(step, input){
-  clearQuick();
-  setInput(false);
-  const nextId = step.next(input, ctx);
+function advance(step,input){
+  clearQuick(); setInput(false);
+  const nextId=step.next(input,ctx);
   if(nextId==='report'){
+    setProgress(100);
     showTyping();
     setTimeout(()=>{
       hideTyping();
-      addMsg('bot','بناءً على ما شاركتني به، إليك **تقريرك التدريبي الشخصي** 📋', false);
+      addMsg('bot','بناءً على ما شاركتني به، إليك **تقريرك التدريبي** من أفريكارد 📋',false);
       setTimeout(()=>{
-        const row = document.createElement('div');
+        const row=document.createElement('div');
         row.className='msg-row bot';
-        const av = document.createElement('div');
-        av.className='msg-avatar bot'; av.textContent='م';
-        const bub = document.createElement('div');
-        bub.style.maxWidth='92%';
-        bub.innerHTML = buildReport(ctx);
+        const av=document.createElement('div');
+        av.className='msg-avatar bot'; av.textContent='🎓';
+        const bub=document.createElement('div');
+        bub.style.maxWidth='94%';
+        bub.innerHTML=buildReport(ctx);
         row.appendChild(av); row.appendChild(bub);
         chatEl.appendChild(row);
-        // restart
-        const rp = document.createElement('div');
+        const rp=document.createElement('div');
         rp.className='restart-pill';
         rp.innerHTML='<button id="restart-btn">🔄 إعادة التقييم من البداية</button>';
         chatEl.appendChild(rp);
-        document.getElementById('restart-btn').addEventListener('click', restart);
+        document.getElementById('restart-btn').addEventListener('click',restart);
         scrollBot();
-      },600);
-    },1200);
+      },700);
+    },1100);
   } else {
-    currentStep = nextId;
-    setTimeout(()=>deliverStep(nextId), 400);
+    currentStep=nextId;
+    setTimeout(()=>deliverStep(nextId),350);
   }
 }
 
@@ -589,25 +683,23 @@ function restart(){
   Object.keys(ctx).forEach(k=>delete ctx[k]);
   currentStep=0;
   chatEl.innerHTML=''; clearQuick();
-  setInput(false);
+  setInput(false); setProgress(0);
   deliverStep(0);
 }
 
-// INPUT SEND
-sendEl.addEventListener('click', send);
-inputEl.addEventListener('keydown', e=>{ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); send(); }});
+sendEl.addEventListener('click',send);
+inputEl.addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); send(); }});
 inputEl.addEventListener('input',()=>{ inputEl.style.height='auto'; inputEl.style.height=inputEl.scrollHeight+'px'; });
 
 function send(){
-  const txt = inputEl.value.trim();
+  const txt=inputEl.value.trim();
   if(!txt) return;
-  addMsg('user', txt);
+  addMsg('user',txt);
   inputEl.value=''; inputEl.style.height='auto';
   setInput(false);
-  const step = getStep(currentStep);
-  if(step) advance(step, txt);
+  const step=getStep(currentStep);
+  if(step) advance(step,txt);
 }
 
-// START
 deliverStep(0);
 </script>
