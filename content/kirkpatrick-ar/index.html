@@ -1,0 +1,244 @@
+<title>نموذج كيركباتريك — أفريكارد</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf8f3;--bg2:#f0ece0;--fg:#1a1a1a;--muted:#666;--border:#d8d0bc;
+  --gold:#C9A227;--blue:#004B8D;
+  --c1:#7a9e5f;--c2:#c8b87a;--c3:#c4a882;--c4:#8fad6e;
+  color-scheme:light;
+}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f0e0b;--bg2:#1a1812;--fg:#f0ece0;--muted:#999;--border:#2e2b22;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{--bg:#0f0e0b;--bg2:#1a1812;--fg:#f0ece0;--muted:#999;--border:#2e2b22;color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;direction:rtl;font-family:'Cairo',sans-serif;background:var(--bg);color:var(--fg)}
+body{padding:0 0 3rem}
+
+/* PAGE HEADER */
+.ph{
+  background:var(--bg2);border-bottom:1px solid var(--border);
+  padding:2.2rem 2rem 1.8rem;
+}
+.ph-brand{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.72rem;font-weight:700;color:var(--gold);letter-spacing:.06em;
+  margin-bottom:1rem;
+}
+.ph-brand span{width:20px;height:20px;background:linear-gradient(135deg,var(--blue),var(--gold));border-radius:4px;display:inline-block}
+.ph h1{font-size:clamp(1.3rem,3vw,2rem);font-weight:900;color:var(--fg);line-height:1.25;margin-bottom:.5rem}
+.ph p{font-size:.88rem;color:var(--muted);max-width:680px;line-height:1.7}
+
+/* MAIN GRID */
+.main{
+  max-width:1100px;margin:2.5rem auto 0;padding:0 1.5rem;
+  display:grid;grid-template-columns:220px 1fr 1fr;gap:2rem;align-items:center;
+}
+
+/* LEFT LABELS */
+.labels{display:flex;flex-direction:column;gap:0;align-items:flex-end}
+.lbl{
+  display:flex;align-items:flex-start;gap:.8rem;
+  padding:1.1rem 0;
+  border-bottom:1px solid var(--border);width:100%;
+}
+.lbl:last-child{border-bottom:none}
+.lbl-num{
+  font-size:1.4rem;font-weight:900;color:var(--gold);
+  min-width:2rem;text-align:center;line-height:1;
+  padding-top:.1rem;
+}
+.lbl-body{}
+.lbl-title{font-size:.95rem;font-weight:800;color:var(--fg);margin-bottom:.2rem}
+.lbl-sub{font-size:.78rem;color:var(--muted);line-height:1.55}
+
+/* PYRAMID */
+.pyramid-wrap{display:flex;align-items:center;justify-content:center}
+.pyramid-svg{width:100%;max-width:280px}
+
+/* RIGHT DETAILS */
+.details{display:flex;flex-direction:column;gap:0}
+.detail-card{
+  padding:1.1rem 1.2rem;
+  border-bottom:1px solid var(--border);
+  position:relative;
+}
+.detail-card::before{
+  content:'';position:absolute;right:0;top:50%;transform:translateY(-50%);
+  width:3px;height:60%;border-radius:2px;
+  background:var(--accent,var(--gold));
+}
+.detail-card:last-child{border-bottom:none}
+.detail-title{font-size:.8rem;font-weight:700;color:var(--fg);margin-bottom:.55rem}
+.detail-items{list-style:none;display:flex;flex-direction:column;gap:.3rem}
+.detail-items li{
+  font-size:.78rem;color:var(--muted);line-height:1.6;
+  display:flex;gap:.4rem;align-items:flex-start;
+}
+.detail-items li::before{content:'•';color:var(--accent,var(--gold));flex-shrink:0;margin-top:.05rem}
+.detail-q{
+  margin-top:.55rem;
+  background:rgba(0,0,0,.04);border-radius:6px;padding:.4rem .65rem;
+  font-size:.76rem;color:var(--fg);font-weight:600;line-height:1.55;
+}
+:root[data-theme="dark"] .detail-q,
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .detail-q}{background:rgba(255,255,255,.05)}
+
+/* FOOTER QUOTE */
+.fq{
+  max-width:700px;margin:3rem auto 0;padding:0 1.5rem;
+  text-align:center;
+}
+.fq-inner{
+  border:1px solid var(--border);border-radius:12px;
+  padding:1.4rem 1.8rem;background:var(--bg2);
+}
+.fq-text{font-size:.92rem;font-weight:600;color:var(--fg);line-height:1.8}
+.fq-src{margin-top:.5rem;font-size:.75rem;color:var(--gold);font-weight:700}
+
+/* ATTRIBUTION */
+.attr{text-align:center;margin-top:2rem;font-size:.72rem;color:var(--muted)}
+
+@media(max-width:700px){
+  .main{grid-template-columns:1fr;gap:1.5rem}
+  .pyramid-wrap{order:-1}
+  .labels{align-items:flex-start}
+}
+</style>
+
+<div class="ph">
+  <div class="ph-brand"><span></span> أفريكارد للتدريب وتنمية الموارد البشرية</div>
+  <h1>نموذج كيركباتريك الرباعي<br>لتقييم فاعلية البرامج التدريبية</h1>
+  <p>يُعدّ هذا النموذج المرجع الأكثر استخداماً عالمياً لقياس أثر التدريب — يشمل أربعة مستويات: رد الفعل، التعلم، السلوك، والأثر المؤسسي.</p>
+</div>
+
+<div class="main">
+
+  <!-- LEFT: LABELS -->
+  <div class="labels">
+
+    <div class="lbl">
+      <div class="lbl-num">٠٤</div>
+      <div class="lbl-body">
+        <div class="lbl-title">الأثر</div>
+        <div class="lbl-sub">كيف أثّر التدريب على الأهداف المؤسسية</div>
+      </div>
+    </div>
+
+    <div class="lbl">
+      <div class="lbl-num">٠٣</div>
+      <div class="lbl-body">
+        <div class="lbl-title">السلوك</div>
+        <div class="lbl-sub">كيف تغيّر سلوك المتدربين بعد البرنامج</div>
+      </div>
+    </div>
+
+    <div class="lbl">
+      <div class="lbl-num">٠٢</div>
+      <div class="lbl-body">
+        <div class="lbl-title">التعلم</div>
+        <div class="lbl-sub">ما المعارف والمهارات التي اكتسبها المتدربون</div>
+      </div>
+    </div>
+
+    <div class="lbl">
+      <div class="lbl-num">٠١</div>
+      <div class="lbl-body">
+        <div class="lbl-title">رد الفعل</div>
+        <div class="lbl-sub">كيف استجاب المتدربون للبرنامج مباشرةً</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CENTER: PYRAMID SVG -->
+  <div class="pyramid-wrap">
+    <svg class="pyramid-svg" viewBox="0 0 260 340" xmlns="http://www.w3.org/2000/svg">
+      <!-- Level 4 — Top (Smallest) -->
+      <polygon points="130,30 80,100 180,100" fill="#7a9e5f" opacity=".92"/>
+      <circle cx="130" cy="75" r="18" fill="rgba(255,255,255,.18)"/>
+      <text x="130" y="80" text-anchor="middle" font-size="16" fill="#fff">🏆</text>
+      <text x="130" y="118" text-anchor="middle" font-size="9.5" fill="#7a9e5f" font-family="Cairo,sans-serif" font-weight="700">الأثر</text>
+
+      <!-- Level 3 -->
+      <polygon points="80,100 40,175 220,175 180,100" fill="#c8b87a" opacity=".92"/>
+      <circle cx="130" cy="140" r="18" fill="rgba(255,255,255,.18)"/>
+      <text x="130" y="145" text-anchor="middle" font-size="16" fill="#fff">⚙️</text>
+      <text x="130" y="193" text-anchor="middle" font-size="9.5" fill="#8a7a3a" font-family="Cairo,sans-serif" font-weight="700">السلوك</text>
+
+      <!-- Level 2 -->
+      <polygon points="40,175 10,252 250,252 220,175" fill="#c4a882" opacity=".92"/>
+      <circle cx="130" cy="215" r="18" fill="rgba(255,255,255,.18)"/>
+      <text x="130" y="220" text-anchor="middle" font-size="16" fill="#fff">📚</text>
+      <text x="130" y="269" text-anchor="middle" font-size="9.5" fill="#7a5a3a" font-family="Cairo,sans-serif" font-weight="700">التعلم</text>
+
+      <!-- Level 1 — Base (Largest) -->
+      <polygon points="10,252 0,318 260,318 250,252" fill="#8fad6e" opacity=".92"/>
+      <circle cx="130" cy="287" r="18" fill="rgba(255,255,255,.18)"/>
+      <text x="130" y="292" text-anchor="middle" font-size="16" fill="#fff">📋</text>
+      <text x="130" y="333" text-anchor="middle" font-size="9.5" fill="#4a7a2a" font-family="Cairo,sans-serif" font-weight="700">رد الفعل</text>
+
+      <!-- Divider lines -->
+      <line x1="30" y1="175" x2="230" y2="175" stroke="rgba(255,255,255,.25)" stroke-width="1"/>
+      <line x1="12" y1="252" x2="248" y2="252" stroke="rgba(255,255,255,.25)" stroke-width="1"/>
+      <line x1="82" y1="100" x2="178" y2="100" stroke="rgba(255,255,255,.25)" stroke-width="1"/>
+    </svg>
+  </div>
+
+  <!-- RIGHT: DETAILS -->
+  <div class="details">
+
+    <div class="detail-card" style="--accent:#7a9e5f">
+      <div class="detail-title">تحديد فاعلية البرنامج التدريبي</div>
+      <ul class="detail-items">
+        <li>الأداة: مقابلات معمّقة مع المشاركين والمشرفين</li>
+        <li>القياس: مؤشرات الأداء المؤسسي قبل وبعد التدريب</li>
+      </ul>
+      <div class="detail-q">❝ هل تحسّن أداء الفريق وإنتاجيته بعد البرنامج؟ ❞</div>
+    </div>
+
+    <div class="detail-card" style="--accent:#c8b87a">
+      <div class="detail-title">تحليل أثر التدريب على السلوك الوظيفي</div>
+      <ul class="detail-items">
+        <li>الأداة: أسئلة مفتوحة من المشرفين المباشرين</li>
+        <li>المتابعة: بعد ٣٠ و٩٠ يوماً من نهاية البرنامج</li>
+      </ul>
+      <div class="detail-q">❝ كيف طبّقت ما تعلمته في عملك اليومي؟ ❞</div>
+    </div>
+
+    <div class="detail-card" style="--accent:#c4a882">
+      <div class="detail-title">تحديد المهارات والمعارف المكتسبة</div>
+      <ul class="detail-items">
+        <li>الأداة: اختبار قبلي وبعدي (Pre & Post Test)</li>
+        <li>القياس: الفارق المعرفي بين بداية البرنامج ونهايته</li>
+      </ul>
+      <div class="detail-q">❝ ما أبرز مهارة اكتسبتها ستوظّفها في دورك؟ ❞</div>
+    </div>
+
+    <div class="detail-card" style="--accent:#8fad6e">
+      <div class="detail-title">رصد مناطق التحسين والرضا الفوري</div>
+      <ul class="detail-items">
+        <li>الأداة: استبيان فوري في نهاية الجلسة</li>
+        <li>المؤشرات: الرضا عن المحتوى والمدرب والتنظيم</li>
+      </ul>
+      <div class="detail-q">❝ على مقياس من ١ إلى ١٠ — ما قيمة هذا البرنامج لك؟ ❞</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Footer quote -->
+<div class="fq">
+  <div class="fq-inner">
+    <p class="fq-text">«التدريب الذي لا يُقيَّم لا يُعرف أثره — وما لا يُقاس لا يُحسَّن»</p>
+    <p class="fq-src">— نموذج كيركباتريك · تطبيق أفريكارد للتدريب</p>
+  </div>
+</div>
+
+<p class="attr">هذه الشريحة قابلة للتعديل الكامل · أفريكارد للتدريب وتنمية الموارد البشرية</p>
