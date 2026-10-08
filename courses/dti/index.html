@@ -1,0 +1,752 @@
+<title>DTI – دبلوم التدريب والتطوير المؤسسي</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"></script>
+<style>
+:root{
+  --blue:#004B8D;--blue-dk:#002a5c;--teal:#006494;
+  --gold:#C9A227;--gold2:#e8c547;
+  --purple:#6b34b5;--purple2:#9b6ef0;
+  --bg:#0a0a0a;--card:#111;--card2:#161616;
+  --border:#1e1e1e;--muted:#8a8a8a;--text:#e8e8e8;
+  font-family:'Cairo',sans-serif;
+}
+@media(prefers-color-scheme:light){
+  :root:not([data-theme=dark]){
+    --bg:#f4f4f2;--card:#fff;--card2:#f0f0ee;
+    --border:#ddd;--muted:#666;--text:#1a1a1a;
+    color-scheme:light;
+  }
+}
+:root[data-theme=light]{
+  --bg:#f4f4f2;--card:#fff;--card2:#f0f0ee;
+  --border:#ddd;--muted:#666;--text:#1a1a1a;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);direction:rtl;text-align:right;line-height:1.6;min-height:100vh}
+
+/* NAV */
+.top-nav{background:rgba(0,0,0,.7);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:.75rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.nav-brand{font-size:.95rem;font-weight:900;color:var(--gold2);letter-spacing:.02em}
+.nav-brand span{color:var(--muted);font-weight:400;font-size:.8rem;margin-right:.6rem}
+.nav-breadcrumb{display:flex;align-items:center;gap:.5rem;font-size:.78rem;color:var(--muted)}
+.nav-breadcrumb a{color:var(--muted);text-decoration:none}
+.nav-breadcrumb a:hover{color:var(--gold2)}
+.nav-breadcrumb i{font-size:.6rem}
+
+/* HERO */
+.hero{background:linear-gradient(150deg,#0d0022 0%,#1a0045 35%,#002a5c 70%,#001535 100%);padding:3.5rem 1.5rem 3rem;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 65% 70% at 15% 50%,rgba(107,52,181,.2),transparent);pointer-events:none}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 50% at 85% 30%,rgba(0,75,141,.25),transparent);pointer-events:none}
+.hero-inner{max-width:960px;margin:0 auto;position:relative}
+.hero-badge-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.2rem}
+.badge{display:inline-flex;align-items:center;gap:.35rem;font-size:.72rem;font-weight:700;padding:.3rem .7rem;border-radius:20px;letter-spacing:.04em}
+.badge-purple{background:rgba(107,52,181,.25);color:#c4b5fd;border:1px solid rgba(107,52,181,.4)}
+.badge-blue{background:rgba(0,75,141,.3);color:#60a5fa;border:1px solid rgba(0,75,141,.4)}
+.badge-gold{background:rgba(201,162,39,.2);color:var(--gold2);border:1px solid rgba(201,162,39,.3)}
+.badge-teal{background:rgba(0,100,148,.25);color:#67e8f9;border:1px solid rgba(0,100,148,.35)}
+.hero-title{font-size:clamp(1.6rem,4vw,2.6rem);font-weight:900;color:#fff;line-height:1.25;margin-bottom:.5rem;text-wrap:balance}
+.hero-title .dti-abbr{color:var(--purple2);font-family:monospace;font-size:.75em;font-weight:700;background:rgba(107,52,181,.2);padding:.1em .45em;border-radius:6px;margin-left:.4rem;border:1px solid rgba(107,52,181,.35)}
+.hero-subtitle{font-size:1rem;color:rgba(255,255,255,.72);font-weight:300;margin-bottom:1.8rem;max-width:600px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:1.5rem;margin-bottom:2rem}
+.meta-item{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:rgba(255,255,255,.7)}
+.meta-item i{color:var(--purple2);font-size:.9rem}
+.meta-item strong{color:#fff}
+.hero-cta-row{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;border-radius:10px;font-size:.88rem;font-weight:700;font-family:'Cairo',sans-serif;cursor:pointer;border:none;text-decoration:none;transition:all .2s}
+.btn-primary{background:linear-gradient(135deg,var(--purple),#4a1fa0);color:#fff;box-shadow:0 4px 16px rgba(107,52,181,.35)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(107,52,181,.5)}
+.btn-outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3)}
+.btn-outline:hover{border-color:var(--gold2);color:var(--gold2)}
+.hero-stats{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.1)}
+.hero-stat{text-align:center;min-width:80px}
+.hero-stat-num{font-size:1.6rem;font-weight:900;color:var(--purple2);line-height:1;font-variant-numeric:tabular-nums}
+.hero-stat-lbl{font-size:.7rem;color:rgba(255,255,255,.5);margin-top:.2rem}
+
+/* LAYOUT */
+.page-body{max-width:960px;margin:0 auto;padding:2.5rem 1.5rem}
+.section-heading{font-size:1.1rem;font-weight:900;color:var(--gold2);margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:2px solid rgba(201,162,39,.2);display:flex;align-items:center;gap:.6rem}
+.section-heading i{font-size:1rem}
+
+/* OVERVIEW */
+.overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem}
+@media(max-width:620px){.overview-grid{grid-template-columns:1fr}}
+.ov-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.3rem}
+.ov-card-head{font-size:.8rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+.ov-card-head i{color:var(--purple2)}
+.ov-list{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.ov-list li{font-size:.83rem;color:var(--text);display:flex;align-items:flex-start;gap:.6rem;line-height:1.5}
+.ov-list li i{color:var(--purple2);margin-top:.15em;flex-shrink:0;font-size:.8rem}
+.ov-highlight{background:linear-gradient(135deg,rgba(107,52,181,.12),rgba(0,75,141,.08));border:1px solid rgba(107,52,181,.25);border-radius:10px;padding:1rem 1.2rem;display:flex;gap:.8rem;align-items:flex-start;margin-bottom:1.2rem}
+.ov-hl-icon{font-size:1.8rem;line-height:1;flex-shrink:0}
+.ov-hl-title{font-size:.85rem;font-weight:800;color:#fff;margin-bottom:.25rem}
+.ov-hl-body{font-size:.8rem;color:var(--muted);line-height:1.7}
+
+/* MODULES */
+.module-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:1.5rem}
+.module-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.2rem;display:flex;flex-direction:column;gap:.6rem;transition:border-color .2s,transform .2s;}
+.module-card:hover{border-color:rgba(107,52,181,.4);transform:translateY(-2px)}
+.module-num{font-size:.65rem;font-weight:800;color:var(--purple2);letter-spacing:.1em;text-transform:uppercase}
+.module-title{font-size:.88rem;font-weight:800;color:#fff;line-height:1.35}
+.module-topics{list-style:none;display:flex;flex-direction:column;gap:.3rem;margin-top:.2rem}
+.module-topics li{font-size:.77rem;color:var(--muted);padding-right:1rem;position:relative;line-height:1.55}
+.module-topics li::before{content:'▸';position:absolute;right:0;top:.1em;color:var(--purple);font-size:.7rem}
+.module-hours{font-size:.7rem;color:var(--purple2);background:rgba(107,52,181,.12);border:1px solid rgba(107,52,181,.2);padding:.2rem .55rem;border-radius:20px;margin-top:auto;align-self:flex-start}
+
+/* MODELS SECTION */
+.models-section{margin-bottom:2.5rem}
+.models-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
+.model-card{--mc:#6b34b5;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.2rem;position:relative;overflow:hidden;transition:transform .2s,border-color .2s}
+.model-card:hover{transform:translateY(-2px);border-color:rgba(107,52,181,.35)}
+.model-card::before{content:'';position:absolute;top:0;right:0;left:0;height:3px;background:var(--mc)}
+.model-abbr{font-size:1.1rem;font-weight:900;color:var(--mc);font-family:monospace;letter-spacing:.04em;margin-bottom:.25rem;line-height:1}
+.model-full{font-size:.78rem;font-weight:700;color:#fff;margin-bottom:.2rem;line-height:1.3}
+.model-origin{font-size:.7rem;color:var(--muted);margin-bottom:.55rem}
+.model-use{font-size:.75rem;color:var(--muted);line-height:1.6}
+/* per-model colors */
+.model-card.addie{--mc:#6b34b5}
+.model-card.kirkpatrick{--mc:#c9a227}
+.model-card.bloom{--mc:#1a6ab5}
+.model-card.sam{--mc:#1a7a4a}
+.model-card.agile{--mc:#c96b1a}
+.model-card.sevens{--mc:#0096a0}
+
+/* CERTS */
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-bottom:1.2rem}
+.cert-card{--cc:#6b34b5;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.2rem;position:relative;overflow:hidden;transition:transform .2s,border-color .2s}
+.cert-card:hover{transform:translateY(-2px)}
+.cert-card::before{content:'';position:absolute;top:0;right:0;left:0;height:3px;background:var(--cc)}
+.cert-abbr{font-size:1.2rem;font-weight:900;color:var(--cc);font-family:monospace;letter-spacing:.05em;margin-bottom:.3rem}
+.cert-full{font-size:.75rem;font-weight:700;color:#fff;margin-bottom:.2rem;line-height:1.35}
+.cert-by{font-size:.7rem;color:var(--muted);margin-bottom:.6rem}
+.cert-tags{display:flex;flex-wrap:wrap;gap:.3rem}
+.cert-tag{font-size:.65rem;background:rgba(255,255,255,.06);border:1px solid var(--border);padding:.15rem .5rem;border-radius:20px;color:var(--muted)}
+.cert-card.cptd{--cc:#6b34b5}
+.cert-card.cplp{--cc:#c9a227}
+.cert-card.ctt{--cc:#1a6ab5}
+.cert-card.hrci{--cc:#1a7a4a}
+.cert-card.apt{--cc:#c96b1a}
+.cert-card.ctp{--cc:#0096a0}
+
+/* COMP */
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;margin-bottom:2rem}
+.comp-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.2rem;display:flex;flex-direction:column;gap:.5rem;transition:border-color .2s}
+.comp-card:hover{border-color:rgba(107,52,181,.3)}
+.comp-icon{font-size:1.7rem;line-height:1}
+.comp-title{font-size:.85rem;font-weight:800;color:var(--gold2);margin-bottom:.2rem}
+.comp-body{font-size:.78rem;color:var(--muted);line-height:1.65}
+.comp-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.3rem}
+.comp-tag{font-size:.65rem;background:rgba(107,52,181,.12);border:1px solid rgba(107,52,181,.2);color:#c4b5fd;padding:.15rem .45rem;border-radius:20px}
+
+/* CAREER */
+.career-strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-bottom:1rem}
+.career-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.2rem;display:flex;gap:.9rem;align-items:flex-start;transition:border-color .2s,transform .2s}
+.career-card:hover{border-color:rgba(107,52,181,.3);transform:translateY(-2px)}
+.career-icon-wrap{min-width:44px;height:44px;border-radius:10px;background:rgba(107,52,181,.15);border:1px solid rgba(107,52,181,.25);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.career-title{font-size:.85rem;font-weight:800;color:#fff;margin-bottom:.2rem}
+.career-sector{font-size:.75rem;color:var(--purple2);margin-bottom:.4rem}
+.career-body{font-size:.77rem;color:var(--muted);line-height:1.6}
+.salary-box{background:linear-gradient(135deg,rgba(107,52,181,.12),rgba(0,75,141,.08));border:1px solid rgba(107,52,181,.25);border-radius:12px;padding:1.3rem 1.5rem;margin-top:1rem}
+.salary-head{font-size:.85rem;font-weight:800;color:var(--gold2);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.salary-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.8rem}
+.salary-item{background:rgba(255,255,255,.04);border-radius:8px;padding:.9rem 1rem}
+.salary-region{font-size:.72rem;color:var(--muted);margin-bottom:.3rem}
+.salary-range{font-size:1rem;font-weight:900;color:var(--purple2);margin-bottom:.15rem;font-variant-numeric:tabular-nums}
+.salary-note{font-size:.68rem;color:var(--muted)}
+
+/* WHO */
+.who-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.8rem;margin-bottom:2rem}
+.who-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem;display:flex;align-items:flex-start;gap:.7rem}
+.who-card:hover{border-color:rgba(107,52,181,.3)}
+.who-icon{font-size:1.3rem;flex-shrink:0;margin-top:.1rem}
+.who-title{font-size:.82rem;font-weight:800;color:#fff;margin-bottom:.15rem}
+.who-body{font-size:.75rem;color:var(--muted);line-height:1.55}
+
+/* TOT CALLOUT */
+.tot-callout{background:linear-gradient(135deg,rgba(201,162,39,.12),rgba(107,52,181,.1));border:1px solid rgba(201,162,39,.3);border-radius:14px;padding:1.5rem 1.8rem;margin-bottom:2.5rem;display:flex;gap:1.2rem;align-items:flex-start}
+@media(max-width:560px){.tot-callout{flex-direction:column}}
+.tot-icon{font-size:2.5rem;line-height:1;flex-shrink:0}
+.tot-title{font-size:1rem;font-weight:900;color:var(--gold2);margin-bottom:.4rem}
+.tot-body{font-size:.83rem;color:rgba(255,255,255,.75);line-height:1.75;margin-bottom:.7rem}
+.tot-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.tot-tag{font-size:.72rem;background:rgba(201,162,39,.12);border:1px solid rgba(201,162,39,.25);color:var(--gold2);padding:.2rem .6rem;border-radius:20px}
+
+/* TRAINER */
+.trainer-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;display:flex;gap:1.5rem;align-items:flex-start;margin-bottom:2.5rem}
+@media(max-width:500px){.trainer-card{flex-direction:column}}
+.trainer-avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--blue));display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:900;color:#fff;flex-shrink:0;border:3px solid rgba(107,52,181,.4)}
+.trainer-name{font-size:1rem;font-weight:900;color:#fff;margin-bottom:.2rem}
+.trainer-title{font-size:.8rem;color:var(--purple2);margin-bottom:.6rem}
+.trainer-bio{font-size:.8rem;color:var(--muted);line-height:1.75;margin-bottom:.7rem}
+.trainer-creds{display:flex;flex-wrap:wrap;gap:.4rem}
+.trainer-cred{font-size:.68rem;background:rgba(255,255,255,.06);border:1px solid var(--border);padding:.2rem .55rem;border-radius:20px;color:var(--muted)}
+
+/* ENROLL */
+.enroll-card{background:linear-gradient(135deg,rgba(107,52,181,.18),rgba(0,75,141,.15));border:1px solid rgba(107,52,181,.3);border-radius:16px;padding:2rem;text-align:center;margin-bottom:2rem}
+.enroll-title{font-size:1.2rem;font-weight:900;color:#fff;margin-bottom:.4rem}
+.enroll-sub{font-size:.85rem;color:rgba(255,255,255,.65);margin-bottom:1.5rem}
+.price-block{margin-bottom:1.5rem}
+.price-label{font-size:.75rem;color:var(--muted);margin-bottom:.2rem}
+.price-num{font-size:2rem;font-weight:900;color:var(--purple2);font-variant-numeric:tabular-nums}
+.price-cur{font-size:1rem;color:var(--muted);margin-right:.3rem}
+.price-note{font-size:.72rem;color:var(--muted);margin-top:.2rem}
+.enroll-features{display:flex;flex-wrap:wrap;justify-content:center;gap:.7rem;margin-bottom:1.5rem}
+.ef{font-size:.78rem;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:.35rem}
+.ef i{color:var(--purple2)}
+.enroll-btns{display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem}
+.btn-whatsapp{background:#25d366;color:#fff}
+.btn-whatsapp:hover{background:#1bbd5a;transform:translateY(-2px)}
+.referral-box{background:rgba(201,162,39,.08);border:1px solid rgba(201,162,39,.25);border-radius:10px;padding:1rem 1.2rem;margin-top:1.2rem;font-size:.82rem;color:rgba(255,255,255,.75);display:flex;align-items:center;gap:.7rem}
+.referral-box i{color:var(--gold2);font-size:1.1rem;flex-shrink:0}
+
+/* FOOTER */
+.site-footer{background:var(--card2);border-top:1px solid var(--border);padding:2rem 1.5rem;text-align:center;color:var(--muted);font-size:.78rem}
+.footer-inner{max-width:960px;margin:0 auto}
+.footer-logo{font-size:1rem;font-weight:900;color:var(--gold2);margin-bottom:.5rem}
+.footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:1.2rem;margin-bottom:.8rem}
+.footer-links a{color:var(--muted);text-decoration:none}
+.footer-links a:hover{color:var(--gold2)}
+</style>
+
+<!-- NAV -->
+<nav class="top-nav">
+  <div class="nav-brand">أفريكارد <span>للتدريب وتنمية الموارد البشرية</span></div>
+  <div class="nav-breadcrumb">
+    <a href="/"><i class="fa-solid fa-house"></i></a>
+    <i class="fa-solid fa-angle-left"></i>
+    <a href="/courses">الدورات</a>
+    <i class="fa-solid fa-angle-left"></i>
+    <span>التدريب والتطوير المؤسسي</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge-row">
+      <span class="badge badge-purple"><i class="fa-solid fa-graduation-cap"></i> تدريب وتطوير</span>
+      <span class="badge badge-blue"><i class="fa-solid fa-certificate"></i> مُعتمد دولياً</span>
+      <span class="badge badge-gold"><i class="fa-solid fa-signal"></i> مبتدئ–متقدم</span>
+      <span class="badge badge-teal"><i class="fa-solid fa-clock"></i> ١٠ أسابيع</span>
+    </div>
+    <h1 class="hero-title">
+      <span class="dti-abbr">DTI</span>
+      دبلوم التدريب والتطوير المؤسسي
+    </h1>
+    <p class="hero-subtitle">Diploma in Training &amp; Institutional Development — المنهج الأشمل لبناء كفايات المدرب الاحترافي وتصميم برامج التعلم وقياس الأثر في المنظمات الحديثة</p>
+    <div class="hero-meta">
+      <div class="meta-item"><i class="fa-solid fa-calendar-days"></i><strong>دفعات مستمرة</strong> — كل ٣ أشهر</div>
+      <div class="meta-item"><i class="fa-solid fa-laptop"></i><strong>عبر الإنترنت</strong> — مباشر وتسجيلات</div>
+      <div class="meta-item"><i class="fa-solid fa-globe"></i><strong>عربي بالكامل</strong></div>
+      <div class="meta-item"><i class="fa-solid fa-users"></i><strong>الدفعة الجارية</strong> — مفتوح التسجيل</div>
+    </div>
+    <div class="hero-cta-row">
+      <a href="#enroll" class="btn btn-primary"><i class="fa-brands fa-whatsapp"></i> سجّل الآن</a>
+      <a href="#modules" class="btn btn-outline"><i class="fa-solid fa-book-open"></i> المحاور التفصيلية</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num">٩+</div><div class="hero-stat-lbl">دفعات مكتملة</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">١٠</div><div class="hero-stat-lbl">وحدات تدريبية</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">٦</div><div class="hero-stat-lbl">نماذج تعليمية</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">٥٠+</div><div class="hero-stat-lbl">ساعة تدريبية</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- BODY -->
+<main class="page-body">
+
+  <!-- OVERVIEW -->
+  <section style="margin-bottom:2.5rem">
+    <h2 class="section-heading"><i class="fa-solid fa-circle-info"></i> نظرة عامة</h2>
+    <div class="ov-highlight">
+      <div class="ov-hl-icon">🎓</div>
+      <div>
+        <div class="ov-hl-title">التدريب كمهنة: من التقديم إلى التأثير</div>
+        <div class="ov-hl-body">لا يكفي أن تعرف موضوعك — المدرب الاحترافي يصمم التجربة التعليمية ويُديرها ويقيس أثرها. دبلوم DTI يُغطي الدورة الكاملة: من تحليل الاحتياجات إلى قياس العائد على الاستثمار، مع إتقان النماذج التعليمية المعتمدة عالمياً مثل Kirkpatrick وADDIE وBloom.</div>
+      </div>
+    </div>
+    <div class="overview-grid">
+      <div class="ov-card">
+        <div class="ov-card-head"><i class="fa-solid fa-bullseye"></i> ما ستكتسبه</div>
+        <ul class="ov-list">
+          <li><i class="fa-solid fa-check"></i> تصميم برامج تدريبية قائمة على الكفايات</li>
+          <li><i class="fa-solid fa-check"></i> تحليل الاحتياجات التدريبية TNA بأدوات فعّالة</li>
+          <li><i class="fa-solid fa-check"></i> تطبيق نماذج ADDIE وSAM وKirkpatrick</li>
+          <li><i class="fa-solid fa-check"></i> إدارة قاعات التدريب وبيئات التعلم الافتراضية</li>
+          <li><i class="fa-solid fa-check"></i> قياس الأثر التدريبي وعائد الاستثمار ROI</li>
+          <li><i class="fa-solid fa-check"></i> بناء استراتيجية التطوير المؤسسي</li>
+          <li><i class="fa-solid fa-check"></i> تصميم المحتوى التفاعلي والرقمي</li>
+        </ul>
+      </div>
+      <div class="ov-card">
+        <div class="ov-card-head"><i class="fa-solid fa-layer-group"></i> هيكل الدبلوم</div>
+        <ul class="ov-list">
+          <li><i class="fa-solid fa-book"></i> <strong>١٠ وحدات</strong> تدريبية متكاملة</li>
+          <li><i class="fa-solid fa-clock"></i> <strong>٥٠–٦٠ ساعة</strong> تدريب + تطبيق</li>
+          <li><i class="fa-solid fa-video"></i> <strong>جلسات مباشرة</strong> أسبوعية</li>
+          <li><i class="fa-solid fa-file-pdf"></i> <strong>أدلة ونماذج عمل</strong> جاهزة للتطبيق</li>
+          <li><i class="fa-solid fa-pen-to-square"></i> <strong>مشروع تطبيقي نهائي</strong></li>
+          <li><i class="fa-solid fa-certificate"></i> <strong>شهادة إتمام</strong> من أفريكارد</li>
+          <li><i class="fa-solid fa-arrow-up-right-dots"></i> مسار تحضيري لـ <strong>CPTD / CPLP</strong></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODELS -->
+  <section class="models-section" id="models">
+    <h2 class="section-heading"><i class="fa-solid fa-diagram-project"></i> النماذج التعليمية الأساسية</h2>
+    <p style="font-size:.85rem;color:var(--muted);margin-bottom:1.2rem;line-height:1.75">يُغطي الدبلوم النماذج التعليمية الأكثر توظيفاً في صناعة التدريب والتطوير على مستوى العالم — ليس للحفظ بل للتطبيق في مشاريع حقيقية.</p>
+    <div class="models-grid">
+      <div class="model-card addie">
+        <div class="model-abbr">ADDIE</div>
+        <div class="model-full">Analysis · Design · Development · Implementation · Evaluation</div>
+        <div class="model-origin">النموذج الأكثر شيوعاً في تصميم التعليم</div>
+        <div class="model-use">الإطار المرجعي الكامل لتصميم وتطوير وتقييم البرامج التدريبية من الصفر.</div>
+      </div>
+      <div class="model-card kirkpatrick">
+        <div class="model-abbr">Kirkpatrick</div>
+        <div class="model-full">The Four-Level Training Evaluation Model</div>
+        <div class="model-origin">النموذج الذهبي لقياس الأثر التدريبي</div>
+        <div class="model-use">قياس الأثر عبر ٤ مستويات: الرد، التعلم، السلوك، النتائج. الأساس لإثبات عائد الاستثمار.</div>
+      </div>
+      <div class="model-card bloom">
+        <div class="model-abbr">Bloom</div>
+        <div class="model-full">Bloom's Revised Taxonomy of Educational Objectives</div>
+        <div class="model-origin">تصنيف الأهداف التعليمية</div>
+        <div class="model-use">تصنيف الأهداف التعليمية عبر ٦ مستويات من التذكر إلى الإبداع، يُوجّه تصميم المحتوى والتقييم.</div>
+      </div>
+      <div class="model-card sam">
+        <div class="model-abbr">SAM</div>
+        <div class="model-full">Successive Approximation Model</div>
+        <div class="model-origin">البديل الرشيق لـ ADDIE</div>
+        <div class="model-use">نهج تكراري لتصميم التعلم يُقلل الدورة الزمنية ويُتيح التغذية الراجعة المبكرة — مثالي للمحتوى الرقمي.</div>
+      </div>
+      <div class="model-card agile">
+        <div class="model-abbr">Agile L&D</div>
+        <div class="model-full">Agile Learning &amp; Development Framework</div>
+        <div class="model-origin">منهجية التطوير الرشيق في التعلم</div>
+        <div class="model-use">تطبيق مبادئ Agile في بناء برامج التدريب — السرعة والمرونة والتحسين المستمر.</div>
+      </div>
+      <div class="model-card sevens">
+        <div class="model-abbr">70-20-10</div>
+        <div class="model-full">The 70:20:10 Learning Model</div>
+        <div class="model-origin">نموذج التعلم المؤسسي الشامل</div>
+        <div class="model-use">٧٠٪ تعلم من التجربة، ٢٠٪ من التفاعل، ١٠٪ من التدريب الرسمي — تصميم بيئة التعلم المتكاملة.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODULES -->
+  <section id="modules" style="margin-bottom:2.5rem">
+    <h2 class="section-heading"><i class="fa-solid fa-book-open"></i> محاور الدبلوم</h2>
+    <div class="module-grid">
+      <div class="module-card">
+        <div class="module-num">الوحدة ١</div>
+        <div class="module-title">أسس التدريب والتطوير المهني</div>
+        <ul class="module-topics">
+          <li>تعريف التدريب وعلاقته بالتطوير المؤسسي</li>
+          <li>التدريب الاحترافي مقابل التقليدي</li>
+          <li>أدوار المدرب: المُيسّر، المصمم، المستشار</li>
+          <li>اتجاهات التعلم في عصر الذكاء الاصطناعي</li>
+        </ul>
+        <span class="module-hours"><i class="fa-solid fa-clock"></i> ٥ ساعات</span>
+      </div>
+      <div class="module-card">
+        <div class="module-num">الوحدة ٢</div>
+        <div class="module-title">تحليل الاحتياجات التدريبية TNA</div>
+        <ul class="module-topics">
+          <li>منهجية التحليل الثلاثي: المنظمة، الوظيفة، الفرد</li>
+          <li>أدوات جمع البيانات: استبيانات، مقابلات، ملاحظة</li>
+          <li>تحليل فجوات الكفايات وترتيب الأولويات</li>
+          <li>كتابة تقرير TNA واقتراح الحلول</li>
+        </ul>
+        <span class="module-hours"><i class="fa-solid fa-clock"></i> ٥–٦ ساعات</span>
+      </div>
+      <div class="module-card">
+        <div class="module-num">الوحدة ٣</div>
+        <div class="module-title">تصميم البرامج التدريبية — ADDIE</div>
+        <ul class="module-topics">
+          <li>كتابة الأهداف التعليمية وفق Bloom</li>
+          <li>تسلسل المحتوى وبناء الوحدات</li>
+          <li>اختيار الاستراتيجيات واستراتيجيات التعلم النشط</li>
+          <li>تصميم أدوات التقييم الختامي والتكويني</li>
+        </ul>
+        <span class="module-hours"><i class="fa-solid fa-clock"></i> ٦ ساعات</span>
+      </div>
+      <div class="module-card">
+        <div class="module-num">الوحدة ٤</div>
+        <div class="module-title">مهارات التيسير وإدارة القاعة</div>
+        <ul class="module-topics">
+          <li>فنون الإلقاء والصوت والحضور الجسدي</li>
+          <li>إدارة ديناميكيات المجموعة والمشاركة</li>
+          <li>التعامل مع الشخصيات الصعبة والمواقف الطارئة</li>
+          <li>التيسير الافتراضي عبر زووم وMSTEAMS</li>
+        </ul>
+        <span class="module-hours"><i class="fa-solid fa-clock"></i> ٦ ساعات</span>
+      </div>
+      <div class="module-card">
+        <div class="module-num">الوحدة ٥</div>
+        <div class="module-title">تصميم المحتوى التفاعلي والرقمي</div>
+        <ul class="module-topics">
+          <li>مبادئ تصميم الشرائح الاحترافية</li>
+          <li>أدوات التعلم الإلكتروني: Articulate وCanva وPPT</li>
+          <li>الفيديو التعليمي والتسجيل الشاشي</li>
+          <li>معايير SCORM وبنية الدروس الرقمية</li>
+        </ul>
+        <span class="module-hours"><i class="fa-solid fa-clock"></i> ٥ ساعات</span>
+      </div>
+      <div class="module-card">
+        <div class="module-num">الوحدة ٦</div>
+        <div class="module-title">قياس الأثر التدريبي — Kirkpatrick</div>
+        <ul class="module-topics">
+          <li>المستوى الأول: قياس الرضا والتجربة</li>
+          <li>المستوى الثاني: اختبارات التعلم قبل وبعد</li>
+          <li>المستوى الثالث: تقييم تغيير السلوك الوظيفي</li>
+          <li>المستوى الرابع: قياس الأثر على الأهداف المؤسسية</li>
+        </ul>
+        <span class="module-hours"><i class="fa-solid fa-clock"></i> ٥ ساعات</span>
+      </div>
+      <div class="module-card">
+        <div class="module-num">الوحدة ٧</div>
+        <div class="module-title">عائد الاستثمار التدريبي ROI</div>
+        <ul class="module-topics">
+          <li>منهجية فيليبس لقياس ROI التدريبي</li>
+          <li>تحويل البيانات إلى قيمة مالية</li>
+          <li>حساب تكاليف وفوائد البرنامج التدريبي</li>
+          <li>تقرير ROI للإدارة العليا</li>
+        </ul>
+        <span class="module-hours"><i class="fa-solid fa-clock"></i> ٥ ساعات</span>
+      </div>
+      <div class="module-card">
+        <div class="module-num">الوحدة ٨</div>
+        <div class="module-title">التطوير المؤسسي وإدارة التغيير</div>
+        <ul class="module-topics">
+          <li>نماذج التطوير المؤسسي: مكينسي ٧S، كوتر ٨</li>
+          <li>تشخيص المنظمة وتحديد مجالات التدخل</li>
+          <li>إدارة مقاومة التغيير وتجنيد الرعاة</li>
+          <li>ربط برامج التدريب باستراتيجية المنظمة</li>
+        </ul>
+        <span class="module-hours"><i class="fa-solid fa-clock"></i> ٥ ساعات</span>
+      </div>
+      <div class="module-card">
+        <div class="module-num">الوحدة ٩</div>
+        <div class="module-title">التعلم الرقمي ومنصات إدارة التعلم LMS</div>
+        <ul class="module-topics">
+          <li>مقارنة منصات LMS: Moodle وTalentLMS وغيرها</li>
+          <li>تصميم مسارات التعلم الذاتي Pathways</li>
+          <li>الذكاء الاصطناعي في تخصيص التعلم</li>
+          <li>بناء مجتمع التعلم الرقمي</li>
+        </ul>
+        <span class="module-hours"><i class="fa-solid fa-clock"></i> ٥ ساعات</span>
+      </div>
+      <div class="module-card">
+        <div class="module-num">الوحدة ١٠</div>
+        <div class="module-title">المشروع التطبيقي النهائي</div>
+        <ul class="module-topics">
+          <li>تصميم برنامج تدريبي متكامل من الألف إلى الياء</li>
+          <li>تطبيق TNA + ADDIE + Kirkpatrick في مشروع واحد</li>
+          <li>تقديم المشروع أمام لجنة التقييم</li>
+          <li>التغذية الراجعة البنّاءة والتطوير</li>
+        </ul>
+        <span class="module-hours"><i class="fa-solid fa-clock"></i> ٦–٨ ساعات</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOT CALLOUT -->
+  <div class="tot-callout">
+    <div class="tot-icon">🏆</div>
+    <div>
+      <div class="tot-title">من DTI إلى برنامج تدريب المدربين TOT</div>
+      <div class="tot-body">دبلوم DTI هو البوابة الطبيعية لبرنامج تدريب المدربين التخصصي (TOT) — حيث تنتقل من تعلم أسس التدريب إلى بناء جيل جديد من المدربين وتأهيلهم. خريجو DTI يحصلون على أولوية في الانضمام لمسار TOT بشروط تفضيلية.</div>
+      <div class="tot-tags">
+        <span class="tot-tag">مسار TOT</span>
+        <span class="tot-tag">أعلى عائد للعميل</span>
+        <span class="tot-tag">شراكة محتملة</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CERTIFICATIONS -->
+  <section style="margin-bottom:2.5rem" id="certs">
+    <h2 class="section-heading"><i class="fa-solid fa-award"></i> الشهادات الدولية في T&amp;D</h2>
+    <div class="cert-grid">
+      <div class="cert-card cptd">
+        <div class="cert-abbr">CPTD</div>
+        <div class="cert-full">Certified Professional in Talent Development</div>
+        <div class="cert-by">ATD – ‏Association for Talent Development · الولايات المتحدة</div>
+        <div class="cert-tags"><span class="cert-tag">أرفع شهادة في T&D</span><span class="cert-tag">معترف بها عالمياً</span></div>
+      </div>
+      <div class="cert-card cplp">
+        <div class="cert-abbr">CPLP</div>
+        <div class="cert-full">Certified Professional in Learning & Performance</div>
+        <div class="cert-by">ATD – الاسم السابق لـ CPTD</div>
+        <div class="cert-tags"><span class="cert-tag">٩ مجالات كفاية</span><span class="cert-tag">مشروع تطبيقي</span></div>
+      </div>
+      <div class="cert-card ctt">
+        <div class="cert-abbr">CTT+</div>
+        <div class="cert-full">Certified Technical Trainer</div>
+        <div class="cert-by">CompTIA · الولايات المتحدة</div>
+        <div class="cert-tags"><span class="cert-tag">مهارات تيسير</span><span class="cert-tag">مقابلة عملية</span></div>
+      </div>
+      <div class="cert-card hrci">
+        <div class="cert-abbr">SHRM-CP</div>
+        <div class="cert-full">SHRM Certified Professional</div>
+        <div class="cert-by">SHRM – Society for Human Resource Management</div>
+        <div class="cert-tags"><span class="cert-tag">موارد بشرية</span><span class="cert-tag">T&D ضمنها</span></div>
+      </div>
+      <div class="cert-card apt">
+        <div class="cert-abbr">APTD</div>
+        <div class="cert-full">Associate Professional in Talent Development</div>
+        <div class="cert-by">ATD – المستوى الأول للمبتدئين</div>
+        <div class="cert-tags"><span class="cert-tag">نقطة البداية</span><span class="cert-tag">خطوة نحو CPTD</span></div>
+      </div>
+      <div class="cert-card ctp">
+        <div class="cert-abbr">CTP</div>
+        <div class="cert-full">Certified Training Professional</div>
+        <div class="cert-by">HRCI / ASTD – معترف بها إقليمياً</div>
+        <div class="cert-tags"><span class="cert-tag">الشرق الأوسط</span><span class="cert-tag">شائعة خليجياً</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPETENCIES -->
+  <section style="margin-bottom:2.5rem" id="comp">
+    <h2 class="section-heading"><i class="fa-solid fa-star"></i> الكفايات الأساسية</h2>
+    <div class="comp-grid">
+      <div class="comp-card">
+        <div class="comp-icon">🔍</div>
+        <div class="comp-title">التحليل والتشخيص</div>
+        <div class="comp-body">تشخيص مشكلات الأداء وتحليل الاحتياجات التدريبية وتحديد ما إذا كان التدريب هو الحل الأنسب.</div>
+        <div class="comp-tags"><span class="comp-tag">TNA</span><span class="comp-tag">Performance Gap</span></div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-icon">✏️</div>
+        <div class="comp-title">التصميم التعليمي</div>
+        <div class="comp-body">تصميم البرامج التدريبية بأهداف قابلة للقياس ومحتوى متسلسل وأساليب تفاعلية وأدوات تقييم فعّالة.</div>
+        <div class="comp-tags"><span class="comp-tag">ADDIE</span><span class="comp-tag">Bloom</span><span class="comp-tag">SAM</span></div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-icon">🎙️</div>
+        <div class="comp-title">التيسير والتقديم</div>
+        <div class="comp-body">إدارة جلسات التدريب الحضوري والافتراضي بمستوى احترافي مع استخدام أساليب التعلم النشط.</div>
+        <div class="comp-tags"><span class="comp-tag">Facilitation</span><span class="comp-tag">Virtual Training</span></div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-icon">📊</div>
+        <div class="comp-title">قياس الأثر</div>
+        <div class="comp-body">تطبيق نماذج Kirkpatrick وPhillips ROI لقياس أثر التدريب على مستوى الفرد والمنظمة.</div>
+        <div class="comp-tags"><span class="comp-tag">Kirkpatrick</span><span class="comp-tag">ROI</span></div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-icon">💻</div>
+        <div class="comp-title">التعلم الرقمي</div>
+        <div class="comp-body">تصميم وإدارة برامج التعلم الإلكتروني والمحتوى الرقمي التفاعلي عبر منصات LMS المتنوعة.</div>
+        <div class="comp-tags"><span class="comp-tag">LMS</span><span class="comp-tag">E-Learning</span><span class="comp-tag">SCORM</span></div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-icon">🏢</div>
+        <div class="comp-title">التطوير المؤسسي</div>
+        <div class="comp-body">ربط برامج التدريب باستراتيجية المنظمة وتصميم تدخلات التغيير وبناء ثقافة التعلم المستمر.</div>
+        <div class="comp-tags"><span class="comp-tag">OD</span><span class="comp-tag">Change Mgmt</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAREER PATHS -->
+  <section id="careers" style="margin-bottom:2.5rem">
+    <h2 class="section-heading"><i class="fa-solid fa-road"></i> المسارات المهنية</h2>
+    <div class="career-strip">
+      <div class="career-card">
+        <div class="career-icon-wrap">🎓</div>
+        <div>
+          <div class="career-title">مصمم تعليمي (Instructional Designer)</div>
+          <div class="career-sector">شركات التعليم الإلكتروني، مراكز تدريب كبرى</div>
+          <div class="career-body">يصمم البرامج التدريبية والمحتوى الرقمي وفق نماذج ADDIE وSAM — من أسرع المهن نمواً في سوق التعليم الرقمي.</div>
+        </div>
+      </div>
+      <div class="career-card">
+        <div class="career-icon-wrap">📚</div>
+        <div>
+          <div class="career-title">مدرب / محاضر معتمد</div>
+          <div class="career-sector">مراكز التدريب، الشركات، الجهات الحكومية</div>
+          <div class="career-body">يُقدم برامج التدريب المهني وينمّي كفايات الموظفين، بإمكانية الاستقلالية وتأسيس المركز الخاص.</div>
+        </div>
+      </div>
+      <div class="career-card">
+        <div class="career-icon-wrap">💼</div>
+        <div>
+          <div class="career-title">مسؤول التدريب والتطوير (T&D Manager)</div>
+          <div class="career-sector">قطاع الموارد البشرية، الشركات الكبرى</div>
+          <div class="career-body">يُخطط وينفّذ استراتيجية التدريب المؤسسي ويُدير الميزانيات ويقيس العائد على الاستثمار التدريبي.</div>
+        </div>
+      </div>
+      <div class="career-card">
+        <div class="career-icon-wrap">🌐</div>
+        <div>
+          <div class="career-title">مستشار التطوير المؤسسي</div>
+          <div class="career-sector">استشارات مستقلة، شركات دولية</div>
+          <div class="career-body">يُشخّص مشكلات المنظمات ويُصمم حلول التطوير والتغيير المؤسسي — مجال الطلب فيه أعلى من العرض.</div>
+        </div>
+      </div>
+      <div class="career-card">
+        <div class="career-icon-wrap">🏫</div>
+        <div>
+          <div class="career-title">مدير مركز تدريب</div>
+          <div class="career-sector">مراكز تدريب حكومية وخاصة</div>
+          <div class="career-body">يُدير العمليات الكاملة لمركز التدريب من التخطيط للجودة والاعتماد وإدارة فريق المدربين.</div>
+        </div>
+      </div>
+      <div class="career-card">
+        <div class="career-icon-wrap">🎤</div>
+        <div>
+          <div class="career-title">مدرب مدربين (TOT Trainer)</div>
+          <div class="career-sector">الطاقة التشغيلية الأعلى قيمة</div>
+          <div class="career-body">يُدرّب المدربين الجدد ويُرسّخ جودة البرامج داخل المنظمات — الدور الأعلى تأثيراً ودخلاً في سلسلة التدريب.</div>
+        </div>
+      </div>
+    </div>
+    <div class="salary-box">
+      <div class="salary-head"><i class="fa-solid fa-chart-line"></i> توقعات الدخل — مختص T&amp;D</div>
+      <div class="salary-row">
+        <div class="salary-item">
+          <div class="salary-region">🇸🇦 المملكة العربية السعودية</div>
+          <div class="salary-range">١٠,٠٠٠ – ٢٢,٠٠٠ ريال</div>
+          <div class="salary-note">شهرياً · يرتفع مع CPTD</div>
+        </div>
+        <div class="salary-item">
+          <div class="salary-region">🇦🇪 الإمارات</div>
+          <div class="salary-range">١٠,٠٠٠ – ٢٠,٠٠٠ درهم</div>
+          <div class="salary-note">شهرياً · شركات وجهات حكومية</div>
+        </div>
+        <div class="salary-item">
+          <div class="salary-region">🌍 أفريقيا / مشاريع دولية</div>
+          <div class="salary-range">١,٢٠٠ – ٣,٥٠٠ دولار</div>
+          <div class="salary-note">شهرياً · مشاريع تنمية</div>
+        </div>
+        <div class="salary-item">
+          <div class="salary-region">🌐 عمل حر / مدرب مستقل</div>
+          <div class="salary-range">٥٠٠ – ٢,٥٠٠ دولار / يوم</div>
+          <div class="salary-note">ورشة تدريبية كاملة</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO -->
+  <section id="who" style="margin-bottom:2.5rem">
+    <h2 class="section-heading"><i class="fa-solid fa-users"></i> من يلتحق بهذا الدبلوم؟</h2>
+    <div class="who-grid">
+      <div class="who-card">
+        <div class="who-icon">🎙️</div>
+        <div>
+          <div class="who-title">المدربون الممارسون</div>
+          <div class="who-body">يُطوّرون أدواتهم ويبنون مرجعية أكاديمية لممارستهم التدريبية</div>
+        </div>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">💼</div>
+        <div>
+          <div class="who-title">مختصو الموارد البشرية</div>
+          <div class="who-body">يرغبون في التخصص في مسار التدريب والتطوير ضمن وظائف HR</div>
+        </div>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">🎓</div>
+        <div>
+          <div class="who-title">أعضاء هيئة التدريس</div>
+          <div class="who-body">يُحدّثون أساليب التدريس وفق نماذج التعلم الحديثة ومعايير الجودة</div>
+        </div>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">📋</div>
+        <div>
+          <div class="who-title">مدراء الفرق</div>
+          <div class="who-body">يحتاجون تصميم برامج التأهيل الداخلي onboarding وتطوير فرقهم</div>
+        </div>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">🏢</div>
+        <div>
+          <div class="who-title">أصحاب مراكز التدريب</div>
+          <div class="who-body">يُطورون جودة برامجهم وينضجون نحو الاعتماد الدولي</div>
+        </div>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">🚀</div>
+        <div>
+          <div class="who-title">الراغبون في التحويل المهني</div>
+          <div class="who-body">يدخلون عالم التدريب والتطوير من تخصصات أخرى بمنهج مدروس</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRAINER -->
+  <section id="trainer" style="margin-bottom:2.5rem">
+    <h2 class="section-heading"><i class="fa-solid fa-chalkboard-user"></i> المدرب المسؤول</h2>
+    <div class="trainer-card">
+      <div class="trainer-avatar">عف</div>
+      <div>
+        <div class="trainer-name">أ. د. عبد الفضيل — منسق الدبلوم</div>
+        <div class="trainer-title">خبير تدريب وتطوير مؤسسي | مصمم برامج معتمد</div>
+        <div class="trainer-bio">متخصص في تصميم وتطوير البرامج التدريبية وبناء الكفايات المؤسسية بخبرة تمتد على مدار سنوات في بيئات تدريبية متنوعة تشمل الشركات والحكومات والمؤسسات الأكاديمية. يجمع بين الإتقان النظري والتطبيق الميداني الغني، ويُشرف على تطوير منهجيات DTI لتواكب أحدث توجهات صناعة التدريب والتطوير.</div>
+        <div class="trainer-creds">
+          <span class="trainer-cred">T&D Specialist</span>
+          <span class="trainer-cred">Instructional Designer</span>
+          <span class="trainer-cred">Kirkpatrick Certified</span>
+          <span class="trainer-cred">٩+ دفعات</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENROLL -->
+  <section id="enroll" style="margin-bottom:2rem">
+    <h2 class="section-heading"><i class="fa-solid fa-pen-to-square"></i> التسجيل</h2>
+    <div class="enroll-card">
+      <div class="enroll-title">انضم للدفعة القادمة من DTI</div>
+      <div class="enroll-sub">التسجيل مفتوح — الدبلوم الأكثر شمولاً في مجال التدريب والتطوير عربياً</div>
+      <div class="price-block">
+        <div class="price-label">رسوم الدبلوم</div>
+        <div class="price-num"><span class="price-cur">$</span>٣٤٩</div>
+        <div class="price-note">تشمل المواد + أدلة العمل + الشهادة + ٩٠ يوم للتسجيلات</div>
+      </div>
+      <div class="enroll-features">
+        <div class="ef"><i class="fa-solid fa-check"></i> ١٠ وحدات تدريبية</div>
+        <div class="ef"><i class="fa-solid fa-check"></i> مشروع تطبيقي نهائي</div>
+        <div class="ef"><i class="fa-solid fa-check"></i> أدلة ونماذج عمل</div>
+        <div class="ef"><i class="fa-solid fa-check"></i> شهادة إتمام معتمدة</div>
+        <div class="ef"><i class="fa-solid fa-check"></i> مجموعة واتساب المتدربين</div>
+        <div class="ef"><i class="fa-solid fa-check"></i> أولوية في مسار TOT</div>
+      </div>
+      <div class="enroll-btns">
+        <a href="https://wa.me/message/africahrd" class="btn btn-whatsapp" target="_blank"><i class="fa-brands fa-whatsapp"></i> تواصل للتسجيل عبر واتساب</a>
+        <a href="#modules" class="btn btn-outline"><i class="fa-solid fa-eye"></i> استعرض المحاور</a>
+      </div>
+      <div class="referral-box">
+        <i class="fa-solid fa-gift"></i>
+        <span><strong style="color:var(--gold2)">ادعُ ٣ وادخل مجاناً</strong> — أحضر ٣ مشتركين جُدد وادخل الدبلوم بلا رسوم. <a href="https://wa.me/message/africahrd" style="color:var(--gold2)" target="_blank">تفاصيل العرض</a></span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-logo">أفريكارد | AfricaHRD</div>
+    <div class="footer-links">
+      <a href="/">الرئيسية</a>
+      <a href="/courses">الدورات</a>
+      <a href="/trainers">المدربون</a>
+      <a href="/certificates">الشهادات</a>
+      <a href="/about">عن أفريكارد</a>
+      <a href="/contact">تواصل معنا</a>
+    </div>
+    <div>© ٢٠٢٤ أفريكارد للتدريب وتنمية الموارد البشرية — جميع الحقوق محفوظة</div>
+  </div>
+</footer>
