@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>مهرجان أفريكارد المجاني 2026</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap">
+<style>
+:root {
+  --bg:#060c18; --card:#0d1626; --card2:#111e35; --border:#1a2a45;
+  --blue:#004B8D; --blue2:#0066cc; --teal:#006494;
+  --gold:#C9A227; --gold2:#e8c547;
+  --text:#e8e8e8; --muted:#7a8ca8;
+  color-scheme: dark;
+}
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){
+  --bg:#f0f4fa; --card:#fff; --card2:#f7f9fd; --border:#d0daf0;
+  --text:#0d1626; --muted:#5a6a85; color-scheme:light;
+}}
+:root[data-theme="light"]{
+  --bg:#f0f4fa; --card:#fff; --card2:#f7f9fd; --border:#d0daf0;
+  --text:#0d1626; --muted:#5a6a85; color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Cairo',sans-serif;font-size:16px;line-height:1.7;padding-inline:16px;}
+img{max-width:100%}
+
+/* HERO */
+.hero{
+  min-height:92vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:60px 20px;margin-inline:-16px;position:relative;overflow:hidden;
+  background:linear-gradient(160deg,#020814,#040e24,#071840,#020814);
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 50% at 30% 40%,rgba(0,75,141,.25),transparent),
+    radial-gradient(ellipse 50% 40% at 75% 60%,rgba(201,162,39,.12),transparent);
+}
+.stars{position:absolute;inset:0;pointer-events:none;}
+.star{
+  position:absolute;border-radius:50%;background:#fff;
+  animation:twinkle var(--d,3s) ease-in-out infinite var(--delay,0s);
+}
+@keyframes twinkle{0%,100%{opacity:.2}50%{opacity:.9}}
+
+.festival-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(201,162,39,.15);border:1px solid rgba(201,162,39,.4);
+  color:var(--gold2);border-radius:40px;padding:8px 22px;
+  font-size:.88rem;font-weight:700;letter-spacing:.04em;margin-bottom:24px;position:relative;
+}
+.hero-logo{
+  width:80px;height:80px;border-radius:50%;margin:0 auto 20px;
+  background:linear-gradient(135deg,var(--blue),var(--teal));
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;font-weight:900;color:#fff;position:relative;
+  box-shadow:0 0 40px rgba(0,75,141,.5);
+}
+.hero h1{font-size:clamp(2.2rem,7vw,4rem);font-weight:900;line-height:1.15;position:relative;margin-bottom:16px;}
+.hero h1 .gold{color:var(--gold2);}
+.hero h1 .blue{color:#5aabff;}
+.hero-tagline{font-size:1.15rem;color:rgba(232,232,232,.7);max-width:560px;margin:0 auto 40px;position:relative;}
+.hero-stats{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;position:relative;margin-bottom:40px;}
+.h-stat{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:16px;padding:18px 28px;text-align:center;min-width:110px;
+}
+.h-stat-num{font-size:2rem;font-weight:900;color:var(--gold2);}
+.h-stat-lbl{font-size:.75rem;color:rgba(232,232,232,.55);}
+.hero-free{
+  display:inline-block;background:linear-gradient(135deg,#1a7a4a,#26a96a);
+  color:#fff;font-size:1.3rem;font-weight:900;padding:10px 36px;border-radius:50px;
+  position:relative;box-shadow:0 8px 30px rgba(26,122,74,.4);
+}
+
+/* FIELDS */
+.fields-section{max-width:900px;margin:0 auto;padding:64px 0;}
+.sec-label{display:inline-block;font-size:.8rem;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-bottom:8px;}
+h2{font-size:clamp(1.5rem,4vw,2.2rem);font-weight:800;margin-bottom:8px;}
+.sec-intro{color:var(--muted);margin-bottom:36px;max-width:600px;}
+hr.div{border:none;border-top:1px solid var(--border);margin:0 0 36px;}
+
+.fields-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;}
+.field-chip{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:16px 12px;text-align:center;
+  transition:border-color .2s,transform .2s;
+}
+.field-chip:hover{border-color:var(--blue2);transform:translateY(-2px);}
+.field-emoji{font-size:1.8rem;margin-bottom:8px;}
+.field-chip p{font-size:.85rem;font-weight:700;}
+
+/* WORKSHOPS */
+.workshops-section{max-width:960px;margin:0 auto;padding:0 0 64px;}
+.ws-grid{display:flex;flex-direction:column;gap:24px;}
+
+.ws-card{
+  background:var(--card);border:1px solid var(--border);border-radius:20px;
+  overflow:hidden;display:grid;grid-template-columns:1fr;
+}
+@media(min-width:640px){
+  .ws-card{grid-template-columns:280px 1fr;}
+  .ws-card.flip{grid-template-columns:1fr 280px;}
+  .ws-card.flip .ws-sidebar{order:2;}
+  .ws-card.flip .ws-body{order:1;}
+}
+.ws-sidebar{
+  padding:28px 24px;display:flex;flex-direction:column;gap:16px;
+  border-left:1px solid var(--border);
+}
+@media(max-width:639px){.ws-sidebar{border-left:none;border-top:1px solid var(--border);}}
+.ws-avatar{
+  width:64px;height:64px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;font-weight:900;color:#fff;
+  flex-shrink:0;align-self:flex-start;
+}
+.ws-trainer-name{font-size:1rem;font-weight:800;margin-bottom:2px;}
+.ws-trainer-role{font-size:.8rem;color:var(--muted);line-height:1.5;}
+.ws-meta-item{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--muted);}
+.ws-meta-item span:first-child{font-size:1rem;}
+.ws-free-tag{
+  display:inline-block;background:rgba(26,122,74,.15);border:1px solid rgba(38,169,106,.3);
+  color:#26a96a;border-radius:20px;padding:4px 14px;font-size:.78rem;font-weight:700;
+  align-self:flex-start;
+}
+
+.ws-body{padding:28px 28px;}
+.ws-accent{width:4px;height:28px;border-radius:4px;display:inline-block;margin-left:12px;vertical-align:middle;}
+.ws-title{font-size:1.3rem;font-weight:900;margin-bottom:6px;display:flex;align-items:center;}
+.ws-subtitle{font-size:.88rem;color:var(--gold2);margin-bottom:14px;font-weight:700;}
+.ws-desc{font-size:.88rem;color:var(--muted);margin-bottom:18px;line-height:1.7;}
+.ws-points{display:flex;flex-direction:column;gap:7px;}
+.ws-point{display:flex;gap:10px;align-items:flex-start;font-size:.85rem;}
+.ws-point-num{
+  width:24px;height:24px;border-radius:8px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;font-weight:800;color:#fff;margin-top:1px;
+}
+.ws-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+.ws-tag{
+  background:rgba(255,255,255,.05);border:1px solid var(--border);
+  border-radius:20px;padding:4px 14px;font-size:.78rem;color:var(--muted);
+}
+
+/* WHATSAPP CTA */
+.cta-section{max-width:700px;margin:0 auto;padding:0 0 80px;text-align:center;}
+.cta-box{
+  background:linear-gradient(135deg,rgba(0,75,141,.2),rgba(0,100,148,.2));
+  border:1px solid rgba(0,102,204,.3);border-radius:24px;padding:48px 32px;
+}
+.cta-box h2{margin-bottom:12px;}
+.cta-box p{color:var(--muted);margin-bottom:28px;}
+.cta-btn{
+  display:inline-block;background:linear-gradient(135deg,#25d366,#128c7e);
+  color:#fff;font-size:1.05rem;font-weight:800;padding:16px 40px;
+  border-radius:50px;text-decoration:none;font-family:'Cairo',sans-serif;
+}
+.cta-btn:hover{opacity:.9;}
+.cta-referral{
+  margin-top:24px;background:rgba(201,162,39,.08);border:1px solid rgba(201,162,39,.2);
+  border-radius:14px;padding:16px 20px;font-size:.88rem;color:rgba(232,232,232,.75);
+}
+.cta-referral strong{color:var(--gold2);}
+</style>
+</head>
+<body>
+
+<!-- STARS -->
+<div class="hero">
+  <div class="stars" id="stars"></div>
+
+  <div class="festival-badge">🌟 مهرجان أفريكارد المجاني 2026</div>
+  <div class="hero-logo">أ</div>
+  <h1>أسبوع<br><span class="gold">المعرفة</span> و<span class="blue">التطوير</span></h1>
+  <p class="hero-tagline">سبعة أيام من التدريب المجاني في مجالات متنوعة — أون لاين — للجميع</p>
+
+  <div class="hero-stats">
+    <div class="h-stat"><div class="h-stat-num">٧</div><div class="h-stat-lbl">أيام تدريب</div></div>
+    <div class="h-stat"><div class="h-stat-num">٩+</div><div class="h-stat-lbl">مجالات متنوعة</div></div>
+    <div class="h-stat"><div class="h-stat-num">٤+</div><div class="h-stat-lbl">ورش وأكثر</div></div>
+    <div class="h-stat"><div class="h-stat-num">١٠٠%</div><div class="h-stat-lbl">مجاني بالكامل</div></div>
+  </div>
+
+  <div class="hero-free">🎁 مجانية بالكامل · سجّل الآن</div>
+</div>
+
+<!-- FIELDS -->
+<section class="fields-section">
+  <span class="sec-label">مجالات المهرجان</span>
+  <h2>٩ مجالات في أسبوع واحد</h2>
+  <p class="sec-intro">تعلّم، طوّر مهاراتك، وكن جزءاً من مجتمع أفريكارد</p>
+  <hr class="div">
+  <div class="fields-grid">
+    <div class="field-chip"><div class="field-emoji">🎓</div><p>التعليم</p></div>
+    <div class="field-chip"><div class="field-emoji">📡</div><p>الإعلام</p></div>
+    <div class="field-chip"><div class="field-emoji">🏥</div><p>الصحة</p></div>
+    <div class="field-chip"><div class="field-emoji">🌿</div><p>الصحة النفسية</p></div>
+    <div class="field-chip"><div class="field-emoji">🏗️</div><p>الهندسة</p></div>
+    <div class="field-chip"><div class="field-emoji">💻</div><p>التقنية</p></div>
+    <div class="field-chip"><div class="field-emoji">👥</div><p>الموارد البشرية</p></div>
+    <div class="field-chip"><div class="field-emoji">🌱</div><p>التنمية الذاتية</p></div>
+    <div class="field-chip"><div class="field-emoji">🏠</div><p>الأسرة والمجتمع</p></div>
+  </div>
+</section>
+
+<!-- WORKSHOPS -->
+<section class="workshops-section">
+  <span class="sec-label">ورش المهرجان</span>
+  <h2>الورش المتاحة</h2>
+  <p class="sec-intro">جميعها مجانية — يمكنك الانضمام في أي وقت بشكل غير تزامني</p>
+  <hr class="div">
+
+  <div class="ws-grid">
+
+    <!-- WS 1: التواصل الفعال -->
+    <div class="ws-card">
+      <div class="ws-body">
+        <div class="ws-title">
+          <span class="ws-accent" style="background:linear-gradient(#b5385a,#d4547a)"></span>
+          مهارات التواصل الفعال والذكاء العاطفي
+        </div>
+        <div class="ws-subtitle">Effective Communication Skills & Emotional Intelligence</div>
+        <p class="ws-desc">رحلة تفاعلية لاكتشاف كيف تنصت بذكاء، وتتحدث بتأثير، وتقرأ ما بين السطور لتطوير بيئتك الشخصية والعملية.</p>
+        <div class="ws-points">
+          <div class="ws-point"><span class="ws-point-num" style="background:#b5385a">١</span><span>فهم أنماط التواصل وعناصره الخمسة</span></div>
+          <div class="ws-point"><span class="ws-point-num" style="background:#b5385a">٢</span><span>الاستماع الفعّال وطرح الأسئلة</span></div>
+          <div class="ws-point"><span class="ws-point-num" style="background:#b5385a">٣</span><span>إدارة المشاعر وبناء التعاطف</span></div>
+          <div class="ws-point"><span class="ws-point-num" style="background:#b5385a">٤</span><span>لغة الجسد والتأثير الإيجابي</span></div>
+          <div class="ws-point"><span class="ws-point-num" style="background:#b5385a">٥</span><span>حل الخلافات بذكاء عاطفي</span></div>
+        </div>
+        <div class="ws-tags">
+          <span class="ws-tag">المعلمون</span><span class="ws-tag">المدراء</span>
+          <span class="ws-tag">الموظفون</span><span class="ws-tag">أصحاب الأعمال</span>
+          <span class="ws-tag">٢ ساعة</span>
+        </div>
+      </div>
+      <div class="ws-sidebar">
+        <div class="ws-avatar" style="background:linear-gradient(135deg,#b5385a,#d4547a)">أ.ز</div>
+        <div>
+          <div class="ws-trainer-name">د. أميرة الزبير إبراهيم خوجلي</div>
+          <div class="ws-trainer-role">أستاذ علم النفس ورياض الأطفال المساعد · جامعة البطانة · مدرب معتمد دولياً</div>
+        </div>
+        <div class="ws-meta-item"><span>🎓</span><span>التنمية الذاتية · الموارد البشرية</span></div>
+        <div class="ws-meta-item"><span>🌐</span><span>أون لاين</span></div>
+        <span class="ws-free-tag">مجانية بالكامل</span>
+      </div>
+    </div>
+
+    <!-- WS 2: من المعرفة إلى الأثر -->
+    <div class="ws-card flip">
+      <div class="ws-body">
+        <div class="ws-title">
+          <span class="ws-accent" style="background:linear-gradient(#C9A227,#e8c547)"></span>
+          من المعرفة إلى الأثر — بوابة المدرب المؤثر
+        </div>
+        <div class="ws-subtitle">From Knowledge to Impact — The Effective Trainer Gateway</div>
+        <p class="ws-desc">اكتشف كيف تحوّل خبرتك إلى تجربة تدريبية ملهمة. للمدربين والمعلمين وكل من يمتلك خبرة ويريد تحويلها إلى أثر حقيقي.</p>
+        <div class="ws-points">
+          <div class="ws-point"><span class="ws-point-num" style="background:#C9A227">١</span><span>أساسيات بناء الجلسة التدريبية</span></div>
+          <div class="ws-point"><span class="ws-point-num" style="background:#C9A227">٢</span><span>مهارات الحضور والإلقاء والتواصل المؤثر</span></div>
+          <div class="ws-point"><span class="ws-point-num" style="background:#C9A227">٣</span><span>تحفيز المتدربين وبناء الثقة</span></div>
+          <div class="ws-point"><span class="ws-point-num" style="background:#C9A227">٤</span><span>التدريب التفاعلي واستخدام التقنيات الحديثة</span></div>
+          <div class="ws-point"><span class="ws-point-num" style="background:#C9A227">٥</span><span>تصميم أهداف وأنشطة تدريبية ناجحة</span></div>
+          <div class="ws-point"><span class="ws-point-num" style="background:#C9A227">٦</span><span>التقييم والتغذية الراجعة البنّاءة</span></div>
+        </div>
+        <div class="ws-tags">
+          <span class="ws-tag">المدربون</span><span class="ws-tag">المعلمون</span>
+          <span class="ws-tag">الموارد البشرية</span><span class="ws-tag">ورشة تدريبية</span>
+        </div>
+      </div>
+      <div class="ws-sidebar">
+        <div class="ws-avatar" style="background:linear-gradient(135deg,#7c4a00,#C9A227)">م.ب</div>
+        <div>
+          <div class="ws-trainer-name">ب. محمد بابكر العوض</div>
+          <div class="ws-trainer-role">مدرب معتمد · متخصص في تدريب المدربين وتصميم البرامج التدريبية</div>
+        </div>
+        <div class="ws-meta-item"><span>🎓</span><span>الموارد البشرية · التعليم</span></div>
+        <div class="ws-meta-item"><span>🌐</span><span>أون لاين</span></div>
+        <span class="ws-free-tag">مجانية بالكامل</span>
+      </div>
+    </div>
+
+    <!-- WS 3: Google Meet + Forms -->
+    <div class="ws-card">
+      <div class="ws-body">
+        <div class="ws-title">
+          <span class="ws-accent" style="background:linear-gradient(#1a7a4a,#26a96a)"></span>
+          التدريس عبر Google Meet وإنشاء الامتحانات الإلكترونية
+        </div>
+        <div class="ws-subtitle">Teaching with Google Meet & Creating Online Tests</div>
+        <p class="ws-desc">دورة تدريبية وورشة تطبيقية للمعلمين الراغبين في الانتقال الكامل إلى التعليم الرقمي والاختبارات الإلكترونية.</p>
+        <div class="ws-points">
+          <div class="ws-point"><span class="ws-point-num" style="background:#1a7a4a">A1</span><span>التعرف على Google Meet وطريقة استخدامه</span></div>
+          <div class="ws-point"><span class="ws-point-num" style="background:#1a7a4a">A2</span><span>مشاركة الشاشة وعرض المادة التعليمية</span></div>
+          <div class="ws-point"><span class="ws-point-num" style="background:#1a7a4a">B1</span><span>خصائص Google Forms وكيفية إعداد الاختبارات أونلاين</span></div>
+          <div class="ws-point"><span class="ws-point-num" style="background:#1a7a4a">B2</span><span>تنظيم الملفات ومتابعة النتائج عبر Google Drive</span></div>
+        </div>
+        <div class="ws-tags">
+          <span class="ws-tag">المعلمون</span><span class="ws-tag">التقنية</span>
+          <span class="ws-tag">التعليم الرقمي</span><span class="ws-tag">يومان · ٩ ساعات</span>
+        </div>
+      </div>
+      <div class="ws-sidebar">
+        <div class="ws-avatar" style="background:linear-gradient(135deg,#1a7a4a,#26a96a)">أ.ف</div>
+        <div>
+          <div class="ws-trainer-name">د. أماني فضل الله أحمد إبراهيم</div>
+          <div class="ws-trainer-role">متخصصة في التعليم الرقمي وتقنيات التدريس الحديثة</div>
+        </div>
+        <div class="ws-meta-item"><span>💻</span><span>التقنية · التعليم</span></div>
+        <div class="ws-meta-item"><span>🌐</span><span>أون لاين</span></div>
+        <span class="ws-free-tag">مجانية بالكامل</span>
+      </div>
+    </div>
+
+    <!-- WS 4: العرض والإلقاء -->
+    <div class="ws-card flip">
+      <div class="ws-body">
+        <div class="ws-title">
+          <span class="ws-accent" style="background:linear-gradient(#004B8D,#0066cc)"></span>
+          مهارات العرض والإلقاء — تحدث بثقة وأثّر بكلماتك
+        </div>
+        <div class="ws-subtitle">Presentation & Public Speaking Skills</div>
+        <p class="ws-desc">هل ترغب في تطوير قدرتك على التحدث أمام الآخرين والتأثير في جمهورك؟ دورة عملية تجعلك أكثر ثقة وحضوراً أثناء الحديث والعرض.</p>
+        <div class="ws-points">
+          <div class="ws-point"><span class="ws-point-num" style="background:#004B8D">١</span><span>التغلب على رهبة الجمهور</span></div>
+          <div class="ws-point"><span class="ws-point-num" style="background:#004B8D">٢</span><span>لغة الجسد والتواصل الفعال</span></div>
+          <div class="ws-point"><span class="ws-point-num" style="background:#004B8D">٣</span><span>مهارات العرض والإلقاء</span></div>
+          <div class="ws-point"><span class="ws-point-num" style="background:#004B8D">٤</span><span>الثقة بالنفس وكسر حاجز الخوف</span></div>
+        </div>
+        <div class="ws-tags">
+          <span class="ws-tag">شهادة معتمدة</span><span class="ws-tag">أنشطة تفاعلية</span>
+          <span class="ws-tag">التنمية الذاتية</span><span class="ws-tag">عبر زووم</span>
+        </div>
+      </div>
+      <div class="ws-sidebar">
+        <div class="ws-avatar" style="background:linear-gradient(135deg,#004B8D,#0066cc)">ن.ع</div>
+        <div>
+          <div class="ws-trainer-name">د. نهلة عز الدين</div>
+          <div class="ws-trainer-role">أستاذ علم النفس الصحي · جامعة الجزيرة · معالجة نفسية · مرشد أسري</div>
+        </div>
+        <div class="ws-meta-item"><span>🌿</span><span>الصحة النفسية · التنمية الذاتية</span></div>
+        <div class="ws-meta-item"><span>🌐</span><span>أون لاين عبر زووم</span></div>
+        <span class="ws-free-tag">مجانية بالكامل</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-box">
+    <h2>انضم إلى مجتمع أفريكارد</h2>
+    <p>سجّل عبر واتساب وابدأ التعلم مجاناً — جميع الورش متاحة بشكل غير تزامني</p>
+    <a class="cta-btn" href="https://chat.whatsapp.com/KIshnD9B4uQ1WBT18q8nwL" target="_blank">
+      📲 انضم عبر واتساب
+    </a>
+    <p style="margin-top:20px;font-size:.82rem;color:var(--muted);">
+      مركز أفريكارد للتدريب وتنمية الموارد البشرية · africahrd.com
+    </p>
+  </div>
+</section>
+
+<script>
+// Stars
+const c = document.getElementById('stars');
+for(let i=0;i<60;i++){
+  const s=document.createElement('div');
+  s.className='star';
+  const size=Math.random()*2.5+.5;
+  s.style.cssText=`
+    width:${size}px;height:${size}px;
+    top:${Math.random()*100}%;left:${Math.random()*100}%;
+    --d:${2+Math.random()*4}s;--delay:${Math.random()*4}s;
+    opacity:${Math.random()*.5+.1};
+  `;
+  c.appendChild(s);
+}
+</script>
+</body>
+</html>
