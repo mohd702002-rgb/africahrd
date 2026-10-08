@@ -1,0 +1,379 @@
+<title>مقومات نجاح الفاعليات</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0a;--bg2:#111;--card:#161616;--border:rgba(255,255,255,.07);
+  --gold:#C9A227;--gold2:#e8c547;--blue:#004B8D;--teal:#006494;
+  --fg:#f0f0f0;--muted:#888;
+  --c1:#e8c547;--c2:#00b4d8;--c3:#ff6b6b;--c4:#51cf66;--c5:#cc5de8;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;direction:rtl;font-family:'Cairo',sans-serif;background:var(--bg);color:var(--fg)}
+body{padding:0 0 3rem}
+
+/* HEADER */
+.page-header{
+  background:linear-gradient(135deg,#000 0%,#0d1a2e 50%,#000 100%);
+  border-bottom:1px solid var(--border);
+  text-align:center;
+  padding:3rem 1.5rem 2.5rem;
+  position:relative;overflow:hidden;
+}
+.page-header::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 80% at 50% 0%,rgba(201,162,39,.12),transparent 70%);
+  pointer-events:none;
+}
+.brand-tag{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(201,162,39,.12);border:1px solid rgba(201,162,39,.3);
+  color:var(--gold2);font-size:.75rem;font-weight:700;letter-spacing:.06em;
+  padding:.35rem .9rem;border-radius:20px;margin-bottom:1.4rem;
+}
+.brand-dot{width:6px;height:6px;background:var(--gold2);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.page-header h1{
+  font-size:clamp(1.6rem,4vw,2.6rem);font-weight:900;
+  background:linear-gradient(135deg,#fff 30%,var(--gold2) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1.2;margin-bottom:.8rem;
+}
+.page-header .sub{color:var(--muted);font-size:.95rem;font-weight:400;max-width:520px;margin:0 auto}
+
+/* PENTAGON VISUAL */
+.pentagon-section{
+  max-width:900px;margin:3rem auto 0;padding:0 1.5rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;
+  align-items:start;
+}
+.pentagon-wrap{
+  display:flex;align-items:center;justify-content:center;
+  min-height:320px;
+}
+.pentagon-svg{width:100%;max-width:300px;cursor:default}
+.pent-segment{transition:opacity .25s,filter .25s;cursor:pointer}
+.pent-segment:hover{opacity:.85;filter:brightness(1.15)}
+.pent-segment.active{filter:brightness(1.3) drop-shadow(0 0 8px currentColor)}
+
+/* CARDS STACK */
+.cards-stack{display:flex;flex-direction:column;gap:1rem}
+.pillar-card{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:1.1rem 1.3rem;cursor:pointer;
+  transition:border-color .25s,transform .2s,box-shadow .25s;
+  position:relative;overflow:hidden;
+}
+.pillar-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--accent,#C9A227)08,transparent 60%);
+  opacity:0;transition:opacity .25s;
+}
+.pillar-card:hover,.pillar-card.active{
+  border-color:var(--accent,#C9A227);
+  transform:translateX(-3px);
+  box-shadow:0 4px 24px rgba(0,0,0,.4);
+}
+.pillar-card:hover::before,.pillar-card.active::before{opacity:1}
+.card-head{display:flex;align-items:center;gap:.85rem}
+.card-icon{
+  width:44px;height:44px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;flex-shrink:0;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+}
+.card-title{font-size:1rem;font-weight:800;color:var(--fg)}
+.card-num{
+  margin-right:auto;margin-left:0;
+  font-size:.7rem;font-weight:700;color:var(--muted);
+  background:rgba(255,255,255,.05);padding:.2rem .55rem;border-radius:20px;
+}
+.card-body{
+  max-height:0;overflow:hidden;
+  transition:max-height .4s cubic-bezier(.4,0,.2,1),opacity .3s;
+  opacity:0;
+}
+.pillar-card.active .card-body{max-height:200px;opacity:1}
+.card-text{
+  margin-top:.8rem;padding-top:.8rem;
+  border-top:1px solid var(--border);
+  font-size:.87rem;line-height:1.75;color:#bbb;
+}
+.card-tip{
+  display:inline-flex;align-items:center;gap:.4rem;
+  margin-top:.7rem;
+  background:rgba(255,255,255,.04);border-radius:8px;
+  padding:.4rem .75rem;font-size:.8rem;color:var(--accent,#C9A227);font-weight:600;
+}
+
+/* BOTTOM WHEEL */
+.wheel-section{
+  max-width:900px;margin:3rem auto 0;padding:0 1.5rem;
+}
+.wheel-title{
+  text-align:center;font-size:.8rem;font-weight:700;
+  color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.8rem;
+}
+.wheel-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;
+}
+.wheel-item{
+  display:flex;flex-direction:column;align-items:center;gap:.6rem;text-align:center;
+}
+.wheel-circle{
+  width:64px;height:64px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;position:relative;
+  background:rgba(255,255,255,.04);
+  border:2px solid var(--c,#C9A227);
+  transition:transform .25s,box-shadow .25s;
+  cursor:pointer;
+}
+.wheel-circle:hover{transform:scale(1.1);box-shadow:0 0 20px var(--c,#C9A227)40}
+.wheel-circle::after{
+  content:'';position:absolute;inset:-6px;border-radius:50%;
+  border:1px dashed var(--c,#C9A227);opacity:.3;
+  animation:spin 8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.wheel-label{font-size:.78rem;font-weight:700;color:var(--fg)}
+.wheel-sub{font-size:.68rem;color:var(--muted);line-height:1.4}
+
+/* QUOTE */
+.quote-bar{
+  max-width:680px;margin:3rem auto 0;padding:1.6rem 2rem;
+  background:linear-gradient(135deg,rgba(201,162,39,.08),rgba(0,100,148,.08));
+  border:1px solid rgba(201,162,39,.2);border-radius:16px;
+  text-align:center;
+}
+.quote-text{font-size:1.05rem;font-weight:600;color:var(--fg);line-height:1.8}
+.quote-src{margin-top:.6rem;font-size:.8rem;color:var(--gold);font-weight:700}
+
+/* CTA */
+.cta-bar{
+  max-width:680px;margin:2rem auto 0;
+  display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;
+  padding:0 1.5rem;
+}
+.cta-btn{
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#000;font-weight:800;font-size:.9rem;font-family:'Cairo',sans-serif;
+  padding:.75rem 2rem;border-radius:10px;border:none;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;
+}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,162,39,.4)}
+.cta-ghost{
+  background:transparent;border:1px solid var(--border);color:var(--muted);
+  font-weight:600;font-size:.85rem;font-family:'Cairo',sans-serif;
+  padding:.75rem 1.5rem;border-radius:10px;cursor:pointer;
+  transition:border-color .2s,color .2s;
+}
+.cta-ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+@media(max-width:640px){
+  .pentagon-section{grid-template-columns:1fr}
+  .pentagon-wrap{min-height:auto}
+  .pentagon-svg{max-width:220px}
+  .wheel-grid{grid-template-columns:repeat(3,1fr)}
+  .wheel-grid .wheel-item:nth-child(4),.wheel-grid .wheel-item:nth-child(5){
+    grid-column:span 1;
+  }
+  .wheel-grid{justify-items:center}
+}
+</style>
+
+<header class="page-header">
+  <div class="brand-tag"><span class="brand-dot"></span> أفريكارد للتدريب وتنمية الموارد البشرية</div>
+  <h1>مقومات نجاح الفاعليات</h1>
+  <p class="sub">٥ عناصر لا غنى عنها في كل مؤتمر أو ورشة أو حفل — غيابها يحوّل الحدث إلى مجرد تجمّع</p>
+</header>
+
+<section class="pentagon-section">
+  <!-- SVG Pentagon -->
+  <div class="pentagon-wrap">
+    <svg class="pentagon-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <!-- Pentagon segments as triangles from center -->
+      <!-- Center -->
+      <circle cx="150" cy="150" r="32" fill="#1a1a1a" stroke="#C9A227" stroke-width="1.5"/>
+      <text x="150" y="145" text-anchor="middle" fill="#C9A227" font-size="9" font-family="Cairo,sans-serif" font-weight="700">نجاح</text>
+      <text x="150" y="158" text-anchor="middle" fill="#C9A227" font-size="9" font-family="Cairo,sans-serif" font-weight="700">الفاعلية</text>
+
+      <!-- Segment 1 — Top: الهدف (gold) -->
+      <g class="pent-segment" data-i="0" onclick="activate(0)">
+        <polygon points="150,150 109,91 191,91" fill="#C9A22722" stroke="#C9A227" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="150,55 109,91 191,91" fill="#C9A22733" stroke="#C9A227" stroke-width="1.5" stroke-linejoin="round"/>
+        <text x="150" y="79" text-anchor="middle" fill="#e8c547" font-size="22" font-family="sans-serif">🎯</text>
+        <text x="150" y="95" text-anchor="middle" fill="#e8c547" font-size="10" font-family="Cairo,sans-serif" font-weight="700">الهدف</text>
+      </g>
+
+      <!-- Segment 2 — Top-right: المتابعة (cyan) -->
+      <g class="pent-segment" data-i="1" onclick="activate(1)">
+        <polygon points="150,150 191,91 256,176" fill="#00b4d822" stroke="#00b4d8" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="256,83 191,91 256,176" fill="#00b4d833" stroke="#00b4d8" stroke-width="1.5" stroke-linejoin="round"/>
+        <text x="232" y="125" text-anchor="middle" fill="#00b4d8" font-size="20" font-family="sans-serif">📋</text>
+        <text x="232" y="140" text-anchor="middle" fill="#00b4d8" font-size="10" font-family="Cairo,sans-serif" font-weight="700">المتابعة</text>
+      </g>
+
+      <!-- Segment 3 — Bottom-right: الوقت (red) -->
+      <g class="pent-segment" data-i="2" onclick="activate(2)">
+        <polygon points="150,150 256,176 191,252" fill="#ff6b6b22" stroke="#ff6b6b" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="222,262 256,176 191,252" fill="#ff6b6b33" stroke="#ff6b6b" stroke-width="1.5" stroke-linejoin="round"/>
+        <text x="213" y="218" text-anchor="middle" fill="#ff6b6b" font-size="20" font-family="sans-serif">⏱️</text>
+        <text x="213" y="233" text-anchor="middle" fill="#ff6b6b" font-size="10" font-family="Cairo,sans-serif" font-weight="700">الوقت</text>
+      </g>
+
+      <!-- Segment 4 — Bottom-left: الجمهور (green) -->
+      <g class="pent-segment" data-i="3" onclick="activate(3)">
+        <polygon points="150,150 191,252 109,252" fill="#51cf6622" stroke="#51cf66" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="78,262 191,252 109,252" fill="#51cf6633" stroke="#51cf66" stroke-width="1.5" stroke-linejoin="round"/>
+        <text x="110" y="254" text-anchor="middle" fill="#51cf66" font-size="20" font-family="sans-serif">👥</text>
+        <text x="110" y="269" text-anchor="middle" fill="#51cf66" font-size="10" font-family="Cairo,sans-serif" font-weight="700">الجمهور</text>
+      </g>
+
+      <!-- Segment 5 — Top-left: الاتصال (purple) -->
+      <g class="pent-segment" data-i="4" onclick="activate(4)">
+        <polygon points="150,150 109,252 44,176" fill="#cc5de822" stroke="#cc5de8" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="44,83 109,252 44,176" fill="#cc5de833" stroke="#cc5de8" stroke-width="1.5" stroke-linejoin="round"/>
+        <text x="72" y="198" text-anchor="middle" fill="#cc5de8" font-size="20" font-family="sans-serif">📡</text>
+        <text x="72" y="213" text-anchor="middle" fill="#cc5de8" font-size="10" font-family="Cairo,sans-serif" font-weight="700">الاتصال</text>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Cards -->
+  <div class="cards-stack" id="cards">
+
+    <div class="pillar-card active" style="--accent:#e8c547" data-i="0" onclick="activate(0)">
+      <div class="card-head">
+        <div class="card-icon">🎯</div>
+        <div class="card-title">الهدف</div>
+        <div class="card-num">١ / ٥</div>
+      </div>
+      <div class="card-body">
+        <p class="card-text">كل فاعلية ناجحة تبدأ بسؤال واحد: <strong>«لماذا نعقدها؟»</strong> — الهدف يحدد الشكل، ويُرشد التصميم، ويُقيس النجاح. فاعلية بلا هدف واضح هي تجمّع بميزانية.</p>
+        <div class="card-tip">✦ الهدف الذكي = قابل للقياس + محدد زمنياً</div>
+      </div>
+    </div>
+
+    <div class="pillar-card" style="--accent:#00b4d8" data-i="1" onclick="activate(1)">
+      <div class="card-head">
+        <div class="card-icon">📋</div>
+        <div class="card-title">المتابعة</div>
+        <div class="card-num">٢ / ٥</div>
+      </div>
+      <div class="card-body">
+        <p class="card-text">التوصيات التي تُكتب ولا تُنفَّذ هي أكبر هدر في عالم المؤتمرات. المتابعة تعني: <strong>مسؤول، وجدول زمني، ومؤشر قياس</strong> — لكل توصية بعد انتهاء الفاعلية مباشرة.</p>
+        <div class="card-tip">✦ التوثيق ليس خاتمة — هو بداية التنفيذ</div>
+      </div>
+    </div>
+
+    <div class="pillar-card" style="--accent:#ff6b6b" data-i="2" onclick="activate(2)">
+      <div class="card-head">
+        <div class="card-icon">⏱️</div>
+        <div class="card-title">الوقت</div>
+        <div class="card-num">٣ / ٥</div>
+      </div>
+      <div class="card-body">
+        <p class="card-text">الوقت هو أثمن موارد الحضور — استهلاكه بكلمات الترحيب والشكليات يُرسل رسالة واضحة: <strong>«لا نحترم حضوركم»</strong>. الجلسة الافتتاحية يجب ألّا تتجاوز ١٥٪ من إجمالي الوقت.</p>
+        <div class="card-tip">✦ المحتوى أولاً — الشكليات في الهامش</div>
+      </div>
+    </div>
+
+    <div class="pillar-card" style="--accent:#51cf66" data-i="3" onclick="activate(3)">
+      <div class="card-head">
+        <div class="card-icon">👥</div>
+        <div class="card-title">الجمهور</div>
+        <div class="card-num">٤ / ٥</div>
+      </div>
+      <div class="card-body">
+        <p class="card-text">المؤتمر يُصمَّم <strong>للحضور لا للمتحدثين</strong>. معرفة من هم جمهورك — احتياجاتهم، توقعاتهم، مستواهم — هو الخطوة الصفر قبل تصميم أي جلسة أو انتقاء أي متحدث.</p>
+        <div class="card-tip">✦ فاعلية بلا جمهور مُعرَّف = رسالة بلا مُرسَل إليه</div>
+      </div>
+    </div>
+
+    <div class="pillar-card" style="--accent:#cc5de8" data-i="4" onclick="activate(4)">
+      <div class="card-head">
+        <div class="card-icon">📡</div>
+        <div class="card-title">الاتصال</div>
+        <div class="card-num">٥ / ٥</div>
+      </div>
+      <div class="card-body">
+        <p class="card-text">الاتصال ثلاثي المراحل: <strong>قبل</strong> (التشويق والتسويق) — <strong>أثناء</strong> (التفاعل والتغطية) — <strong>بعد</strong> (التوثيق والامتداد). قطع أي مرحلة يُفقد الفاعلية نصف أثرها.</p>
+        <div class="card-tip">✦ الاتصال لا ينتهي بإسدال الستار</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Wheel -->
+<section class="wheel-section">
+  <p class="wheel-title">دورة النجاح — كل مقوّم يُغذّي الآخر</p>
+  <div class="wheel-grid">
+    <div class="wheel-item">
+      <div class="wheel-circle" style="--c:#e8c547" onclick="activate(0)">🎯</div>
+      <div class="wheel-label">الهدف</div>
+      <div class="wheel-sub">يُحدّد كل شيء</div>
+    </div>
+    <div class="wheel-item">
+      <div class="wheel-circle" style="--c:#00b4d8;animation-delay:.5s" onclick="activate(1)">📋</div>
+      <div class="wheel-label">المتابعة</div>
+      <div class="wheel-sub">تُحوّل الكلام عملاً</div>
+    </div>
+    <div class="wheel-item">
+      <div class="wheel-circle" style="--c:#ff6b6b;animation-delay:1s" onclick="activate(2)">⏱️</div>
+      <div class="wheel-label">الوقت</div>
+      <div class="wheel-sub">لا يُعاد</div>
+    </div>
+    <div class="wheel-item">
+      <div class="wheel-circle" style="--c:#51cf66;animation-delay:1.5s" onclick="activate(3)">👥</div>
+      <div class="wheel-label">الجمهور</div>
+      <div class="wheel-sub">هو الغاية</div>
+    </div>
+    <div class="wheel-item">
+      <div class="wheel-circle" style="--c:#cc5de8;animation-delay:2s" onclick="activate(4)">📡</div>
+      <div class="wheel-label">الاتصال</div>
+      <div class="wheel-sub">يمتد ما بعد الحدث</div>
+    </div>
+  </div>
+</section>
+
+<!-- Quote -->
+<div class="quote-bar" style="max-width:680px;margin:2.5rem auto 0;padding:1.6rem 2rem">
+  <p class="quote-text">«الفاعلية الناجحة لا تُقاس بعدد الحضور — بل بعمق الأثر الذي تتركه بعد انتهائها»</p>
+  <p class="quote-src">— د. عبد الوهاب عبد الفضيل · أفريكارد للتدريب</p>
+</div>
+
+<!-- CTA -->
+<div class="cta-bar">
+  <button class="cta-btn" onclick="window.open('https://chat.whatsapp.com/HfPrsl6oFd95jWah0cq03u','_blank')">سجّل في الدورة مجاناً</button>
+  <button class="cta-ghost">تعرّف على المحاور</button>
+</div>
+
+<script>
+var colors=['#e8c547','#00b4d8','#ff6b6b','#51cf66','#cc5de8'];
+function activate(i){
+  // Cards
+  document.querySelectorAll('.pillar-card').forEach(function(c,j){
+    c.classList.toggle('active',j===i);
+  });
+  // SVG segments
+  document.querySelectorAll('.pent-segment').forEach(function(s,j){
+    s.classList.toggle('active',j===i);
+  });
+  // Scroll card into view on mobile
+  var card=document.querySelectorAll('.pillar-card')[i];
+  if(card&&window.innerWidth<640){
+    card.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+}
+// Init first
+activate(0);
+</script>
