@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: SamKirkland/FTP-Deploy-Action@v4.3.5        with:
+      - uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
           server: ftp.africahrd.com
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
