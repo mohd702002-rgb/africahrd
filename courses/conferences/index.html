@@ -1,0 +1,812 @@
+<title>دورة تنظيم المؤتمرات والفعاليات — أفريكارد</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"></script>
+<style>
+:root{
+  --blue:#004B8D;--blue-dk:#002a5c;--teal:#006494;
+  --gold:#C9A227;--gold2:#e8c547;
+  --bg:#0a0a0a;--bg2:#111;--bg3:#151515;
+  --card:#1a1a1a;--border:rgba(255,255,255,.08);
+  --fg:#f0f0f0;--muted:#888;--dim:#555;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;direction:rtl;font-family:'Cairo',sans-serif;background:var(--bg);color:var(--fg)}
+body{padding:0}
+a{text-decoration:none;color:inherit}
+
+/* TOPBAR */
+.topbar{
+  background:linear-gradient(90deg,var(--blue-dk),var(--blue));
+  color:#fff;font-size:.8rem;font-weight:600;
+  text-align:center;padding:.45rem 1rem;
+  display:flex;align-items:center;justify-content:center;gap:.6rem;
+}
+.topbar-gift{color:var(--gold2)}
+
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:200;
+  background:#000;border-bottom:1px solid rgba(255,255,255,.06);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.75rem 2rem;gap:1rem;
+}
+.nav-logo{font-size:1rem;font-weight:900;color:var(--gold);display:flex;align-items:center;gap:.5rem}
+.nav-logo-icon{width:32px;height:32px;background:linear-gradient(135deg,var(--blue),var(--gold));border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:900;color:#fff}
+.nav-links{display:flex;gap:1.8rem;list-style:none}
+.nav-links a{color:var(--muted);font-size:.83rem;transition:color .2s}
+.nav-links a:hover{color:#fff}
+.nav-actions{display:flex;align-items:center;gap:.8rem}
+.btn-login{background:transparent;border:1px solid var(--border);color:var(--fg);font-size:.82rem;padding:.42rem 1rem;border-radius:6px;cursor:pointer;font-family:'Cairo',sans-serif;transition:border-color .2s}
+.btn-login:hover{border-color:var(--gold)}
+
+/* HERO — full-width dark, YouTube player centered */
+.hero{
+  position:relative;
+  background:#000;
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  overflow:hidden;
+  text-align:center;
+  padding:2rem 1.5rem 3rem;
+}
+/* Background radial glow */
+.hero::before{
+  content:'';position:absolute;
+  width:800px;height:800px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,75,141,.3) 0%,transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-60%);
+  pointer-events:none;
+}
+/* Subtle geometric ring */
+.hero::after{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 0%,rgba(0,75,141,.15) 0%,transparent 100%),
+    radial-gradient(ellipse 40% 30% at 50% 100%,rgba(201,162,39,.08) 0%,transparent 100%);
+  pointer-events:none;
+}
+
+.hero-content{position:relative;z-index:2;max-width:900px;width:100%}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(201,162,39,.12);border:1px solid rgba(201,162,39,.35);
+  color:var(--gold2);font-size:.78rem;font-weight:700;
+  padding:.32rem .9rem;border-radius:999px;margin-bottom:1.2rem;
+}
+.hero-title{
+  font-size:clamp(1.9rem,5vw,3.4rem);font-weight:900;color:#fff;
+  line-height:1.2;margin-bottom:.4rem;
+}
+.hero-title em{color:var(--gold2);font-style:normal}
+.hero-sub{font-size:1rem;color:var(--muted);margin-bottom:.3rem}
+.hero-trainer{
+  font-size:1.05rem;font-weight:700;color:#ccc;margin-bottom:2rem;
+}
+.hero-trainer span{color:var(--gold2)}
+
+/* YouTube player wrapper — responsive 16:9 */
+.yt-wrap{
+  position:relative;width:100%;padding-bottom:56.25%;
+  border-radius:16px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 20px 80px rgba(0,0,0,.7);
+  margin-bottom:2.2rem;
+  background:#000;
+}
+.yt-wrap iframe{
+  position:absolute;inset:0;width:100%;height:100%;border:none;
+}
+
+/* Stats row */
+.stats-row{
+  display:flex;justify-content:center;align-items:center;
+  gap:0;margin-bottom:2rem;flex-wrap:wrap;
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--border);border-radius:12px;
+  overflow:hidden;
+}
+.stat{
+  display:flex;flex-direction:column;align-items:center;gap:.25rem;
+  padding:.85rem 1.6rem;
+  border-left:1px solid var(--border);
+}
+.stat:last-child{border-left:none}
+.stat i{font-size:1.2rem;color:var(--gold)}
+.stat-val{font-size:.85rem;font-weight:800;color:#fff}
+.stat-lbl{font-size:.68rem;color:var(--dim)}
+
+/* CTA buttons */
+.cta-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.cta-primary{
+  display:inline-flex;align-items:center;gap:.7rem;
+  background:linear-gradient(135deg,var(--gold),#b88a10);
+  color:#000;font-weight:900;font-size:1rem;
+  padding:.9rem 2.5rem;border-radius:10px;
+  box-shadow:0 6px 28px rgba(201,162,39,.35);
+  transition:transform .2s,box-shadow .2s;cursor:pointer;
+  border:none;font-family:'Cairo',sans-serif;
+}
+.cta-primary:hover{transform:translateY(-2px);box-shadow:0 10px 38px rgba(201,162,39,.5)}
+.cta-whatsapp{
+  display:inline-flex;align-items:center;gap:.7rem;
+  background:rgba(37,211,102,.12);border:1px solid rgba(37,211,102,.4);
+  color:#25d366;font-weight:700;font-size:.9rem;
+  padding:.85rem 1.8rem;border-radius:10px;
+  transition:background .2s;
+}
+.cta-whatsapp:hover{background:rgba(37,211,102,.2)}
+
+/* BODY */
+.page-body{
+  max-width:1100px;margin:0 auto;padding:3rem 2rem;
+  display:grid;grid-template-columns:1fr 320px;gap:3rem;align-items:start;
+}
+
+/* SECTION HEADING */
+.sh{
+  font-size:1.1rem;font-weight:800;color:#fff;
+  border-right:3px solid var(--gold);padding-right:.7rem;
+  margin-bottom:1.3rem;
+}
+
+/* OUTCOMES */
+.outcomes{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.9rem;margin-bottom:3rem}
+.outcome{
+  background:var(--card);border:1px solid var(--border);border-radius:10px;
+  padding:1.1rem;display:flex;gap:.8rem;align-items:flex-start;
+  transition:border-color .2s,transform .2s;
+}
+.outcome:hover{border-color:rgba(201,162,39,.3);transform:translateY(-2px)}
+.oi{
+  width:38px;height:38px;flex-shrink:0;border-radius:8px;
+  background:rgba(0,75,141,.35);display:flex;align-items:center;justify-content:center;
+  font-size:1rem;color:var(--gold2);
+}
+.outcome p{font-size:.82rem;color:var(--fg);line-height:1.6}
+
+/* MODULES — 3 محاور رئيسية */
+.modules{display:flex;flex-direction:column;gap:.5rem;margin-bottom:3rem}
+.module{
+  background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;
+}
+.mod-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 1.2rem;cursor:pointer;gap:.8rem;
+  transition:background .15s;user-select:none;
+}
+.mod-header:hover{background:rgba(255,255,255,.04)}
+.mod-left{display:flex;align-items:center;gap:.8rem}
+.mod-num{
+  width:30px;height:30px;border-radius:7px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--blue),var(--teal));
+  display:flex;align-items:center;justify-content:center;
+  font-size:.75rem;font-weight:800;color:#fff;
+}
+.mod-title{font-size:.95rem;font-weight:700;color:#fff}
+.mod-arrow{color:var(--muted);font-size:.8rem;transition:transform .25s;flex-shrink:0}
+.module.open .mod-arrow{transform:rotate(180deg)}
+.mod-body{display:none;border-top:1px solid var(--border);padding:1.1rem 1.2rem}
+.module.open .mod-body{display:block}
+.mod-points{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.mod-points li{
+  font-size:.84rem;color:var(--muted);padding-right:1.2rem;position:relative;line-height:1.6;
+}
+.mod-points li::before{
+  content:'◆';position:absolute;right:0;top:.15em;
+  color:var(--gold);font-size:.52rem;
+}
+
+/* GIFT BOX */
+.gift-box{
+  background:linear-gradient(135deg,rgba(0,75,141,.2),rgba(201,162,39,.1));
+  border:1px solid rgba(201,162,39,.3);border-radius:12px;
+  padding:1.4rem 1.6rem;margin-bottom:3rem;
+  display:flex;gap:1rem;align-items:flex-start;
+}
+.gift-icon{font-size:2rem;flex-shrink:0;line-height:1}
+.gift-text h4{font-size:.95rem;font-weight:800;color:var(--gold2);margin-bottom:.4rem}
+.gift-text p{font-size:.83rem;color:var(--muted);line-height:1.7}
+
+/* TRAINER */
+.trainer-card{
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:1.6rem;display:flex;gap:1.2rem;align-items:flex-start;margin-bottom:3rem;
+}
+.trainer-av{
+  width:68px;height:68px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--blue),var(--teal));
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;font-weight:900;color:#fff;border:2px solid var(--gold);
+}
+.trainer-name{font-size:1rem;font-weight:800;color:#fff;margin-bottom:.2rem}
+.trainer-role{font-size:.78rem;color:var(--gold2);margin-bottom:.7rem}
+.trainer-bio{font-size:.83rem;color:var(--muted);line-height:1.8}
+
+/* RELATED */
+.related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-bottom:1rem}
+.rc{
+  background:var(--card);border:1px solid var(--border);border-radius:10px;
+  overflow:hidden;transition:transform .2s,border-color .2s;cursor:pointer;
+}
+.rc:hover{transform:translateY(-3px);border-color:rgba(201,162,39,.3)}
+.rc-thumb{height:110px;display:flex;align-items:center;justify-content:center;font-size:2.2rem;color:rgba(255,255,255,.12)}
+.rc-body{padding:.9rem}
+.rc-cat{font-size:.68rem;color:var(--gold2);font-weight:700;margin-bottom:.3rem}
+.rc-title{font-size:.83rem;font-weight:700;color:#fff;line-height:1.45;margin-bottom:.4rem}
+.rc-free{font-size:.75rem;font-weight:800;color:var(--gold)}
+
+/* SIDEBAR */
+.sidebar{position:sticky;top:70px}
+.sidebar-card{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;
+}
+.sidebar-yt{
+  position:relative;width:100%;padding-bottom:56.25%;background:#000;
+  cursor:pointer;overflow:hidden;
+}
+.sidebar-yt iframe{position:absolute;inset:0;width:100%;height:100%;border:none;pointer-events:none}
+.sidebar-yt-overlay{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.3);transition:background .2s;
+}
+.sidebar-yt:hover .sidebar-yt-overlay{background:rgba(0,0,0,.1)}
+.yt-play-btn{
+  width:54px;height:54px;border-radius:50%;
+  background:rgba(201,162,39,.9);display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;color:#000;transition:transform .2s;
+}
+.sidebar-yt:hover .yt-play-btn{transform:scale(1.1)}
+.sidebar-body{padding:1.4rem}
+.sidebar-free{
+  font-size:2rem;font-weight:900;color:var(--gold);margin-bottom:.25rem;
+}
+.sidebar-free-lbl{
+  display:inline-block;background:rgba(201,162,39,.15);border:1px solid rgba(201,162,39,.3);
+  color:var(--gold2);font-size:.75rem;font-weight:700;
+  padding:.2rem .7rem;border-radius:6px;margin-bottom:1.1rem;
+}
+.sidebar-btn{
+  width:100%;padding:.82rem;border-radius:8px;border:none;cursor:pointer;
+  font-family:'Cairo',sans-serif;font-size:.92rem;font-weight:800;
+  background:linear-gradient(135deg,var(--gold),#b88a10);
+  color:#000;margin-bottom:.6rem;transition:opacity .2s;
+}
+.sidebar-btn:hover{opacity:.9}
+.sidebar-btn-wa{
+  width:100%;padding:.75rem;border-radius:8px;border:1px solid rgba(37,211,102,.4);
+  cursor:pointer;font-family:'Cairo',sans-serif;font-size:.88rem;font-weight:700;
+  background:rgba(37,211,102,.08);color:#25d366;
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+  transition:background .2s;
+}
+.sidebar-btn-wa:hover{background:rgba(37,211,102,.16)}
+.sidebar-includes{margin-top:1.1rem}
+.sidebar-includes h4{font-size:.78rem;color:var(--muted);margin-bottom:.65rem;font-weight:600}
+.inc{
+  display:flex;align-items:center;gap:.65rem;
+  font-size:.8rem;color:var(--fg);padding:.38rem 0;
+  border-bottom:1px solid rgba(255,255,255,.04);
+}
+.inc:last-child{border-bottom:none}
+.inc i{color:var(--gold);font-size:.8rem;width:14px;text-align:center}
+
+/* PROFESSIONAL DIMENSION */
+.prof-section{margin-bottom:3rem}
+.prof-intro{font-size:.88rem;color:var(--muted);line-height:1.8;margin-bottom:1.5rem}
+.prof-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem}
+.prof-card{
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:1.3rem;display:flex;flex-direction:column;gap:.6rem;
+  transition:border-color .2s,transform .2s;
+}
+.prof-card:hover{border-color:rgba(201,162,39,.35);transform:translateY(-2px)}
+.prof-icon{font-size:1.8rem;line-height:1}
+.prof-title{font-size:.88rem;font-weight:800;color:var(--gold2);margin-bottom:.25rem}
+.prof-list{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.prof-list li{
+  font-size:.8rem;color:var(--muted);line-height:1.6;
+  padding-right:1.1rem;position:relative;
+}
+.prof-list li::before{content:'◆';position:absolute;right:0;top:.2em;color:var(--gold);font-size:.48rem}
+
+/* INTERNATIONAL ORGS */
+.orgs-section{margin-bottom:3rem}
+.orgs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:1.5rem}
+.org-card{
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:1.2rem;display:flex;gap:1rem;align-items:flex-start;
+  transition:border-color .2s,transform .2s;
+}
+.org-card:hover{border-color:rgba(201,162,39,.3);transform:translateY(-2px)}
+.org-badge{
+  min-width:56px;height:56px;border-radius:10px;flex-shrink:0;
+  border:2px solid;display:flex;align-items:center;justify-content:center;
+  font-size:.72rem;font-weight:900;letter-spacing:.03em;line-height:1.2;
+  text-align:center;
+}
+.org-body{}
+.org-name{font-size:.8rem;font-weight:800;color:#fff;margin-bottom:.15rem}
+.org-name-ar{font-size:.74rem;color:var(--gold2);margin-bottom:.45rem}
+.org-desc{font-size:.77rem;color:var(--muted);line-height:1.65}
+
+/* ARAB CONTEXT BOX */
+.arab-box{
+  background:linear-gradient(135deg,rgba(0,75,141,.18),rgba(0,100,148,.1));
+  border:1px solid rgba(0,100,148,.35);border-radius:12px;padding:1.4rem 1.6rem;
+}
+.arab-box-head{
+  font-size:.95rem;font-weight:800;color:var(--gold2);margin-bottom:1.1rem;
+}
+.arab-box-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
+.arab-item{
+  background:rgba(255,255,255,.04);border-radius:8px;padding:1rem;
+  display:flex;flex-direction:column;gap:.35rem;
+}
+.arab-item-icon{font-size:1.5rem;line-height:1}
+.arab-item-title{font-size:.8rem;font-weight:700;color:#fff}
+.arab-item-body{font-size:.77rem;color:var(--muted);line-height:1.6}
+
+/* FOOTER */
+footer{
+  background:#000;border-top:1px solid var(--border);
+  padding:1.8rem;text-align:center;font-size:.8rem;color:var(--dim);
+}
+footer a{color:var(--gold)}
+
+/* RESPONSIVE */
+@media(max-width:860px){
+  .page-body{grid-template-columns:1fr}
+  .sidebar{position:static}
+}
+@media(max-width:600px){
+  nav{padding:.6rem 1rem}
+  .nav-links{display:none}
+  .hero{padding:1.5rem 1rem 2rem}
+  .stats-row .stat{padding:.7rem .9rem}
+  .page-body{padding:1.5rem 1rem;gap:1.5rem}
+  .trainer-card{flex-direction:column;align-items:center;text-align:center}
+  .cta-row{flex-direction:column;align-items:stretch}
+}
+</style>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <span class="topbar-gift"><i class="fas fa-gift"></i></span>
+  ادعُ ٣ أصحاب وتاغهم في ٣ تعليقات واحضر مجاناً!
+  <span class="topbar-gift"><i class="fas fa-gift"></i></span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-icon">أك</div>
+    أفريكارد للتنمية
+  </div>
+  <ul class="nav-links">
+    <li><a href="#">الرئيسية</a></li>
+    <li><a href="#">الدورات</a></li>
+    <li><a href="#">المدربون</a></li>
+    <li><a href="#">تواصل معنا</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-login">تسجيل الدخول</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><i class="fas fa-star"></i> أفريكارد للتدريب وتنمية الموارد البشرية</div>
+    <h1 class="hero-title">العلاقات العامة و<em>تنظيم المؤتمرات</em><br>والفعاليات</h1>
+    <p class="hero-sub">دورة تدريبية متكاملة عبر الإنترنت</p>
+    <p class="hero-trainer">يقدّمها: <span>د. عبد الوهاب عبد الفضيل</span></p>
+
+    <!-- YouTube Player -->
+    <div class="yt-wrap">
+      <iframe
+        src="https://www.youtube.com/embed/ljYGDasuEqo?rel=0&modestbranding=1&color=white"
+        title="دورة تنظيم المؤتمرات والفعاليات — أفريكارد"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat">
+        <i class="fas fa-layer-group"></i>
+        <span class="stat-val">٣ محاور</span>
+        <span class="stat-lbl">أجزاء</span>
+      </div>
+      <div class="stat">
+        <i class="fas fa-clock"></i>
+        <span class="stat-val">يوم واحد</span>
+        <span class="stat-lbl">مدة</span>
+      </div>
+      <div class="stat">
+        <i class="fas fa-wifi"></i>
+        <span class="stat-val">أونلاين</span>
+        <span class="stat-lbl">طريقة التدريب</span>
+      </div>
+      <div class="stat">
+        <i class="fas fa-certificate"></i>
+        <span class="stat-val">شهادة</span>
+        <span class="stat-lbl">حضور</span>
+      </div>
+      <div class="stat">
+        <i class="fas fa-tag"></i>
+        <span class="stat-val">مجانية</span>
+        <span class="stat-lbl">الرسوم</span>
+      </div>
+    </div>
+
+    <!-- CTAs -->
+    <div class="cta-row">
+      <button class="cta-primary" onclick="document.getElementById('reg').scrollIntoView({behavior:'smooth'})">
+        <i class="fas fa-rocket"></i>
+        سجّل في الدورة مجاناً
+      </button>
+      <a href="https://chat.whatsapp.com/HfPrsl6oFd95jWah0cq03u" target="_blank" class="cta-whatsapp">
+        <i class="fab fa-whatsapp"></i>
+        انضم لمجموعة WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- BODY -->
+<div class="page-body">
+  <div class="main-content">
+
+    <!-- What you'll learn -->
+    <h2 class="sh">ماذا ستتعلم في هذه الدورة؟</h2>
+    <div class="outcomes">
+      <div class="outcome">
+        <div class="oi"><i class="fas fa-handshake"></i></div>
+        <p>فهم دور العلاقات العامة في الفكر الإداري الحديث وتطبيقاتها المؤسسية</p>
+      </div>
+      <div class="outcome">
+        <div class="oi"><i class="fas fa-calendar-check"></i></div>
+        <p>إتقان مراحل تنظيم المؤتمرات والفعاليات من التخطيط حتى التقييم</p>
+      </div>
+      <div class="outcome">
+        <div class="oi"><i class="fas fa-sitemap"></i></div>
+        <p>بناء خطة تواصل داخلي وخارجي فعّالة داخل المؤسسات</p>
+      </div>
+      <div class="outcome">
+        <div class="oi"><i class="fas fa-users"></i></div>
+        <p>إدارة العلاقة مع وسائل الإعلام والجمهور الخارجي باحترافية</p>
+      </div>
+      <div class="outcome">
+        <div class="oi"><i class="fas fa-clipboard-list"></i></div>
+        <p>تصميم بروتوكولات الفعاليات وإدارة الضيافة والتشريفات</p>
+      </div>
+      <div class="outcome">
+        <div class="oi"><i class="fas fa-chart-bar"></i></div>
+        <p>قياس نجاح الفعاليات وإعداد تقارير الأداء والأثر</p>
+      </div>
+    </div>
+
+    <!-- Gift offer -->
+    <div class="gift-box">
+      <div class="gift-icon">🎁</div>
+      <div class="gift-text">
+        <h4>عرض خاص — احضر مجاناً!</h4>
+        <p>ادعُ ثلاثة من أصحابك لحضور الدورة، وتاغهم في ثلاثة تعليقات منفصلة،<br>واحضر الدورة مجاناً بالكامل.</p>
+      </div>
+    </div>
+
+    <!-- Modules -->
+    <h2 class="sh">محاور الدورة</h2>
+    <div class="modules">
+
+      <div class="module open">
+        <div class="mod-header" onclick="toggleMod(this)">
+          <div class="mod-left">
+            <div class="mod-num">١</div>
+            <div class="mod-title">العلاقات العامة في الفكر الإداري</div>
+          </div>
+          <i class="fas fa-chevron-down mod-arrow"></i>
+        </div>
+        <div class="mod-body">
+          <ul class="mod-points">
+            <li>نشأة العلاقات العامة وتطورها التاريخي</li>
+            <li>وظائف إدارة العلاقات العامة داخل المنظمات</li>
+            <li>العلاقات العامة والاتصال المؤسسي</li>
+            <li>دور العلاقات العامة في بناء الصورة الذهنية للمنظمة</li>
+            <li>أخلاقيات مهنة العلاقات العامة والمعايير الدولية</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="mod-header" onclick="toggleMod(this)">
+          <div class="mod-left">
+            <div class="mod-num">٢</div>
+            <div class="mod-title">تنظيم المؤتمرات والفعاليات</div>
+          </div>
+          <i class="fas fa-chevron-down mod-arrow"></i>
+        </div>
+        <div class="mod-body">
+          <ul class="mod-points">
+            <li>أنواع المؤتمرات والفعاليات وخصائص كل منها</li>
+            <li>مراحل التخطيط: من الفكرة إلى اليوم الصفر</li>
+            <li>إعداد الميزانية وإدارة الموارد والموردين</li>
+            <li>البروتوكول والتشريفات وإدارة الضيافة</li>
+            <li>إدارة المخاطر والخطط البديلة (Plan B)</li>
+            <li>التقييم وإعداد تقرير ما بعد الفعالية</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="mod-header" onclick="toggleMod(this)">
+          <div class="mod-left">
+            <div class="mod-num">٣</div>
+            <div class="mod-title">الاتصال الداخلي والخارجي في المؤسسات</div>
+          </div>
+          <i class="fas fa-chevron-down mod-arrow"></i>
+        </div>
+        <div class="mod-body">
+          <ul class="mod-points">
+            <li>مفهوم الاتصال الداخلي وأهميته في بناء ثقافة مؤسسية</li>
+            <li>قنوات الاتصال الداخلي وأدواته الحديثة</li>
+            <li>إدارة العلاقة مع الجمهور الخارجي والشركاء</li>
+            <li>التعامل مع وسائل الإعلام والرسائل الصحفية</li>
+            <li>الاتصال في الأزمات وإدارة السمعة المؤسسية</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PROFESSIONAL DIMENSION -->
+    <h2 class="sh">البُعد المهني والتخصصي</h2>
+    <div class="prof-section">
+      <p class="prof-intro">تنظيم المؤتمرات والفعاليات تحوّل من مهمة إدارية إلى <strong>مهنة متخصصة ذات هوية مستقلة</strong> — لها معايير دولية وكفايات مهنية وشهادات احترافية معترف بها عالمياً.</p>
+      <div class="prof-grid">
+        <div class="prof-card">
+          <div class="prof-icon">🎓</div>
+          <div class="prof-title">الكفايات المهنية الأساسية</div>
+          <ul class="prof-list">
+            <li>التخطيط الاستراتيجي للفعاليات</li>
+            <li>إدارة المشاريع وتوزيع الموارد</li>
+            <li>الاتصال المؤسسي والتفاوض</li>
+            <li>إدارة المخاطر وخطط الطوارئ</li>
+            <li>التسويق الرقمي للفعاليات</li>
+            <li>قياس الأثر والتقييم المؤسسي</li>
+          </ul>
+        </div>
+        <div class="prof-card">
+          <div class="prof-icon">📜</div>
+          <div class="prof-title">الشهادات الدولية المعتمدة</div>
+          <ul class="prof-list">
+            <li><strong>CMP</strong> — Certified Meeting Professional (MPI)</li>
+            <li><strong>CSEP</strong> — Certified Special Events Professional (ILEA)</li>
+            <li><strong>CMM</strong> — Certificate in Meeting Management</li>
+            <li><strong>DES</strong> — Digital Event Strategist (PCMA)</li>
+            <li><strong>CEM</strong> — Certified Exhibition Manager (IAEE)</li>
+          </ul>
+        </div>
+        <div class="prof-card">
+          <div class="prof-icon">📈</div>
+          <div class="prof-title">مسارات العمل في القطاع</div>
+          <ul class="prof-list">
+            <li>مدير فعاليات مؤسسية (Corporate Events Manager)</li>
+            <li>منسق مؤتمرات (Conference Coordinator)</li>
+            <li>مخطط اجتماعات (Meeting Planner)</li>
+            <li>مدير علاقات عامة وبروتوكول</li>
+            <li>استشاري فعاليات مستقل (Freelance)</li>
+            <li>مدير شراكات ورعاة (Sponsorship Manager)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- INTERNATIONAL ORGS -->
+    <h2 class="sh">المنظمات الدولية المعنية بصناعة المؤتمرات</h2>
+    <div class="orgs-section">
+      <p class="prof-intro">تضمّ صناعة المؤتمرات شبكة من المنظمات العالمية التي تضع المعايير وتمنح الاعتمادات وتربط المهنيين بعضهم ببعض.</p>
+      <div class="orgs-grid">
+
+        <div class="org-card">
+          <div class="org-badge" style="background:rgba(0,75,141,.18);border-color:rgba(0,75,141,.4)">MPI</div>
+          <div class="org-body">
+            <div class="org-name">Meeting Professionals International</div>
+            <div class="org-name-ar">الجمعية الدولية لمهنيي الاجتماعات</div>
+            <p class="org-desc">أكبر جمعية مهنية في العالم لمخططي الاجتماعات والفعاليات — ١٧٠+ فصل في ٦ قارات. تمنح شهادة CMP العالمية.</p>
+          </div>
+        </div>
+
+        <div class="org-card">
+          <div class="org-badge" style="background:rgba(201,162,39,.12);border-color:rgba(201,162,39,.4)">PCMA</div>
+          <div class="org-body">
+            <div class="org-name">Professional Convention Management Association</div>
+            <div class="org-name-ar">جمعية إدارة المؤتمرات الاحترافية</div>
+            <p class="org-desc">مرجع عالمي لصناعة الاجتماعات التجارية — متخصصة في المؤتمرات الكبرى والمعارض الدولية وتمنح شهادة DES.</p>
+          </div>
+        </div>
+
+        <div class="org-card">
+          <div class="org-badge" style="background:rgba(0,100,148,.18);border-color:rgba(0,100,148,.4)">ILEA</div>
+          <div class="org-body">
+            <div class="org-name">International Live Events Association</div>
+            <div class="org-name-ar">الرابطة الدولية للفعاليات الحية</div>
+            <p class="org-desc">تُعنى بالفعاليات الإبداعية والاحتفالية — تمنح شهادة CSEP وتضم منظمي الحفلات والمهرجانات والفعاليات الخاصة.</p>
+          </div>
+        </div>
+
+        <div class="org-card">
+          <div class="org-badge" style="background:rgba(100,160,80,.15);border-color:rgba(100,160,80,.4)">IAEE</div>
+          <div class="org-body">
+            <div class="org-name">International Association of Exhibitions & Events</div>
+            <div class="org-name-ar">الجمعية الدولية للمعارض والفعاليات</div>
+            <p class="org-desc">المرجع الدولي لمنظمي المعارض التجارية والصناعية — تمنح شهادة CEM وتنظم قمة Expo! Expo! السنوية.</p>
+          </div>
+        </div>
+
+        <div class="org-card">
+          <div class="org-badge" style="background:rgba(180,80,80,.15);border-color:rgba(180,80,80,.4)">ICCA</div>
+          <div class="org-body">
+            <div class="org-name">International Congress & Convention Association</div>
+            <div class="org-name-ar">الجمعية الدولية للمؤتمرات والاتفاقيات</div>
+            <p class="org-desc">تُصنّف المدن والدول وفق حجم استضافتها للمؤتمرات الدولية — تقريرها السنوي مرجع صناعة المؤتمرات العالمية.</p>
+          </div>
+        </div>
+
+        <div class="org-card">
+          <div class="org-badge" style="background:rgba(150,100,200,.15);border-color:rgba(150,100,200,.4)">UFI</div>
+          <div class="org-body">
+            <div class="org-name">Global Association of the Exhibition Industry</div>
+            <div class="org-name-ar">الاتحاد العالمي لصناعة المعارض</div>
+            <p class="org-desc">أقدم جمعية عالمية للمعارض (تأسست ١٩٢٥) — تضم أكثر من ٨٠٠ عضو في ٨٥ دولة وتمنح شهادة UFI Approved Event.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Arab context box -->
+      <div class="arab-box">
+        <div class="arab-box-head">
+          <span class="arab-flag">🌍</span>
+          <span>واقع الصناعة في العالم العربي والأفريقي</span>
+        </div>
+        <div class="arab-box-grid">
+          <div class="arab-item">
+            <div class="arab-item-icon">🏙️</div>
+            <div>
+              <div class="arab-item-title">مراكز الصدارة الإقليمية</div>
+              <div class="arab-item-body">دبي وأبوظبي ورأس الخيمة تتصدر قائمة ICCA في المنطقة — تليها الرياض والقاهرة وأكرا وكيب تاون</div>
+            </div>
+          </div>
+          <div class="arab-item">
+            <div class="arab-item-icon">📊</div>
+            <div>
+              <div class="arab-item-title">حجم السوق</div>
+              <div class="arab-item-body">تُقدَّر قيمة صناعة الفعاليات في منطقة الشرق الأوسط وأفريقيا بأكثر من ٣٥ مليار دولار سنوياً</div>
+            </div>
+          </div>
+          <div class="arab-item">
+            <div class="arab-item-icon">🚀</div>
+            <div>
+              <div class="arab-item-title">الفرص المتاحة</div>
+              <div class="arab-item-body">الطلب على المتخصصين العرب المعتمدين يفوق العرض — ثغرة مهنية حقيقية يمكن لهذه الدورة أن تُسدّها</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trainer -->
+    <h2 class="sh">المدرب</h2>
+    <div class="trainer-card">
+      <div class="trainer-av">عف</div>
+      <div>
+        <div class="trainer-name">د. عبد الوهاب عبد الفضيل</div>
+        <div class="trainer-role">أستاذ العلاقات العامة بالجامعات السودانية</div>
+        <p class="trainer-bio">
+          أستاذ أكاديمي متخصص في العلاقات العامة والاتصال المؤسسي، يجمع بين الخبرة الأكاديمية العميقة والتطبيق العملي الميداني. خبير في تأهيل الكوادر المؤسسية على أسس علمية راسخة وأدوات حديثة في مجال إدارة الفعاليات والتواصل المؤسسي.
+        </p>
+      </div>
+    </div>
+
+    <!-- Related -->
+    <h2 class="sh">دورات أخرى قد تعجبك</h2>
+    <div class="related-grid">
+      <div class="rc">
+        <div class="rc-thumb" style="background:linear-gradient(135deg,#0d2038,#1a3d5c)">
+          <i class="fas fa-brain"></i>
+        </div>
+        <div class="rc-body">
+          <div class="rc-cat">تطوير بشري</div>
+          <div class="rc-title">من المعرفة إلى الأثر — بوابة المدرب المؤثر</div>
+          <div class="rc-free">مجاني</div>
+        </div>
+      </div>
+      <div class="rc">
+        <div class="rc-thumb" style="background:linear-gradient(135deg,#1c2a0d,#3a5218)">
+          <i class="fas fa-heart-pulse"></i>
+        </div>
+        <div class="rc-body">
+          <div class="rc-cat">مهارات شخصية</div>
+          <div class="rc-title">مهارات التواصل والذكاء العاطفي</div>
+          <div class="rc-free">مجاني</div>
+        </div>
+      </div>
+      <div class="rc">
+        <div class="rc-thumb" style="background:linear-gradient(135deg,#2a1a0d,#5c3518)">
+          <i class="fas fa-users-gear"></i>
+        </div>
+        <div class="rc-body">
+          <div class="rc-cat">الموارد البشرية</div>
+          <div class="rc-title">تخطيط وإدارة الكفاءات البشرية</div>
+          <div class="rc-free">مجاني</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main -->
+
+  <!-- SIDEBAR -->
+  <div class="sidebar" id="reg">
+    <div class="sidebar-card">
+      <!-- Mini YouTube preview -->
+      <div class="sidebar-yt" onclick="this.querySelector('iframe').style.pointerEvents='all';this.querySelector('.sidebar-yt-overlay').style.display='none'">
+        <iframe
+          src="https://www.youtube.com/embed/ljYGDasuEqo?rel=0&modestbranding=1"
+          title="preview"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+        <div class="sidebar-yt-overlay">
+          <div class="yt-play-btn"><i class="fas fa-play"></i></div>
+        </div>
+      </div>
+      <div class="sidebar-body">
+        <div class="sidebar-free">مجانية 🎉</div>
+        <span class="sidebar-free-lbl">التسجيل مفتوح الآن</span>
+        <button class="sidebar-btn"><i class="fas fa-user-plus"></i> سجّل مجاناً الآن</button>
+        <a href="https://chat.whatsapp.com/HfPrsl6oFd95jWah0cq03u" target="_blank" class="sidebar-btn-wa">
+          <i class="fab fa-whatsapp"></i> انضم للمجموعة
+        </a>
+        <div class="sidebar-includes">
+          <h4>تشمل الدورة</h4>
+          <div class="inc"><i class="fas fa-video"></i> فيديو تعليمي كامل</div>
+          <div class="inc"><i class="fas fa-layer-group"></i> ٣ محاور رئيسية</div>
+          <div class="inc"><i class="fas fa-wifi"></i> تدريب أونلاين مباشر</div>
+          <div class="inc"><i class="fas fa-file-pdf"></i> مواد تدريبية PDF</div>
+          <div class="inc"><i class="fas fa-certificate"></i> شهادة حضور معتمدة</div>
+          <div class="inc"><i class="fas fa-mobile-alt"></i> متاح على كل الأجهزة</div>
+        </div>
+        <div style="margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--border);font-size:.78rem;color:var(--dim);text-align:center">
+          <i class="fas fa-phone" style="color:var(--gold)"></i>
+          للاستفسار: 0903844999 — 0118416600
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page-body -->
+
+<footer>
+  <p>© ٢٠٢٦ أفريكارد للتدريب وتنمية الموارد البشرية &nbsp;·&nbsp;
+    <a href="#">الرئيسية</a> &nbsp;·&nbsp;
+    <a href="#">الدورات</a> &nbsp;·&nbsp;
+    <a href="#">تواصل معنا</a>
+  </p>
+</footer>
+
+<script>
+function toggleMod(header){
+  var m = header.closest('.module');
+  var isOpen = m.classList.contains('open');
+  document.querySelectorAll('.module.open').forEach(function(el){ el.classList.remove('open'); });
+  if(!isOpen) m.classList.add('open');
+}
+</script>
