@@ -1,0 +1,492 @@
+<title>حاسبة الاحتياج التدريبي</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap">
+<style>
+/* ── TOKENS ───────────────────────────────────────────────
+   Layout : single-column wizard, progress rail at top
+   Color  : deep navy ground · gold accent · rose/green result chips
+   Type   : Cairo throughout (Arabic-native, strong weights)
+──────────────────────────────────────────────────────── */
+:root {
+  --bg:      #f4f6fb;
+  --surface: #ffffff;
+  --surface2:#f0f3fa;
+  --border:  #dce2f0;
+  --fg:      #0d1626;
+  --muted:   #5a6a85;
+  --blue:    #004B8D;
+  --blue2:   #0066cc;
+  --gold:    #C9A227;
+  --gold2:   #a07b10;
+  --rose:    #b5385a;
+  --green:   #1a7a4a;
+  --prog-bg: #e0e7f4;
+  color-scheme: light;
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#06101e; --surface:#0d1a2e; --surface2:#111e35;
+  --border:#1e2d45; --fg:#e8edf5; --muted:#7a8ca8;
+  --blue:#2a7dd4; --blue2:#4a9af0; --gold:#e8c547; --gold2:#c9a227;
+  --rose:#d4547a; --green:#26a96a; --prog-bg:#1a2740; color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#06101e; --surface:#0d1a2e; --surface2:#111e35;
+  --border:#1e2d45; --fg:#e8edf5; --muted:#7a8ca8;
+  --blue:#2a7dd4; --blue2:#4a9af0; --gold:#e8c547; --gold2:#c9a227;
+  --rose:#d4547a; --green:#26a96a; --prog-bg:#1a2740; color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--bg);color:var(--fg);
+  font-family:'Cairo',sans-serif;font-size:16px;line-height:1.7;
+  padding-inline:16px;padding-block:24px;
+}
+
+/* HEADER */
+.app-header{
+  text-align:center;max-width:640px;margin:0 auto 32px;
+}
+.brand-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--blue);color:#fff;
+  border-radius:30px;padding:6px 18px;
+  font-size:.78rem;font-weight:700;letter-spacing:.06em;margin-bottom:16px;
+}
+.brand-badge span{opacity:.7}
+.app-header h1{
+  font-size:clamp(1.6rem,5vw,2.4rem);font-weight:900;
+  line-height:1.2;text-wrap:balance;margin-bottom:8px;
+}
+.app-header h1 em{font-style:normal;color:var(--gold);}
+.app-header p{color:var(--muted);font-size:.95rem;max-width:480px;margin:0 auto;}
+
+/* PROGRESS */
+.progress-wrap{max-width:640px;margin:0 auto 28px;}
+.progress-meta{display:flex;justify-content:space-between;font-size:.78rem;color:var(--muted);margin-bottom:6px;}
+.progress-bar{height:5px;background:var(--prog-bg);border-radius:10px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--gold));border-radius:10px;transition:width .4s ease;}
+
+/* CARD */
+.card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:20px;padding:32px 28px;
+  max-width:640px;margin:0 auto 24px;
+  box-shadow:0 2px 16px rgba(0,0,0,.06);
+}
+.step-label{
+  font-size:.72rem;letter-spacing:.1em;color:var(--muted);
+  text-transform:uppercase;margin-bottom:6px;
+}
+.question{font-size:1.25rem;font-weight:800;margin-bottom:20px;text-wrap:balance;}
+
+/* OPTIONS GRID */
+.options{display:flex;flex-direction:column;gap:10px;}
+.opt{
+  display:flex;align-items:center;gap:14px;
+  background:var(--surface2);border:2px solid transparent;
+  border-radius:14px;padding:14px 18px;cursor:pointer;
+  transition:border-color .18s,background .18s;
+  font-family:'Cairo',sans-serif;font-size:.95rem;font-weight:600;
+  color:var(--fg);text-align:right;direction:rtl;
+  -webkit-appearance:none;appearance:none;width:100%;
+}
+.opt:hover{border-color:var(--blue);background:var(--bg);}
+.opt.selected{border-color:var(--blue);background:rgba(0,75,141,.06);}
+.opt-icon{font-size:1.3rem;flex-shrink:0;}
+.opt-text{flex:1;}
+.opt-check{
+  width:20px;height:20px;border-radius:50%;
+  border:2px solid var(--border);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .18s,border-color .18s;
+}
+.opt.selected .opt-check{background:var(--blue);border-color:var(--blue);}
+.opt.selected .opt-check::after{content:'✓';color:#fff;font-size:.65rem;font-weight:900;}
+
+/* NAVIGATION */
+.nav-row{
+  display:flex;gap:12px;max-width:640px;margin:0 auto;
+  flex-direction:row-reverse;
+}
+.btn{
+  font-family:'Cairo',sans-serif;font-weight:700;font-size:.95rem;
+  padding:13px 28px;border-radius:12px;cursor:pointer;
+  transition:opacity .18s,transform .12s;border:none;
+}
+.btn:active{transform:scale(.97);}
+.btn-primary{background:var(--blue);color:#fff;}
+.btn-primary:hover{opacity:.88;}
+.btn-secondary{background:var(--surface2);color:var(--muted);border:1px solid var(--border);}
+.btn-secondary:hover{color:var(--fg);}
+.btn:disabled{opacity:.4;cursor:not-allowed;}
+
+/* RESULT */
+.result-header{text-align:center;margin-bottom:28px;}
+.result-score{
+  width:88px;height:88px;border-radius:50%;
+  background:linear-gradient(135deg,var(--blue),var(--gold));
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  margin:0 auto 16px;box-shadow:0 8px 30px rgba(0,75,141,.25);
+}
+.result-score-num{font-size:1.6rem;font-weight:900;color:#fff;line-height:1;}
+.result-score-lbl{font-size:.6rem;color:rgba(255,255,255,.75);letter-spacing:.06em;}
+.result-title{font-size:1.4rem;font-weight:900;margin-bottom:6px;}
+.result-subtitle{color:var(--muted);font-size:.9rem;}
+
+.needs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:24px;}
+.need-card{
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:14px;padding:18px 16px;
+}
+.need-badge{
+  display:inline-block;border-radius:20px;padding:3px 12px;
+  font-size:.72rem;font-weight:700;margin-bottom:10px;
+}
+.need-badge.urgent{background:rgba(181,56,90,.12);color:var(--rose);border:1px solid rgba(181,56,90,.25);}
+.need-badge.recommended{background:rgba(0,75,141,.1);color:var(--blue);border:1px solid rgba(0,75,141,.2);}
+.need-badge.optional{background:rgba(26,122,74,.1);color:var(--green);border:1px solid rgba(26,122,74,.2);}
+.need-title{font-weight:800;font-size:.95rem;margin-bottom:4px;}
+.need-desc{font-size:.82rem;color:var(--muted);line-height:1.6;}
+.need-link{
+  display:inline-block;margin-top:10px;font-size:.8rem;font-weight:700;
+  color:var(--blue2);text-decoration:none;
+}
+.need-link:hover{text-decoration:underline;}
+
+.tracks-section{margin-bottom:24px;}
+.tracks-label{font-size:.78rem;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin-bottom:12px;}
+.tracks-row{display:flex;flex-wrap:wrap;gap:8px;}
+.track-chip{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:20px;padding:6px 16px;font-size:.83rem;font-weight:600;
+}
+
+.wa-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  background:linear-gradient(135deg,#25d366,#128c7e);
+  color:#fff;text-decoration:none;border-radius:14px;padding:16px;
+  font-family:'Cairo',sans-serif;font-size:1rem;font-weight:800;
+  transition:opacity .18s;
+}
+.wa-btn:hover{opacity:.88;}
+
+.restart-row{text-align:center;margin-top:16px;}
+.restart-btn{
+  background:none;border:none;color:var(--muted);font-size:.85rem;
+  font-family:'Cairo',sans-serif;cursor:pointer;text-decoration:underline;
+}
+</style>
+
+<!-- HEADER -->
+<header class="app-header">
+  <div class="brand-badge">أفريكارد <span>·</span> للتدريب وتنمية الموارد البشرية</div>
+  <h1>اكتشف <em>احتياجك</em> التدريبي</h1>
+  <p>أجب على ٥ أسئلة سريعة وستحصل على توصية تدريبية مخصصة تماماً لمسارك</p>
+</header>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="progress-meta">
+    <span id="step-text">السؤال ١ من ٥</span>
+    <span id="pct-text">٢٠٪</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="prog" style="width:20%"></div></div>
+</div>
+
+<!-- WIZARD -->
+<div id="wizard"></div>
+
+<script>
+// ── DATA ────────────────────────────────────────────────
+const questions = [
+  {
+    id:'field',
+    label:'المجال المهني',
+    q:'ما مجالك المهني أو الذي تعمل فيه؟',
+    opts:[
+      {icon:'🎓',text:'التعليم والأكاديميا'},
+      {icon:'📡',text:'الإعلام والصحافة'},
+      {icon:'🏥',text:'الصحة والطب'},
+      {icon:'👥',text:'الموارد البشرية والإدارة'},
+      {icon:'💻',text:'التقنية والبرمجيات'},
+      {icon:'🌱',text:'التدريب والتطوير'},
+      {icon:'🏗️',text:'الهندسة والمشاريع'},
+      {icon:'🏠',text:'الأسرة والعمل الاجتماعي'},
+    ]
+  },
+  {
+    id:'role',
+    label:'الدور الحالي',
+    q:'ما أقرب وصف لدورك الحالي؟',
+    opts:[
+      {icon:'🎤',text:'مدرب أو مدربة'},
+      {icon:'📚',text:'معلم أو أستاذ جامعي'},
+      {icon:'👔',text:'مدير أو قائد فريق'},
+      {icon:'💼',text:'موظف يسعى للتطوير'},
+      {icon:'🚀',text:'صاحب مشروع أو رائد أعمال'},
+      {icon:'🎓',text:'طالب أو خريج حديث'},
+    ]
+  },
+  {
+    id:'goal',
+    label:'الهدف التدريبي',
+    q:'ما الذي تريد تحقيقه من خلال التدريب؟',
+    opts:[
+      {icon:'📣',text:'تحسين مهارات التواصل والإلقاء'},
+      {icon:'🧠',text:'تطوير الكفاءة المهنية في تخصصي'},
+      {icon:'🏫',text:'الانتقال إلى التعليم والتدريب الرقمي'},
+      {icon:'🌟',text:'بناء مكانة مهنية وقيادية'},
+      {icon:'🔬',text:'إتقان مهارات البحث والتحليل'},
+      {icon:'💡',text:'التجديد وتطوير الأساليب الإبداعية'},
+    ]
+  },
+  {
+    id:'level',
+    label:'المستوى الحالي',
+    q:'كيف تقيّم مستواك الحالي في المجال الذي تريد تطويره؟',
+    opts:[
+      {icon:'🌱',text:'مبتدئ — أبدأ من الصفر'},
+      {icon:'📈',text:'متوسط — لدي أساس وأريد التطوير'},
+      {icon:'⭐',text:'متقدم — أبحث عن الاحتراف'},
+      {icon:'🏆',text:'محترف — أريد التجديد والتحديث'},
+    ]
+  },
+  {
+    id:'time',
+    label:'الوقت المتاح',
+    q:'كم الوقت الذي يمكنك تخصيصه أسبوعياً للتدريب؟',
+    opts:[
+      {icon:'⚡',text:'ساعة إلى ساعتين في الأسبوع'},
+      {icon:'🕐',text:'٣–٥ ساعات في الأسبوع'},
+      {icon:'📅',text:'٦–١٠ ساعات في الأسبوع'},
+      {icon:'🔥',text:'أكثر من ١٠ ساعات — تفرغ تام'},
+    ]
+  }
+];
+
+// ── RECOMMENDATION ENGINE ────────────────────────────────
+function buildResult(ans){
+  const {field, role, goal, level, time} = ans;
+  const recs = [];
+
+  // EIC — التواصل الفعال
+  if(goal===0 || goal===3 || role===0 || role===1 || role===2){
+    recs.push({
+      priority: (goal===0) ? 'urgent' : 'recommended',
+      title:'ورشة التواصل الفعال والذكاء العاطفي',
+      desc:'تُعزز قدرتك على التأثير، الاستماع، وإدارة الحوار في البيئات المهنية والتعليمية.',
+      link:'/workshops/eic/',
+      linkText:'عرض الورشة'
+    });
+  }
+
+  // TOT — من المعرفة إلى الأثر
+  if(role===0 || role===1 || goal===1 || goal===5){
+    recs.push({
+      priority: (role===0||role===1) ? 'urgent' : 'recommended',
+      title:'ورشة من المعرفة إلى الأثر — بوابة المدرب المؤثر',
+      desc:'للمدربين والمعلمين الراغبين في بناء جلسات تدريبية احترافية وقابلة للأثر.',
+      link:'/festivals/2026/',
+      linkText:'مهرجان أفريكارد'
+    });
+  }
+
+  // Google Meet — التعليم الرقمي
+  if(field===0 || field===4 || goal===2 || role===1){
+    recs.push({
+      priority: (field===0||goal===2) ? 'urgent' : 'recommended',
+      title:'دورة التدريس عبر Google Meet والاختبارات الإلكترونية',
+      desc:'انتقل بسلاسة إلى التعليم الرقمي مع أدوات جوجل الأكثر انتشاراً في المنطقة.',
+      link:'/festivals/2026/',
+      linkText:'مهرجان أفريكارد'
+    });
+  }
+
+  // Presentation — العرض والإلقاء
+  if(goal===0 || goal===3 || role===4 || role===5){
+    recs.push({
+      priority: (goal===0) ? 'urgent' : 'recommended',
+      title:'ورشة مهارات العرض والإلقاء',
+      desc:'تحدث بثقة، أثّر في جمهورك، وتغلّب على رهبة المسرح مع د. نهلة عز الدين.',
+      link:'/festivals/2026/',
+      linkText:'مهرجان أفريكارد'
+    });
+  }
+
+  // RM-100 — المنهجية والبحث
+  if(goal===4 || field===1 || field===0){
+    recs.push({
+      priority: 'recommended',
+      title:'برنامج RM-100 — منهجية البحث العلمي',
+      desc:'باقة تدريبية احترافية لإتقان البحث وتحليل البيانات، مرخصة دولياً.',
+      link:'/courses/hncp/',
+      linkText:'عرض البرنامج'
+    });
+  }
+
+  // HNCP — ديناميكيات السلوك الإنساني
+  if(field===2 || field===7 || goal===1 || goal===5){
+    recs.push({
+      priority: 'optional',
+      title:'دورة ديناميكيات الطبيعة البشرية والتميز المهني',
+      desc:'أُطُر علمية لفهم دوافع الإنسان وبناء بيئات عمل عالية الكفاءة والانتماء.',
+      link:'/courses/hncp/',
+      linkText:'عرض الدورة'
+    });
+  }
+
+  // fallback
+  if(recs.length===0){
+    recs.push({
+      priority:'recommended',
+      title:'مهرجان أفريكارد المجاني 2026',
+      desc:'استكشف ٤ ورش تدريبية مجانية في مجالات متعددة واختر ما يناسب مسارك.',
+      link:'/festivals/2026/',
+      linkText:'استعرض المهرجان'
+    });
+  }
+
+  // score
+  let base = 60;
+  if(level===2||level===3) base += 15;
+  if(time===2||time===3) base += 15;
+  if(recs.some(r=>r.priority==='urgent')) base += 10;
+  base = Math.min(base,99);
+
+  // tracks
+  const trackMap = {
+    0:['التعليم الرقمي','التنمية المهنية'],
+    1:['الإعلام','التواصل'],
+    2:['الصحة','المهارات الناعمة'],
+    3:['الموارد البشرية','القيادة'],
+    4:['التقنية','التعليم الرقمي'],
+    5:['التدريب','تصميم البرامج'],
+    6:['القيادة','إدارة المشاريع'],
+    7:['الأسرة','المهارات الاجتماعية']
+  };
+  const tracks = trackMap[field] || ['التنمية الذاتية'];
+
+  return {recs: recs.slice(0,3), score: base, tracks};
+}
+
+// ── RENDER ──────────────────────────────────────────────
+const root = document.getElementById('wizard');
+const prog = document.getElementById('prog');
+const stepTxt = document.getElementById('step-text');
+const pctTxt  = document.getElementById('pct-text');
+let step = 0;
+const answers = {};
+const selected = {};
+const ARABIC_NUMS = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+function toAr(n){ return String(n).split('').map(d=>ARABIC_NUMS[+d]).join(''); }
+
+function updateProgress(){
+  const pct = Math.round(((step+1)/questions.length)*100);
+  const filled = step < questions.length ? Math.max(20, pct) : 100;
+  prog.style.width = filled+'%';
+  if(step < questions.length){
+    stepTxt.textContent = 'السؤال '+toAr(step+1)+' من '+toAr(questions.length);
+    pctTxt.textContent  = toAr(filled)+'٪';
+  } else {
+    stepTxt.textContent = 'اكتملت الأسئلة';
+    pctTxt.textContent  = '١٠٠٪';
+    prog.style.width = '100%';
+  }
+}
+
+function renderStep(){
+  if(step >= questions.length){ renderResult(); return; }
+  const q = questions[step];
+  updateProgress();
+
+  const sel = selected[step] ?? -1;
+  root.innerHTML = `
+    <div class="card">
+      <div class="step-label">${q.label}</div>
+      <div class="question">${q.q}</div>
+      <div class="options">
+        ${q.opts.map((o,i)=>`
+          <button class="opt${sel===i?' selected':''}" data-idx="${i}" type="button" aria-pressed="${sel===i}">
+            <span class="opt-icon">${o.icon}</span>
+            <span class="opt-text">${o.text}</span>
+            <span class="opt-check"></span>
+          </button>
+        `).join('')}
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn btn-primary" id="btn-next" ${sel===-1?'disabled':''}>
+        ${step===questions.length-1?'اعرض توصيتي →':'التالي →'}
+      </button>
+      ${step>0?'<button class="btn btn-secondary" id="btn-back">→ السابق</button>':''}
+    </div>`;
+
+  root.querySelectorAll('.opt').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const idx = +btn.dataset.idx;
+      selected[step] = idx;
+      const qId = questions[step].id;
+      answers[qId] = idx;
+      renderStep();
+    });
+  });
+  document.getElementById('btn-next')?.addEventListener('click',()=>{
+    if(selected[step]!==-1){ step++; renderStep(); }
+  });
+  document.getElementById('btn-back')?.addEventListener('click',()=>{
+    step--; renderStep();
+  });
+}
+
+function renderResult(){
+  updateProgress();
+  const {recs, score, tracks} = buildResult(answers);
+  const priorityLabel = {urgent:'أولوية عالية',recommended:'موصى به',optional:'تكميلي'};
+  const scoreLabel = score>=85?'احتياج تدريبي حاد':score>=70?'احتياج تدريبي واضح':'احتياج تدريبي متوسط';
+
+  root.innerHTML = `
+    <div class="card">
+      <div class="result-header">
+        <div class="result-score">
+          <span class="result-score-num">${toAr(score)}٪</span>
+          <span class="result-score-lbl">مؤشر الاحتياج</span>
+        </div>
+        <div class="result-title">${scoreLabel}</div>
+        <div class="result-subtitle">بناءً على إجاباتك — إليك مسارك التدريبي المقترح</div>
+      </div>
+
+      <div class="tracks-section">
+        <div class="tracks-label">المسارات الموصى بها لك</div>
+        <div class="tracks-row">
+          ${tracks.map(t=>`<span class="track-chip">📍 ${t}</span>`).join('')}
+        </div>
+      </div>
+
+      <div class="needs-grid">
+        ${recs.map(r=>`
+          <div class="need-card">
+            <span class="need-badge ${r.priority}">${priorityLabel[r.priority]}</span>
+            <div class="need-title">${r.title}</div>
+            <div class="need-desc">${r.desc}</div>
+            <a class="need-link" href="${r.link}" target="_blank">← ${r.linkText}</a>
+          </div>
+        `).join('')}
+      </div>
+
+      <a class="wa-btn" href="https://chat.whatsapp.com/KIshnD9B4uQ1WBT18q8nwL" target="_blank">
+        <span>📲</span> استشر مستشاراً تدريبياً عبر واتساب
+      </a>
+    </div>
+    <div class="restart-row">
+      <button class="restart-btn" id="btn-restart">إعادة الحاسبة من البداية</button>
+    </div>`;
+
+  document.getElementById('btn-restart').addEventListener('click',()=>{
+    step=0; Object.keys(selected).forEach(k=>delete selected[k]);
+    Object.keys(answers).forEach(k=>delete answers[k]);
+    renderStep();
+  });
+}
+
+renderStep();
+</script>
