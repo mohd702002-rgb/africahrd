@@ -1,0 +1,613 @@
+<title>مستشار أفريكارد التدريبي</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap">
+<style>
+/* ── TOKENS ───────────────────────────────────────────
+   Layout : fixed chat UI, full-height, message bubbles
+   Color  : deep navy · gold accent · white surfaces
+   Type   : Cairo — Arabic-native, conversational feel
+──────────────────────────────────────────────────────*/
+:root {
+  --bg:       #f0f4fb;
+  --surface:  #ffffff;
+  --surface2: #f5f7fd;
+  --border:   #dce3f2;
+  --fg:       #0d1626;
+  --muted:    #5a6a85;
+  --blue:     #004B8D;
+  --blue2:    #0066cc;
+  --blue-lt:  #e8f0fb;
+  --gold:     #C9A227;
+  --gold-lt:  #fdf6e3;
+  --rose:     #b5385a;
+  --green:    #1a7a4a;
+  --bubble-bot:  #ffffff;
+  --bubble-user: #004B8D;
+  --bubble-user-fg: #ffffff;
+  color-scheme: light;
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#06101e; --surface:#0d1a2e; --surface2:#111e35;
+  --border:#1e2d45; --fg:#e8edf5; --muted:#7a8ca8;
+  --blue:#2a7dd4; --blue2:#4a9af0; --blue-lt:#0d1a35;
+  --gold:#e8c547; --gold-lt:#1a1508;
+  --bubble-bot:#0d1a2e; --bubble-user:#1a4a8a; --bubble-user-fg:#fff;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#06101e; --surface:#0d1a2e; --surface2:#111e35;
+  --border:#1e2d45; --fg:#e8edf5; --muted:#7a8ca8;
+  --blue:#2a7dd4; --blue2:#4a9af0; --blue-lt:#0d1a35;
+  --gold:#e8c547; --gold-lt:#1a1508;
+  --bubble-bot:#0d1a2e; --bubble-user:#1a4a8a; --bubble-user-fg:#fff;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;}
+body{
+  background:var(--bg);color:var(--fg);
+  font-family:'Cairo',sans-serif;font-size:15px;line-height:1.65;
+  display:flex;flex-direction:column;
+}
+
+/* TOP BAR */
+.topbar{
+  background:var(--blue);color:#fff;
+  display:flex;align-items:center;gap:12px;
+  padding:12px 20px;flex-shrink:0;
+  border-bottom:2px solid rgba(255,255,255,.1);
+}
+.bot-avatar{
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,#e8c547,#C9A227);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;font-weight:900;color:var(--blue);flex-shrink:0;
+}
+.bot-info{flex:1;}
+.bot-name{font-weight:800;font-size:.95rem;}
+.bot-status{font-size:.72rem;opacity:.7;display:flex;align-items:center;gap:4px;}
+.status-dot{width:7px;height:7px;border-radius:50%;background:#4cff90;display:inline-block;}
+.topbar-logo{font-size:.75rem;opacity:.55;letter-spacing:.04em;text-align:left;}
+
+/* CHAT AREA */
+.chat-area{
+  flex:1;overflow-y:auto;padding:20px 16px;
+  display:flex;flex-direction:column;gap:14px;
+  scroll-behavior:smooth;
+}
+
+/* MESSAGES */
+.msg-row{display:flex;gap:10px;align-items:flex-end;}
+.msg-row.user{flex-direction:row-reverse;}
+.msg-avatar{
+  width:32px;height:32px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.75rem;font-weight:800;
+}
+.msg-avatar.bot{background:linear-gradient(135deg,var(--blue),#0066cc);color:#fff;}
+.msg-avatar.user{background:linear-gradient(135deg,#e8c547,#C9A227);color:#004B8D;}
+
+.bubble{
+  max-width:78%;border-radius:18px;padding:12px 16px;
+  font-size:.9rem;line-height:1.7;
+}
+.msg-row.bot .bubble{
+  background:var(--bubble-bot);border:1px solid var(--border);
+  border-bottom-right-radius:4px;
+  box-shadow:0 1px 6px rgba(0,0,0,.07);
+}
+.msg-row.user .bubble{
+  background:var(--bubble-user);color:var(--bubble-user-fg);
+  border-bottom-left-radius:4px;
+}
+.bubble p+p{margin-top:8px;}
+.bubble strong{font-weight:800;}
+
+/* QUICK REPLIES */
+.quick-replies{
+  display:flex;flex-wrap:wrap;gap:8px;
+  padding:0 16px 4px 16px;
+  flex-direction:row-reverse;
+}
+.qr{
+  background:var(--blue-lt);border:1px solid rgba(0,75,141,.25);
+  color:var(--blue2);border-radius:20px;padding:7px 16px;
+  font-family:'Cairo',sans-serif;font-size:.84rem;font-weight:700;
+  cursor:pointer;transition:background .15s,border-color .15s;
+}
+.qr:hover{background:var(--blue);color:#fff;border-color:var(--blue);}
+
+/* TYPING INDICATOR */
+.typing{display:flex;gap:5px;align-items:center;padding:12px 16px;}
+.typing span{
+  width:7px;height:7px;border-radius:50%;background:var(--muted);
+  animation:bounce .9s ease-in-out infinite;
+}
+.typing span:nth-child(2){animation-delay:.15s;}
+.typing span:nth-child(3){animation-delay:.3s;}
+@keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-8px)}}
+
+/* REPORT CARD */
+.report-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:16px;overflow:hidden;margin-top:4px;
+}
+.report-header{
+  background:linear-gradient(135deg,var(--blue),#0066cc);
+  color:#fff;padding:16px 20px;
+}
+.report-header h3{font-size:1.05rem;font-weight:900;margin-bottom:2px;}
+.report-header p{font-size:.78rem;opacity:.8;}
+.report-body{padding:16px 20px;display:flex;flex-direction:column;gap:12px;}
+.report-score-row{display:flex;align-items:center;gap:12px;}
+.report-score-circle{
+  width:64px;height:64px;border-radius:50%;flex-shrink:0;
+  background:conic-gradient(var(--gold) var(--pct), var(--border) 0);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.report-score-circle::before{
+  content:'';position:absolute;inset:8px;border-radius:50%;background:var(--surface);
+}
+.report-score-num{position:relative;font-size:.85rem;font-weight:900;color:var(--gold);}
+.report-score-info h4{font-size:.9rem;font-weight:800;margin-bottom:2px;}
+.report-score-info p{font-size:.78rem;color:var(--muted);}
+.report-section{border-top:1px solid var(--border);padding-top:12px;}
+.report-section-title{font-size:.72rem;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin-bottom:8px;}
+.cert-list{display:flex;flex-direction:column;gap:6px;}
+.cert-item{
+  display:flex;align-items:flex-start;gap:10px;
+  background:var(--surface2);border-radius:10px;padding:10px 12px;
+}
+.cert-icon{font-size:1rem;flex-shrink:0;margin-top:1px;}
+.cert-name{font-size:.84rem;font-weight:700;margin-bottom:1px;}
+.cert-body{font-size:.76rem;color:var(--muted);}
+.cert-priority{
+  display:inline-block;font-size:.65rem;font-weight:700;border-radius:8px;
+  padding:1px 7px;margin-right:4px;
+}
+.pri-high{background:rgba(181,56,90,.1);color:var(--rose);}
+.pri-med{background:rgba(0,75,141,.1);color:var(--blue2);}
+.pri-opt{background:rgba(26,122,74,.1);color:var(--green);}
+.wa-mini{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  background:linear-gradient(135deg,#25d366,#128c7e);
+  color:#fff;text-decoration:none;border-radius:10px;padding:11px;
+  font-family:'Cairo',sans-serif;font-size:.85rem;font-weight:800;
+  margin-top:4px;
+}
+
+/* INPUT BAR */
+.input-bar{
+  background:var(--surface);border-top:1px solid var(--border);
+  padding:12px 16px;display:flex;gap:10px;align-items:flex-end;
+  flex-shrink:0;
+}
+.input-bar textarea{
+  flex:1;background:var(--surface2);border:1.5px solid var(--border);
+  border-radius:14px;padding:10px 14px;resize:none;
+  font-family:'Cairo',sans-serif;font-size:.9rem;color:var(--fg);
+  min-height:44px;max-height:120px;line-height:1.5;direction:rtl;
+  transition:border-color .18s;
+}
+.input-bar textarea:focus{outline:none;border-color:var(--blue);}
+.input-bar textarea::placeholder{color:var(--muted);}
+.send-btn{
+  width:44px;height:44px;border-radius:12px;border:none;
+  background:var(--blue);color:#fff;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:opacity .18s,transform .1s;font-size:1.1rem;
+}
+.send-btn:hover{opacity:.85;}
+.send-btn:active{transform:scale(.93);}
+.send-btn:disabled{opacity:.35;cursor:not-allowed;}
+
+/* RESTART */
+.restart-pill{
+  text-align:center;padding:4px 0;
+}
+.restart-pill button{
+  background:none;border:1px solid var(--border);color:var(--muted);
+  border-radius:20px;padding:5px 16px;font-family:'Cairo',sans-serif;
+  font-size:.78rem;cursor:pointer;
+}
+</style>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="bot-avatar">م</div>
+  <div class="bot-info">
+    <div class="bot-name">مستشار أفريكارد التدريبي</div>
+    <div class="bot-status"><span class="status-dot"></span>متاح الآن</div>
+  </div>
+  <div class="topbar-logo">أفريكارد<br>africahrd.com</div>
+</div>
+
+<!-- CHAT -->
+<div class="chat-area" id="chat"></div>
+<div id="quick-area" class="quick-replies"></div>
+
+<!-- INPUT -->
+<div class="input-bar">
+  <button class="send-btn" id="send-btn" title="إرسال" disabled>➤</button>
+  <textarea id="user-input" placeholder="اكتب ردك هنا…" rows="1" disabled></textarea>
+</div>
+
+<script>
+// ─── KNOWLEDGE BASE ──────────────────────────────────────
+const CERTS = {
+  communication:[
+    {name:'شهادة التواصل الفعال والذكاء العاطفي — أفريكارد',body:'ورشة مجانية معتمدة مع شهادة حضور رقمية.',pri:'high'},
+    {name:'شهادة DISC للشخصية والتواصل',body:'أداة دولية لفهم أنماط السلوك وتحسين فرق العمل.',pri:'med'},
+    {name:'شهادة NLP Practitioner',body:'الأساليب اللغوية العصبية للتأثير والإقناع.',pri:'opt'},
+  ],
+  training:[
+    {name:'شهادة TOT — تدريب المدربين (أفريكارد)',body:'الورشة التأسيسية للمدرب المؤثر — مجانية ضمن المهرجان.',pri:'high'},
+    {name:'شهادة CPTD — محترف تطوير المواهب المعتمد (ATD)',body:'معيار عالمي لمتخصصي التدريب والتطوير.',pri:'med'},
+    {name:'شهادة Kirkpatrick Bronze',body:'نموذج قياس أثر التدريب بالمستويات الأربعة.',pri:'opt'},
+  ],
+  education:[
+    {name:'شهادة التدريس عبر Google Meet — أفريكارد',body:'ورشة رقمية مجانية لاكتساب مهارات التعليم عن بُعد.',pri:'high'},
+    {name:'شهادة Google Educator Level 1',body:'اعتماد جوجل الرسمي لمهارات التعليم الرقمي.',pri:'med'},
+    {name:'شهادة Microsoft Educator',body:'أدوات مايكروسوفت التعليمية — Teams وغيرها.',pri:'opt'},
+  ],
+  presentation:[
+    {name:'شهادة مهارات العرض والإلقاء — أفريكارد',body:'ورشة مجانية مع د. نهلة عز الدين.',pri:'high'},
+    {name:'شهادة Toastmasters CTM',body:'برنامج عالمي لتطوير الخطابة والقيادة.',pri:'med'},
+    {name:'شهادة Dale Carnegie Public Speaking',body:'منهج كارنيغي الكلاسيكي للإلقاء العام.',pri:'opt'},
+  ],
+  hr:[
+    {name:'شهادة PHRi — محترف الموارد البشرية الدولي',body:'اعتماد HRCI المعترف به عالمياً لمتخصصي HR.',pri:'high'},
+    {name:'شهادة SHRM-CP',body:'اعتماد جمعية إدارة الموارد البشرية الأمريكية.',pri:'med'},
+    {name:'شهادة أفريكارد في التنمية البشرية',body:'برامج أفريكارد المعتمدة في تطوير الكوادر.',pri:'opt'},
+  ],
+  research:[
+    {name:'برنامج RM-100 — منهجية البحث العلمي (أفريكارد)',body:'باقة منهجية بحثية مرخصة دولياً من أفريكارد.',pri:'high'},
+    {name:'شهادة SPSS Certified User',body:'تحليل البيانات الإحصائية للباحثين.',pri:'med'},
+    {name:'شهادة GCP — الممارسات السريرية الجيدة',body:'للباحثين في المجال الطبي والعلوم التطبيقية.',pri:'opt'},
+  ],
+  leadership:[
+    {name:'شهادة PMP — إدارة المشاريع الاحترافية',body:'الاعتماد الأشهر عالمياً لقادة المشاريع.',pri:'high'},
+    {name:'شهادة ILM في القيادة والإدارة',body:'المعهد البريطاني للقيادة — مستويات 3/5.',pri:'med'},
+    {name:'شهادة إدارة التغيير PROSCI',body:'نموذج ADKAR لقيادة التحولات المؤسسية.',pri:'opt'},
+  ],
+};
+
+// ─── CONVERSATION FLOW ───────────────────────────────────
+const FLOW = [
+  // 0
+  {
+    bot:['مرحباً بك! 👋\n\nأنا مستشارك التدريبي في **أفريكارد**.\n\nأساعدك في تحديد احتياجك التدريبي الحقيقي وأهم الشهادات المهنية التي تحتاجها — سواء كنت فرداً أو مؤسسة.\n\nنبدأ؟ 🎯'],
+    quickReplies:['نعم، ابدأ معي','أريد تقييم لمؤسستي'],
+    next:(input,ctx)=>{
+      if(/مؤسس|شركة|منظمة|فريق|موظف/.test(input)){ ctx.isOrg=true; return 'org_name'; }
+      return 1;
+    }
+  },
+  // 1 — name
+  {
+    bot:['ممتاز! قبل أن نبدأ، ما اسمك الكريم؟'],
+    freeText:true,
+    next:(input,ctx)=>{ ctx.name=input.trim(); return 2; }
+  },
+  // 2 — field
+  {
+    bot:(ctx)=>[`أهلاً بك ${ctx.name}! 😊\n\nفي أي مجال تعمل أو تدرس؟`],
+    quickReplies:['التعليم والأكاديميا','الإعلام والصحافة','الموارد البشرية','التدريب والتطوير','التقنية','الصحة والطب','الهندسة','القيادة والإدارة','غير ذلك'],
+    next:(input,ctx)=>{
+      const map = {
+        'التعليم':'education','أكاديم':'education','معلم':'education','أستاذ':'education',
+        'إعلام':'communication','صحاف':'communication',
+        'موارد بشرية':'hr','hr':'hr',
+        'تدريب':'training','مدرب':'training',
+        'تقني':'education','برمج':'education',
+        'صح':'research','طب':'research',
+        'هندس':'leadership',
+        'قياد':'leadership','إدار':'leadership',
+      };
+      ctx.field = 'communication';
+      for(const [k,v] of Object.entries(map)){
+        if(input.includes(k)){ ctx.field=v; break; }
+      }
+      ctx.fieldRaw = input;
+      return 3;
+    }
+  },
+  // 3 — role
+  {
+    bot:['وما الدور الذي تؤديه حالياً؟'],
+    quickReplies:['مدرب أو معلم','مدير أو قائد فريق','موظف يبحث عن تطوير','طالب أو خريج','صاحب مشروع'],
+    next:(input,ctx)=>{ ctx.role=input; return 4; }
+  },
+  // 4 — goal
+  {
+    bot:['ما الذي تريد تحقيقه من التدريب؟ حدد الأهم بالنسبة لك:'],
+    quickReplies:['تطوير مهارات التواصل','بناء قدرات تدريبية','الانتقال للتعليم الرقمي','تعزيز الثقة والإلقاء','الحصول على شهادة معتمدة','تطوير مهارات قيادية','إجراء بحوث احترافية'],
+    next:(input,ctx)=>{
+      ctx.goal=input;
+      const goalMap = {
+        'تواصل':'communication','حوار':'communication',
+        'تدريب':'training','تدريبية':'training',
+        'رقمي':'education','تعليم':'education',
+        'إلقاء':'presentation','ثقة':'presentation','خطاب':'presentation',
+        'شهادة':'hr',
+        'قياد':'leadership',
+        'بحث':'research',
+      };
+      for(const [k,v] of Object.entries(goalMap)){
+        if(input.includes(k)){ ctx.field2=v; break; }
+      }
+      return 5;
+    }
+  },
+  // 5 — level
+  {
+    bot:['وكيف تقيّم مستواك الحالي في هذا المجال؟'],
+    quickReplies:['مبتدئ — أبدأ من الصفر','متوسط — لديّ أساس جيد','متقدم — أبحث عن الاحتراف'],
+    next:(input,ctx)=>{
+      ctx.level = input.includes('مبتدئ') ? 'beginner' : input.includes('متوسط') ? 'mid' : 'advanced';
+      return 6;
+    }
+  },
+  // 6 — time
+  {
+    bot:['آخر سؤال: كم الوقت الذي تستطيع تخصيصه للتدريب أسبوعياً؟'],
+    quickReplies:['ساعة إلى ساعتين','٣ إلى ٥ ساعات','٦ ساعات فأكثر'],
+    next:(input,ctx)=>{
+      ctx.time = input;
+      return 'report';
+    }
+  },
+  // ORG
+  {
+    id:'org_name',
+    bot:['ممتاز! ما اسم مؤسستك أو شركتك؟'],
+    freeText:true,
+    next:(input,ctx)=>{ ctx.orgName=input.trim(); ctx.name=input.trim(); return 'org_size'; }
+  },
+  {
+    id:'org_size',
+    bot:(ctx)=>[`شكراً لـ **${ctx.orgName}**! 🏢\n\nكم عدد الموظفين أو المستهدفين بالتدريب؟`],
+    quickReplies:['أقل من ١٠','١٠–٥٠','٥٠–٢٠٠','أكثر من ٢٠٠'],
+    next:(input,ctx)=>{ ctx.orgSize=input; return 'org_sector'; }
+  },
+  {
+    id:'org_sector',
+    bot:['ما القطاع الذي تعمل فيه مؤسستك؟'],
+    quickReplies:['التعليم والتدريب','الصحة','الحكومي','الخاص / الأعمال','المنظمات غير الربحية'],
+    next:(input,ctx)=>{ ctx.orgSector=input; ctx.field='hr'; ctx.isOrg=true; return 'org_goal'; }
+  },
+  {
+    id:'org_goal',
+    bot:['ما الهدف الرئيسي من تدريب موظفيكم؟'],
+    quickReplies:['تطوير مهارات التواصل والقيادة','بناء كوادر تدريبية داخلية','رفع كفاءة استخدام التقنية','التحضير للحصول على شهادات مهنية','تحسين الأداء المؤسسي العام'],
+    next:(input,ctx)=>{ ctx.orgGoal=input; return 'report'; }
+  },
+];
+
+// ─── ENGINE ──────────────────────────────────────────────
+const ARABIC_NUMS = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+function toAr(n){ return String(n).split('').map(d=>ARABIC_NUMS[+d]).join(''); }
+
+function getStep(id){ return FLOW.find(s=>s.id===id) || FLOW[id]; }
+
+function pickCerts(ctx){
+  const keys = [ctx.field, ctx.field2, ctx.isOrg?'leadership':null].filter(Boolean);
+  const seen = new Set();
+  const out  = [];
+  for(const k of keys){
+    if(CERTS[k]) for(const c of CERTS[k]){
+      if(!seen.has(c.name)){ seen.add(c.name); out.push(c); }
+      if(out.length>=6) break;
+    }
+    if(out.length>=6) break;
+  }
+  return out.slice(0,5);
+}
+
+function computeScore(ctx){
+  let s=55;
+  if(ctx.level==='mid') s+=15; else if(ctx.level==='advanced') s+=25;
+  if(ctx.time?.includes('٣')||ctx.time?.includes('٦')) s+=12;
+  if(ctx.isOrg) s+=8;
+  return Math.min(s,97);
+}
+
+function buildReport(ctx){
+  const certs = pickCerts(ctx);
+  const score = computeScore(ctx);
+  const label = score>=80?'احتياج تدريبي عالٍ':score>=65?'احتياج تدريبي واضح':'احتياج تدريبي معتدل';
+  const pct = `${score*3.6}deg`;
+  const priLabel = {high:'أولوية عالية',med:'موصى به',opt:'تكميلي'};
+  const priClass = {high:'pri-high',med:'pri-med',opt:'pri-opt'};
+  const whoLine = ctx.isOrg
+    ? `تقرير مؤسسة: **${ctx.orgName}** · القطاع: ${ctx.orgSector}`
+    : `تقرير شخصي: **${ctx.name}** · المجال: ${ctx.fieldRaw}`;
+
+  return `<div class="report-card">
+    <div class="report-header">
+      <h3>📋 تقرير الاحتياج التدريبي</h3>
+      <p>${whoLine}</p>
+    </div>
+    <div class="report-body">
+      <div class="report-score-row">
+        <div class="report-score-circle" style="--pct:${pct}">
+          <span class="report-score-num">${toAr(score)}٪</span>
+        </div>
+        <div class="report-score-info">
+          <h4>${label}</h4>
+          <p>${ctx.isOrg ? 'بناءً على حجم المؤسسة والقطاع والأهداف' : 'بناءً على مجالك ومستواك وهدفك'}</p>
+        </div>
+      </div>
+
+      <div class="report-section">
+        <div class="report-section-title">أهم الشهادات المهنية الموصى بها</div>
+        <div class="cert-list">
+          ${certs.map(c=>`
+            <div class="cert-item">
+              <span class="cert-icon">🏅</span>
+              <div>
+                <div class="cert-name">
+                  <span class="cert-priority ${priClass[c.pri]}">${priLabel[c.pri]}</span>
+                  ${c.name}
+                </div>
+                <div class="cert-body">${c.body}</div>
+              </div>
+            </div>`).join('')}
+        </div>
+      </div>
+
+      <div class="report-section">
+        <div class="report-section-title">الخطوة التالية</div>
+        <a class="wa-mini" href="https://chat.whatsapp.com/KIshnD9B4uQ1WBT18q8nwL" target="_blank">
+          📲 تحدث مع مستشار أفريكارد على واتساب
+        </a>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ─── UI CORE ─────────────────────────────────────────────
+const chatEl  = document.getElementById('chat');
+const qaEl    = document.getElementById('quick-area');
+const inputEl = document.getElementById('user-input');
+const sendEl  = document.getElementById('send-btn');
+let currentStep = 0;
+const ctx = {};
+
+function scrollBot(){ chatEl.scrollTop = chatEl.scrollHeight; }
+
+function addMsg(who, html, isHtml=false){
+  const row = document.createElement('div');
+  row.className = 'msg-row '+who;
+  const av = document.createElement('div');
+  av.className = 'msg-avatar '+who;
+  av.textContent = who==='bot' ? 'م' : 'أ';
+  const bub = document.createElement('div');
+  bub.className = 'bubble';
+  if(isHtml){ bub.innerHTML = html; }
+  else {
+    const lines = html.split('\n').filter(l=>l.trim());
+    bub.innerHTML = lines.map(l=>`<p>${l.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')}</p>`).join('');
+  }
+  if(who==='bot'){ row.appendChild(av); row.appendChild(bub); }
+  else { row.appendChild(bub); row.appendChild(av); }
+  chatEl.appendChild(row);
+  scrollBot();
+}
+
+function showTyping(){
+  const row = document.createElement('div');
+  row.className='msg-row bot'; row.id='typing-row';
+  row.innerHTML='<div class="msg-avatar bot">م</div><div class="bubble"><div class="typing"><span></span><span></span><span></span></div></div>';
+  chatEl.appendChild(row); scrollBot();
+}
+function hideTyping(){ document.getElementById('typing-row')?.remove(); }
+
+function clearQuick(){ qaEl.innerHTML=''; }
+
+function showQuick(opts, onChoose){
+  clearQuick();
+  opts.forEach(opt=>{
+    const btn = document.createElement('button');
+    btn.className='qr'; btn.textContent=opt;
+    btn.addEventListener('click',()=>{ clearQuick(); onChoose(opt); });
+    qaEl.appendChild(btn);
+  });
+  scrollBot();
+}
+
+function setInput(enabled){
+  inputEl.disabled = !enabled;
+  sendEl.disabled  = !enabled;
+  if(enabled) setTimeout(()=>inputEl.focus(),100);
+}
+
+function deliverStep(stepId){
+  const step = getStep(stepId);
+  if(!step) return;
+
+  const msgs = typeof step.bot === 'function' ? step.bot(ctx) : step.bot;
+
+  showTyping();
+  let delay = 700;
+  msgs.forEach((msg,i)=>{
+    setTimeout(()=>{
+      if(i===msgs.length-1) hideTyping();
+      addMsg('bot', msg);
+      if(i<msgs.length-1){ showTyping(); }
+    }, delay*(i+1));
+  });
+
+  setTimeout(()=>{
+    if(step.quickReplies){
+      setInput(false);
+      showQuick(step.quickReplies, input=>{
+        addMsg('user', input);
+        advance(step, input);
+      });
+    } else if(step.freeText || step.id==='report' || stepId==='report'){
+      if(stepId!=='report') setInput(true);
+    }
+  }, delay*(msgs.length+0.5));
+}
+
+function advance(step, input){
+  clearQuick();
+  setInput(false);
+  const nextId = step.next(input, ctx);
+  if(nextId==='report'){
+    showTyping();
+    setTimeout(()=>{
+      hideTyping();
+      addMsg('bot','بناءً على ما شاركتني به، إليك **تقريرك التدريبي الشخصي** 📋', false);
+      setTimeout(()=>{
+        const row = document.createElement('div');
+        row.className='msg-row bot';
+        const av = document.createElement('div');
+        av.className='msg-avatar bot'; av.textContent='م';
+        const bub = document.createElement('div');
+        bub.style.maxWidth='92%';
+        bub.innerHTML = buildReport(ctx);
+        row.appendChild(av); row.appendChild(bub);
+        chatEl.appendChild(row);
+        // restart
+        const rp = document.createElement('div');
+        rp.className='restart-pill';
+        rp.innerHTML='<button id="restart-btn">🔄 إعادة التقييم من البداية</button>';
+        chatEl.appendChild(rp);
+        document.getElementById('restart-btn').addEventListener('click', restart);
+        scrollBot();
+      },600);
+    },1200);
+  } else {
+    currentStep = nextId;
+    setTimeout(()=>deliverStep(nextId), 400);
+  }
+}
+
+function restart(){
+  Object.keys(ctx).forEach(k=>delete ctx[k]);
+  currentStep=0;
+  chatEl.innerHTML=''; clearQuick();
+  setInput(false);
+  deliverStep(0);
+}
+
+// INPUT SEND
+sendEl.addEventListener('click', send);
+inputEl.addEventListener('keydown', e=>{ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); send(); }});
+inputEl.addEventListener('input',()=>{ inputEl.style.height='auto'; inputEl.style.height=inputEl.scrollHeight+'px'; });
+
+function send(){
+  const txt = inputEl.value.trim();
+  if(!txt) return;
+  addMsg('user', txt);
+  inputEl.value=''; inputEl.style.height='auto';
+  setInput(false);
+  const step = getStep(currentStep);
+  if(step) advance(step, txt);
+}
+
+// START
+deliverStep(0);
+</script>
