@@ -1,0 +1,579 @@
+<title>البُعد المهني وصناعة المؤتمرات — أفريكارد</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#004B8D;--blue-dk:#002a5c;--teal:#006494;
+  --gold:#C9A227;--gold2:#e8c547;
+  --bg:#0a0a0a;--bg2:#111;--bg3:#151515;
+  --card:#191919;--card2:#1f1f1f;--border:rgba(255,255,255,.07);
+  --fg:#f0f0f0;--muted:#888;--dim:#444;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;direction:rtl;font-family:'Cairo',sans-serif;background:var(--bg);color:var(--fg)}
+body{padding:0 0 4rem}
+a{text-decoration:none;color:inherit}
+
+/* ── PAGE HEADER ── */
+.ph{
+  background:linear-gradient(160deg,var(--blue-dk) 0%,#001830 60%,#0a0a0a 100%);
+  border-bottom:1px solid rgba(201,162,39,.15);
+  padding:3rem 2rem 2.5rem;position:relative;overflow:hidden;
+}
+.ph::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(201,162,39,.08) 0%,transparent 70%);
+  pointer-events:none;
+}
+.ph-brand{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.72rem;font-weight:700;color:var(--gold);letter-spacing:.06em;margin-bottom:1rem;
+  position:relative;z-index:1;
+}
+.ph-brand-dot{width:18px;height:18px;background:linear-gradient(135deg,var(--blue),var(--gold));border-radius:4px;display:inline-block}
+.ph h1{
+  font-size:clamp(1.6rem,4vw,2.8rem);font-weight:900;color:#fff;
+  line-height:1.2;margin-bottom:.6rem;position:relative;z-index:1;
+}
+.ph h1 em{color:var(--gold2);font-style:normal}
+.ph-sub{font-size:.9rem;color:var(--muted);line-height:1.7;max-width:640px;position:relative;z-index:1}
+
+/* ── SECTION WRAPPER ── */
+.wrap{max-width:1080px;margin:0 auto;padding:0 1.5rem}
+
+/* ── SECTION HEADING ── */
+.sh{
+  font-size:1.15rem;font-weight:900;color:#fff;
+  border-right:3px solid var(--gold);padding-right:.75rem;
+  margin-bottom:1.5rem;
+}
+.section{padding:3rem 0}
+.section+.section{border-top:1px solid var(--border)}
+
+/* ── INTRO TEXT ── */
+.intro{font-size:.9rem;color:var(--muted);line-height:1.85;margin-bottom:2rem;max-width:800px}
+.intro strong{color:var(--fg)}
+
+/* ── COMPETENCY MAP ── */
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-bottom:2rem}
+.comp-card{
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:1.3rem;display:flex;flex-direction:column;gap:.7rem;
+  transition:border-color .2s,transform .18s;
+}
+.comp-card:hover{border-color:rgba(201,162,39,.3);transform:translateY(-2px)}
+.comp-icon{font-size:1.9rem;line-height:1}
+.comp-title{font-size:.88rem;font-weight:800;color:var(--gold2)}
+.comp-items{list-style:none;display:flex;flex-direction:column;gap:.35rem}
+.comp-items li{
+  font-size:.8rem;color:var(--muted);line-height:1.6;
+  display:flex;align-items:flex-start;gap:.45rem;
+}
+.comp-items li::before{content:'◆';color:var(--gold);font-size:.45rem;flex-shrink:0;margin-top:.35rem}
+
+/* ── CERTS STRIP ── */
+.certs-strip{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1rem;margin-bottom:2rem;
+}
+.cert-card{
+  background:var(--card2);border:1px solid var(--border);border-radius:12px;
+  padding:1.2rem 1.3rem;display:flex;flex-direction:column;gap:.5rem;
+  position:relative;overflow:hidden;
+  transition:border-color .2s,transform .18s;
+}
+.cert-card:hover{border-color:rgba(0,75,141,.5);transform:translateY(-2px)}
+.cert-card::before{
+  content:'';position:absolute;top:0;right:0;
+  width:3px;height:100%;background:var(--cert-color,var(--blue));
+}
+.cert-abbr{
+  font-size:1.4rem;font-weight:900;color:var(--cert-color,var(--gold));line-height:1;
+}
+.cert-full{font-size:.78rem;font-weight:700;color:var(--fg);line-height:1.35}
+.cert-body{font-size:.75rem;color:var(--muted);line-height:1.6}
+.cert-org{
+  display:inline-block;font-size:.68rem;font-weight:700;
+  color:var(--cert-color,var(--gold));
+  background:rgba(255,255,255,.05);border-radius:4px;
+  padding:.1rem .5rem;margin-top:.2rem;
+  width:fit-content;
+}
+
+/* ── CAREER PATHS ── */
+.career-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-bottom:2rem}
+.career-card{
+  background:var(--card);border:1px solid var(--border);border-radius:10px;
+  padding:1.1rem 1.2rem;display:flex;gap:.9rem;align-items:flex-start;
+  transition:border-color .2s;
+}
+.career-card:hover{border-color:rgba(201,162,39,.25)}
+.career-num{
+  min-width:36px;height:36px;border-radius:8px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--blue),var(--teal));
+  display:flex;align-items:center;justify-content:center;
+  font-size:.8rem;font-weight:900;color:#fff;
+}
+.career-body{}
+.career-title{font-size:.84rem;font-weight:800;color:#fff;margin-bottom:.2rem}
+.career-sub{font-size:.75rem;color:var(--muted);line-height:1.55}
+
+/* ── SALARY INSIGHT ── */
+.salary-box{
+  background:linear-gradient(135deg,rgba(0,75,141,.15),rgba(0,100,148,.08));
+  border:1px solid rgba(0,100,148,.3);border-radius:12px;
+  padding:1.4rem 1.8rem;display:flex;gap:2rem;flex-wrap:wrap;
+  align-items:stretch;margin-bottom:2rem;
+}
+.salary-item{display:flex;flex-direction:column;gap:.3rem;flex:1;min-width:140px}
+.salary-label{font-size:.73rem;color:var(--muted);font-weight:600}
+.salary-val{font-size:1.3rem;font-weight:900;color:var(--gold2)}
+.salary-note{font-size:.72rem;color:var(--dim)}
+
+/* ── ORGS SECTION ── */
+.orgs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.1rem;margin-bottom:2rem}
+.org-card{
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:1.3rem;display:flex;gap:1.1rem;align-items:flex-start;
+  transition:border-color .2s,transform .18s;
+}
+.org-card:hover{border-color:rgba(201,162,39,.25);transform:translateY(-2px)}
+.org-badge{
+  min-width:64px;height:64px;border-radius:11px;flex-shrink:0;
+  border:2px solid;display:flex;align-items:center;justify-content:center;
+  font-size:.75rem;font-weight:900;letter-spacing:.04em;text-align:center;
+  line-height:1.2;
+}
+.org-body{}
+.org-name{font-size:.82rem;font-weight:800;color:#fff;margin-bottom:.1rem}
+.org-name-ar{font-size:.75rem;color:var(--gold2);font-weight:700;margin-bottom:.5rem}
+.org-desc{font-size:.78rem;color:var(--muted);line-height:1.7;margin-bottom:.55rem}
+.org-tags{display:flex;flex-wrap:wrap;gap:.35rem}
+.org-tag{
+  font-size:.68rem;font-weight:700;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  border-radius:4px;padding:.15rem .5rem;color:var(--muted);
+}
+.org-tag.cert{color:var(--gold2);border-color:rgba(201,162,39,.3);background:rgba(201,162,39,.07)}
+
+/* ── ARAB WORLD BOX ── */
+.arab-box{
+  background:linear-gradient(135deg,rgba(0,75,141,.14),rgba(201,162,39,.07));
+  border:1px solid rgba(201,162,39,.2);border-radius:14px;
+  padding:1.8rem 2rem;margin-bottom:2rem;
+}
+.arab-box-head{
+  font-size:1rem;font-weight:900;color:var(--gold2);margin-bottom:1.3rem;
+  display:flex;align-items:center;gap:.6rem;
+}
+.arab-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;margin-bottom:1.5rem}
+.astat{
+  background:rgba(255,255,255,.04);border-radius:8px;padding:1rem;
+  text-align:center;
+}
+.astat-val{font-size:1.6rem;font-weight:900;color:var(--gold);margin-bottom:.2rem}
+.astat-lbl{font-size:.76rem;color:var(--muted);line-height:1.5}
+.arab-highlights{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.8rem}
+.arab-hi{
+  display:flex;gap:.75rem;align-items:flex-start;
+  background:rgba(255,255,255,.03);border-radius:8px;padding:.9rem;
+}
+.arab-hi-icon{font-size:1.4rem;flex-shrink:0;line-height:1}
+.arab-hi-body{}
+.arab-hi-title{font-size:.8rem;font-weight:800;color:#fff;margin-bottom:.2rem}
+.arab-hi-text{font-size:.76rem;color:var(--muted);line-height:1.6}
+
+/* ── FOOTER QUOTE ── */
+.fq{
+  max-width:680px;margin:3rem auto 0;padding:0 1.5rem;text-align:center;
+}
+.fq-inner{
+  border:1px solid var(--border);border-radius:12px;
+  padding:1.5rem 2rem;background:var(--card);
+}
+.fq-text{font-size:.95rem;font-weight:700;color:var(--fg);line-height:1.85}
+.fq-src{margin-top:.5rem;font-size:.75rem;color:var(--gold);font-weight:700}
+
+/* ── ATTR ── */
+.attr{text-align:center;margin-top:2rem;font-size:.72rem;color:var(--dim)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  .ph{padding:2rem 1rem 1.8rem}
+  .wrap{padding:0 1rem}
+  .section{padding:2rem 0}
+  .salary-box{flex-direction:column;gap:1rem}
+  .arab-stats{grid-template-columns:1fr 1fr}
+}
+</style>
+
+<!-- PAGE HEADER -->
+<div class="ph">
+  <div class="ph-brand"><span class="ph-brand-dot"></span> أفريكارد للتدريب وتنمية الموارد البشرية</div>
+  <h1>البُعد المهني <em>وصناعة المؤتمرات</em></h1>
+  <p class="ph-sub">من التنظيم التقليدي إلى المهنة المتخصصة ذات الهوية المستقلة — الكفايات، الشهادات الدولية، المسارات الوظيفية، والمنظمات العالمية الرائدة في صناعة الفعاليات.</p>
+</div>
+
+<!-- ══════════════════════════════════
+     SECTION 1 — PROFESSIONAL DIMENSION
+══════════════════════════════════ -->
+<div class="wrap">
+<div class="section">
+  <h2 class="sh">البُعد المهني والتخصصي</h2>
+  <p class="intro">تنظيم المؤتمرات والفعاليات تحوّل خلال العقود الثلاثة الأخيرة من مهمة إدارية عَرَضية إلى <strong>مهنة متخصصة ذات معايير دولية وكفايات محددة واعتمادات احترافية</strong>. اليوم، يتطلب الدخول إلى هذا القطاع امتلاك منظومة متكاملة من الكفايات، وليس مجرد خبرة التنسيق.</p>
+
+  <!-- Competency Map -->
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-icon">🎯</div>
+      <div class="comp-title">التخطيط الاستراتيجي</div>
+      <ul class="comp-items">
+        <li>تحديد أهداف الفعالية وربطها بأهداف المنظمة</li>
+        <li>تحليل الجمهور المستهدف وتصميم التجربة</li>
+        <li>بناء مفهوم الفعالية (Event Concept)</li>
+        <li>وضع المؤشرات القابلة للقياس (KPIs)</li>
+      </ul>
+    </div>
+    <div class="comp-card">
+      <div class="comp-icon">📊</div>
+      <div class="comp-title">إدارة المشاريع والموارد</div>
+      <ul class="comp-items">
+        <li>بناء جداول زمنية وخطط عمل تفصيلية</li>
+        <li>إدارة الميزانيات وضبط التكاليف</li>
+        <li>التعاقد مع الموردين والتفاوض معهم</li>
+        <li>إدارة فرق العمل والمتطوعين</li>
+      </ul>
+    </div>
+    <div class="comp-card">
+      <div class="comp-icon">🤝</div>
+      <div class="comp-title">الاتصال والتفاوض</div>
+      <ul class="comp-items">
+        <li>إدارة العلاقة مع العملاء والرعاة</li>
+        <li>كتابة العروض والتقارير الرسمية</li>
+        <li>التواصل مع الإعلام وإدارة التغطية</li>
+        <li>بروتوكول الاستقبال والضيافة المؤسسية</li>
+      </ul>
+    </div>
+    <div class="comp-card">
+      <div class="comp-icon">⚠️</div>
+      <div class="comp-title">إدارة المخاطر</div>
+      <ul class="comp-items">
+        <li>رسم خريطة المخاطر المحتملة لكل فعالية</li>
+        <li>وضع بروتوكولات الطوارئ والسلامة</li>
+        <li>إدارة الأزمات أثناء الفعاليات</li>
+        <li>التخطيط البديل (Contingency Planning)</li>
+      </ul>
+    </div>
+    <div class="comp-card">
+      <div class="comp-icon">📱</div>
+      <div class="comp-title">التسويق الرقمي للفعاليات</div>
+      <ul class="comp-items">
+        <li>بناء الهوية البصرية للفعالية</li>
+        <li>استراتيجيات التسويق عبر وسائل التواصل</li>
+        <li>إدارة منصات التسجيل الرقمي</li>
+        <li>الفعاليات الهجينة والبث المباشر</li>
+      </ul>
+    </div>
+    <div class="comp-card">
+      <div class="comp-icon">📈</div>
+      <div class="comp-title">القياس والتقييم</div>
+      <ul class="comp-items">
+        <li>جمع بيانات المشاركين وتحليلها</li>
+        <li>قياس الرضا ومستوى التفاعل</li>
+        <li>إعداد تقرير ما بعد الفعالية (Post-Event Report)</li>
+        <li>توظيف نتائج التقييم في التخطيط المستقبلي</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Certifications -->
+  <h3 style="font-size:.92rem;font-weight:700;color:var(--muted);margin-bottom:1rem;padding-top:.5rem">الشهادات الدولية المعتمدة في صناعة الفعاليات</h3>
+  <div class="certs-strip">
+    <div class="cert-card" style="--cert-color:#3a8ee6">
+      <div class="cert-abbr" style="color:#3a8ee6">CMP</div>
+      <div class="cert-full">Certified Meeting Professional</div>
+      <div class="cert-body">الشهادة الأعرق والأوسع انتشاراً في العالم لمخططي الاجتماعات والفعاليات. تتطلب خبرة ميدانية وامتحاناً معتمداً من CIC.</div>
+      <div class="cert-org" style="color:#3a8ee6">MPI · Events Industry Council</div>
+    </div>
+    <div class="cert-card" style="--cert-color:#c9a227">
+      <div class="cert-abbr" style="color:#c9a227">CSEP</div>
+      <div class="cert-full">Certified Special Events Professional</div>
+      <div class="cert-body">متخصصة في الفعاليات الخاصة والإبداعية — الحفلات، المهرجانات، حفلات التخرج والأعراس المؤسسية.</div>
+      <div class="cert-org" style="color:#c9a227">ILEA</div>
+    </div>
+    <div class="cert-card" style="--cert-color:#006494">
+      <div class="cert-abbr" style="color:#006494">CMM</div>
+      <div class="cert-full">Certificate in Meeting Management</div>
+      <div class="cert-body">تركّز على المهارات القيادية والاستراتيجية لمديري الاجتماعات وكبار المسؤولين عن الفعاليات المؤسسية.</div>
+      <div class="cert-org" style="color:#006494">MPI Business School</div>
+    </div>
+    <div class="cert-card" style="--cert-color:#e07b39">
+      <div class="cert-abbr" style="color:#e07b39">DES</div>
+      <div class="cert-full">Digital Event Strategist</div>
+      <div class="cert-body">شهادة العصر الرقمي — تغطي الفعاليات الافتراضية والهجينة ومنصات البث واستراتيجيات المشاركة الرقمية.</div>
+      <div class="cert-org" style="color:#e07b39">PCMA</div>
+    </div>
+    <div class="cert-card" style="--cert-color:#5a9e50">
+      <div class="cert-abbr" style="color:#5a9e50">CEM</div>
+      <div class="cert-full">Certified Exhibition Manager</div>
+      <div class="cert-body">متخصصة في إدارة المعارض التجارية والصناعية الكبرى — تمنحها IAEE لمحترفي قطاع المعارض.</div>
+      <div class="cert-org" style="color:#5a9e50">IAEE</div>
+    </div>
+  </div>
+
+  <!-- Career Paths -->
+  <h3 style="font-size:.92rem;font-weight:700;color:var(--muted);margin-bottom:1rem;padding-top:.5rem">المسارات الوظيفية في قطاع الفعاليات</h3>
+  <div class="career-row">
+    <div class="career-card">
+      <div class="career-num">١</div>
+      <div class="career-body">
+        <div class="career-title">مدير فعاليات مؤسسية</div>
+        <div class="career-sub">Corporate Events Manager — المسؤول عن كافة فعاليات المؤسسة الداخلية والخارجية</div>
+      </div>
+    </div>
+    <div class="career-card">
+      <div class="career-num">٢</div>
+      <div class="career-body">
+        <div class="career-title">منسّق مؤتمرات</div>
+        <div class="career-sub">Conference Coordinator — ينسّق تفاصيل المؤتمرات من تسجيل وجدولة وتنسيق مع المتحدثين</div>
+      </div>
+    </div>
+    <div class="career-card">
+      <div class="career-num">٣</div>
+      <div class="career-body">
+        <div class="career-title">مخطط اجتماعات</div>
+        <div class="career-sub">Meeting Planner — متخصص في تخطيط الاجتماعات واللقاءات التجارية والحوافز (MICE)</div>
+      </div>
+    </div>
+    <div class="career-card">
+      <div class="career-num">٤</div>
+      <div class="career-body">
+        <div class="career-title">مدير علاقات عامة وبروتوكول</div>
+        <div class="career-sub">يدير الصورة المؤسسية ويُشرف على بروتوكول الاستقبال والتشريفات</div>
+      </div>
+    </div>
+    <div class="career-card">
+      <div class="career-num">٥</div>
+      <div class="career-body">
+        <div class="career-title">مدير شراكات ورعاة</div>
+        <div class="career-sub">Sponsorship Manager — يجلب الرعاة ويدير علاقتهم وحضورهم في الفعاليات</div>
+      </div>
+    </div>
+    <div class="career-card">
+      <div class="career-num">٦</div>
+      <div class="career-body">
+        <div class="career-title">استشاري فعاليات مستقل</div>
+        <div class="career-sub">Freelance Event Consultant — يعمل مع عملاء متعددين بمرونة عالية وخبرة متراكمة</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Salary insight -->
+  <div class="salary-box">
+    <div class="salary-item">
+      <div class="salary-label">متوسط راتب مدير فعاليات — الخليج</div>
+      <div class="salary-val">٨,٠٠٠ – ١٨,٠٠٠ ر.س</div>
+      <div class="salary-note">يرتفع مع الخبرة والشهادات الدولية</div>
+    </div>
+    <div class="salary-item">
+      <div class="salary-label">حجم سوق الفعاليات عالمياً (٢٠٢٤)</div>
+      <div class="salary-val">$١.٥ تريليون</div>
+      <div class="salary-note">نمو متوقع ١١.٢٪ سنوياً حتى ٢٠٣٠</div>
+    </div>
+    <div class="salary-item">
+      <div class="salary-label">فرص العمل المفتوحة عالمياً</div>
+      <div class="salary-val">+٤٠٠,٠٠٠ وظيفة</div>
+      <div class="salary-note">نقص حاد في المهنيين المعتمدين بمنطقة MENA</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     SECTION 2 — INTERNATIONAL ORGS
+══════════════════════════════════ -->
+<div class="section">
+  <h2 class="sh">المنظمات الدولية المعنية بصناعة المؤتمرات</h2>
+  <p class="intro">تضمّ صناعة الفعاليات والمؤتمرات شبكةً من المنظمات المهنية العالمية التي تضع المعايير، وتمنح الاعتمادات، وتوفر الشبكات المهنية، وتُصدر تقارير الاتجاهات. المحترف في هذا القطاع يعرف هذه المنظمات ويستثمر عضويتها.</p>
+
+  <div class="orgs-grid">
+
+    <div class="org-card">
+      <div class="org-badge" style="background:rgba(0,75,141,.2);border-color:rgba(0,75,141,.45);color:#6ab0f5">MPI</div>
+      <div class="org-body">
+        <div class="org-name">Meeting Professionals International</div>
+        <div class="org-name-ar">الجمعية الدولية لمهنيي الاجتماعات</div>
+        <p class="org-desc">أكبر جمعية مهنية في العالم لمخططي الاجتماعات والفعاليات — تضم أكثر من <strong>٧٠,٠٠٠ عضو</strong> في ١٧٠+ فصل موزعين على ٦ قارات. تنظّم مؤتمر WEC السنوي ومؤتمر EMEC الأوروبي، وتصدر تقرير Meetings Outlook الفصلي.</p>
+        <div class="org-tags">
+          <span class="org-tag cert">🏆 CMP · CMM</span>
+          <span class="org-tag">١٧٠+ فصل</span>
+          <span class="org-tag">منذ ١٩٧٢</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="org-card">
+      <div class="org-badge" style="background:rgba(201,162,39,.12);border-color:rgba(201,162,39,.4);color:var(--gold2)">PCMA</div>
+      <div class="org-body">
+        <div class="org-name">Professional Convention Management Association</div>
+        <div class="org-name-ar">جمعية إدارة المؤتمرات الاحترافية</div>
+        <p class="org-desc">المرجع الأول لصناعة الاجتماعات التجارية والمؤتمرات الكبرى — تنظّم مؤتمر <strong>Convening Leaders</strong> السنوي ومنبر التعلم Spark. متخصصة في المؤتمرات الهجينة والافتراضية، وتصدر مجلة Convene.</p>
+        <div class="org-tags">
+          <span class="org-tag cert">🏆 DES</span>
+          <span class="org-tag">+٧,٠٠٠ عضو</span>
+          <span class="org-tag">منذ ١٩٥٧</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="org-card">
+      <div class="org-badge" style="background:rgba(0,150,180,.15);border-color:rgba(0,150,180,.4);color:#4ec5d8">ILEA</div>
+      <div class="org-body">
+        <div class="org-name">International Live Events Association</div>
+        <div class="org-name-ar">الرابطة الدولية للفعاليات الحية</div>
+        <p class="org-desc">الرابطة العالمية للفعاليات الإبداعية والخاصة — تضم منظمي الحفلات، المهرجانات، حفلات التكريم، والفعاليات الترفيهية. تُصدر معايير الصناعة وأخلاقياتها المهنية.</p>
+        <div class="org-tags">
+          <span class="org-tag cert">🏆 CSEP</span>
+          <span class="org-tag">فعاليات إبداعية</span>
+          <span class="org-tag">منذ ١٩٥٥</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="org-card">
+      <div class="org-badge" style="background:rgba(90,160,80,.12);border-color:rgba(90,160,80,.4);color:#7ecf72">IAEE</div>
+      <div class="org-body">
+        <div class="org-name">International Association of Exhibitions & Events</div>
+        <div class="org-name-ar">الجمعية الدولية للمعارض والفعاليات</div>
+        <p class="org-desc">المرجع العالمي لصناعة المعارض التجارية والصناعية — تنظّم مؤتمر <strong>Expo! Expo!</strong> السنوي الأكبر في مجال المعارض. تصدر دليل المعايير والممارسات المهنية للصناعة.</p>
+        <div class="org-tags">
+          <span class="org-tag cert">🏆 CEM</span>
+          <span class="org-tag">معارض تجارية</span>
+          <span class="org-tag">منذ ١٩٢٨</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="org-card">
+      <div class="org-badge" style="background:rgba(160,80,80,.15);border-color:rgba(200,100,100,.4);color:#e88080">ICCA</div>
+      <div class="org-body">
+        <div class="org-name">International Congress and Convention Association</div>
+        <div class="org-name-ar">الرابطة الدولية للمؤتمرات والاجتماعات</div>
+        <p class="org-desc">الجسم العالمي المتخصص في <strong>مؤتمرات الجمعيات والنقابات الدولية</strong> — تنشر تقرير ICCA Statistics السنوي الذي يصنّف دول ومدن العالم بحسب عدد المؤتمرات الدولية. مرجع لا غنى عنه لصانعي القرار.</p>
+        <div class="org-tags">
+          <span class="org-tag">ترتيب الوجهات</span>
+          <span class="org-tag">مؤتمرات الجمعيات</span>
+          <span class="org-tag">منذ ١٩٦٣</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="org-card">
+      <div class="org-badge" style="background:rgba(120,80,180,.12);border-color:rgba(150,100,220,.4);color:#b08ef0">UFI</div>
+      <div class="org-body">
+        <div class="org-name">The Global Association of the Exhibition Industry</div>
+        <div class="org-name-ar">الاتحاد العالمي لصناعة المعارض</div>
+        <p class="org-desc">الاتحاد العالمي الأقدم والأعرق في صناعة المعارض التجارية — تأسس عام ١٩٢٥ ويضم أكثر من <strong>٨٠٠ عضو</strong> في ٨٠ دولة. يمنح ختم UFI للمعارض المستوفية لمعاييره الدولية.</div>
+        <div class="org-tags">
+          <span class="org-tag">ختم UFI</span>
+          <span class="org-tag">٨٠٠+ عضو</span>
+          <span class="org-tag">منذ ١٩٢٥</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="org-card">
+      <div class="org-badge" style="background:rgba(0,130,100,.12);border-color:rgba(0,170,130,.4);color:#45d4a8">SITE</div>
+      <div class="org-body">
+        <div class="org-name">Society for Incentive Travel Excellence</div>
+        <div class="org-name-ar">جمعية السياحة الحافزة</div>
+        <p class="org-desc">المرجع العالمي لـ<strong>Incentive Travel</strong> أو رحلات الحوافز — تجمع المخططين والموردين والوجهات المتخصصة في السياحة المؤسسية التحفيزية وبرامج المكافآت الجماعية.</p>
+        <div class="org-tags">
+          <span class="org-tag">Incentive Travel</span>
+          <span class="org-tag">MICE</span>
+          <span class="org-tag">منذ ١٩٧٣</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="org-card">
+      <div class="org-badge" style="background:rgba(201,162,39,.1);border-color:rgba(201,162,39,.3);color:var(--gold);font-size:.65rem">AIPC</div>
+      <div class="org-body">
+        <div class="org-name">International Association of Convention Centres</div>
+        <div class="org-name-ar">الرابطة الدولية لمراكز المؤتمرات</div>
+        <p class="org-desc">تجمع مراكز المؤتمرات الكبرى حول العالم — تضع معايير التشغيل والخدمة وتوفر منصة التبادل بين مديري المراكز. شريك استراتيجي لمدن الفعاليات العالمية.</p>
+        <div class="org-tags">
+          <span class="org-tag">مراكز مؤتمرات</span>
+          <span class="org-tag">معايير تشغيل</span>
+          <span class="org-tag">منذ ١٩٥٨</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Arab World Box -->
+  <div class="arab-box">
+    <div class="arab-box-head">🌍 واقع الصناعة في العالم العربي والأفريقي</div>
+    <div class="arab-stats">
+      <div class="astat">
+        <div class="astat-val">١٢</div>
+        <div class="astat-lbl">مركز مؤتمرات دولياً معتمداً في دول الخليج والشرق الأوسط</div>
+      </div>
+      <div class="astat">
+        <div class="astat-val">٣٥٪</div>
+        <div class="astat-lbl">نمو قطاع MICE في السعودية والإمارات بين ٢٠٢٢–٢٠٢٤</div>
+      </div>
+      <div class="astat">
+        <div class="astat-val">+٢٠٠</div>
+        <div class="astat-lbl">مؤتمر دولي سنوياً في دولة الإمارات وحدها (تقرير ICCA)</div>
+      </div>
+      <div class="astat">
+        <div class="astat-val">٢٠٣٠</div>
+        <div class="astat-lbl">رؤية السعودية تستهدف جعل الرياض ضمن أفضل ٥ وجهات للمؤتمرات</div>
+      </div>
+    </div>
+    <div class="arab-highlights">
+      <div class="arab-hi">
+        <div class="arab-hi-icon">🏙️</div>
+        <div class="arab-hi-body">
+          <div class="arab-hi-title">مراكز الصدارة العربية</div>
+          <div class="arab-hi-text">دبي والرياض وأبوظبي والدوحة وعمّان تتسابق على جذب كبرى المؤتمرات الدولية — بدعم حكومي قوي وبنية تحتية عالمية المستوى.</div>
+        </div>
+      </div>
+      <div class="arab-hi">
+        <div class="arab-hi-icon">🌱</div>
+        <div class="arab-hi-body">
+          <div class="arab-hi-title">فرصة أفريقيا</div>
+          <div class="arab-hi-text">نيروبي وكيب تاون وأديس أبابا ولاغوس وأكرا تنمو بسرعة كوجهات للمؤتمرات الأممية والقارية — مع نقص حاد في المهنيين المتخصصين.</div>
+        </div>
+      </div>
+      <div class="arab-hi">
+        <div class="arab-hi-icon">📉</div>
+        <div class="arab-hi-body">
+          <div class="arab-hi-title">الفجوة المهنية</div>
+          <div class="arab-hi-text">أقل من ٣٪ من مهنيي الفعاليات في منطقة MENA يحملون شهادات دولية — مما يخلق فرصة تنافسية حقيقية لحامل الشهادة المعتمدة.</div>
+        </div>
+      </div>
+      <div class="arab-hi">
+        <div class="arab-hi-icon">🤝</div>
+        <div class="arab-hi-body">
+          <div class="arab-hi-title">الشبكات العربية</div>
+          <div class="arab-hi-text">الاتحاد العربي للمعارض والمؤتمرات (UAEC) والاتحاد الأفريقي للمعارض (AAXO) توفران شبكة إقليمية لمحترفي القطاع.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Footer quote -->
+<div class="fq">
+  <div class="fq-inner">
+    <p class="fq-text">«الفعالية الناجحة ليست مجرد تنظيم حدث — إنها صياغة تجربة، وإدارة انطباع، وقياس أثر»</p>
+    <p class="fq-src">— البُعد المهني لصناعة المؤتمرات · أفريكارد للتدريب</p>
+  </div>
+</div>
+
+<p class="attr">هذه الصفحة قابلة للتعديل الكامل · أفريكارد للتدريب وتنمية الموارد البشرية</p>
