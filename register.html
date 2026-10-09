@@ -465,7 +465,7 @@ textarea.form-control { resize: vertical; min-height: 90px; }
 </head>
 <body>
 
-<!-- شريط سريع — WordPress يوفر الهيدر والناف -->
+<!-- شريط سريع -->
 <div class="ann">
   التسجيل مفتوح في برامج آفريكارد &nbsp;·&nbsp; حضوري وأونلاين &nbsp;·&nbsp; 2026
   &nbsp;&nbsp;<a href="#register">سجّل الآن ←</a>
@@ -884,7 +884,7 @@ textarea.form-control { resize: vertical; min-height: 90px; }
       <h3>شهادة إتمام</h3>
       <div class="cert-name">برنامج التحول الرقمي في التعليم والذكاء الاصطناعي</div>
       <div class="cert-prog">مُنحت إلى المشارك الذي أتمّ متطلبات البرنامج بنجاح</div>
-      <div class="cert-hours">40 ساعة تدريبية · أكتوبر 2026</div>
+      <div class="cert-hours">40 ساعة تدريبية · 2026</div>
       <div class="cert-badges">
         <div class="cert-badge"><i class="fas fa-shield-alt"></i> معتمد DTI</div>
         <div class="cert-badge"><i class="fas fa-qrcode"></i> كود تحقق إلكتروني</div>
@@ -913,7 +913,7 @@ textarea.form-control { resize: vertical; min-height: 90px; }
 </section>
 
 
-<!-- REGISTRATION FORM -->
+<!-- REGISTRATION FORM — Formspree -->
 <section class="sec" id="register">
   <div class="wrap-sm">
     <div class="sh c">
@@ -931,29 +931,37 @@ textarea.form-control { resize: vertical; min-height: 90px; }
       <div class="form-body">
         <div class="form-notice">
           <i class="fas fa-info-circle"></i>
-          ملء الاستمارة الإلكترونية شرط في اكتمال التسجيل والحصول على شهادة الدورة
+          ملء الاستمارة الإلكترونية شرط لاكتمال التسجيل والحصول على شهادة الدورة
         </div>
-        <form id="reg-form" onsubmit="submitForm(event)">
+
+        <!-- ✅ Formspree: change xwlvbpnv to the ID from your Formspree dashboard -->
+        <form id="reg-form" action="https://formspree.io/f/xwlvbpnv" method="POST">
+
+          <!-- Formspree: redirect after submission -->
+          <input type="hidden" name="_next" value="https://africahrd.com/register/?sent=1">
+          <!-- Formspree: subject line of the email you receive -->
+          <input type="hidden" name="_subject" value="تسجيل جديد — آفريكارد">
+
           <div class="form-grid">
 
             <div class="form-group full">
               <label for="email">عنوان البريد الإلكتروني <span>*</span></label>
-              <input type="email" id="email" name="entry.51716235" class="form-control" placeholder="name@example.com" required>
+              <input type="email" id="email" name="email" class="form-control" placeholder="name@example.com" required>
             </div>
 
             <div class="form-group">
               <label for="name_ar">الاسم (باللغة العربية) <span>*</span></label>
-              <input type="text" id="name_ar" name="entry.2108821704" class="form-control" placeholder="محمد أحمد" required>
+              <input type="text" id="name_ar" name="name_ar" class="form-control" placeholder="محمد أحمد" required>
             </div>
 
             <div class="form-group">
               <label for="name_en">Name (in English) <span>*</span></label>
-              <input type="text" id="name_en" name="entry.1115899542" class="form-control" placeholder="Mohammed Ahmed" required>
+              <input type="text" id="name_en" name="name_en" class="form-control" placeholder="Mohammed Ahmed" required>
             </div>
 
             <div class="form-group">
               <label for="edu">المستوى التعليمي <span>*</span></label>
-              <select id="edu" name="entry.1268034880_sentinel" class="form-control" required>
+              <select id="edu" name="edu" class="form-control" required>
                 <option value="">اختر</option>
                 <option value="ثانوي">ثانوي</option>
                 <option value="جامعي">جامعي</option>
@@ -963,22 +971,22 @@ textarea.form-control { resize: vertical; min-height: 90px; }
 
             <div class="form-group">
               <label for="location">السكن</label>
-              <input type="text" id="location" name="entry.1329719981" class="form-control" placeholder="المدينة، الدولة">
+              <input type="text" id="location" name="location" class="form-control" placeholder="المدينة، الدولة">
             </div>
 
             <div class="form-group">
               <label for="phone">رقم الهاتف <span>*</span></label>
-              <input type="tel" id="phone" name="entry.1518578172" class="form-control" placeholder="+249XXXXXXXXX" required>
+              <input type="tel" id="phone" name="phone" class="form-control" placeholder="+249XXXXXXXXX" required>
             </div>
 
             <div class="form-group">
               <label for="phone2">رقم الهاتف البديل</label>
-              <input type="tel" id="phone2" name="entry.1650549548" class="form-control" placeholder="+249XXXXXXXXX">
+              <input type="tel" id="phone2" name="phone2" class="form-control" placeholder="+249XXXXXXXXX">
             </div>
 
             <div class="form-group full">
               <label for="course">اسم الدورة التي تود التسجيل فيها <span>*</span></label>
-              <input type="text" id="course" name="entry.48235906" class="form-control" placeholder="اكتب اسم الدورة أو البرنامج..." required>
+              <input type="text" id="course" name="course" class="form-control" placeholder="اكتب اسم الدورة أو البرنامج..." required>
             </div>
 
             <div class="form-group full">
@@ -986,32 +994,32 @@ textarea.form-control { resize: vertical; min-height: 90px; }
               <p class="form-note" style="margin-bottom:10px;">اختر الطريقة التي تناسبك — وسيُحدَّد مسارك التدريبي بناءً على اختيارك</p>
               <div class="radio-group">
 
-                <label class="radio-opt mode-opt" data-mode="in-person">
-                  <input type="radio" name="entry.419844542_sentinel" value="حضوري في ود مدني" required>
+                <label class="radio-opt mode-opt">
+                  <input type="radio" name="participation_mode" value="حضوري في ود مدني" required>
                   <span>
                     <strong><i class="fas fa-map-marker-alt"></i> حضوري — ود مدني</strong>
                     <small>جلسات مباشرة في مقر آفريكارد بولاية الجزيرة</small>
                   </span>
                 </label>
 
-                <label class="radio-opt mode-opt" data-mode="in-person">
-                  <input type="radio" name="entry.419844542_sentinel" value="حضوري في الخرطوم">
+                <label class="radio-opt mode-opt">
+                  <input type="radio" name="participation_mode" value="حضوري في الخرطوم">
                   <span>
                     <strong><i class="fas fa-map-marker-alt"></i> حضوري — الخرطوم</strong>
                     <small>جلسات مباشرة في المقر المتاح بالخرطوم (يُأكَّد عند الإقبال)</small>
                   </span>
                 </label>
 
-                <label class="radio-opt mode-opt" data-mode="online">
-                  <input type="radio" name="entry.419844542_sentinel" value="التدريب عن بعد (اونلاين)">
+                <label class="radio-opt mode-opt">
+                  <input type="radio" name="participation_mode" value="عن بعد - أونلاين">
                   <span>
                     <strong><i class="fas fa-laptop"></i> عن بُعد — أونلاين</strong>
                     <small>جلسات مباشرة عبر الإنترنت · مناسب للمشاركين خارج السودان أو خارج المدينتين</small>
                   </span>
                 </label>
 
-                <label class="radio-opt mode-opt" data-mode="online">
-                  <input type="radio" name="entry.419844542_sentinel" value="أخرى">
+                <label class="radio-opt mode-opt">
+                  <input type="radio" name="participation_mode" value="أخرى / لم أحدد بعد">
                   <span>
                     <strong><i class="fas fa-question-circle"></i> أخرى / لم أحدد بعد</strong>
                     <small>سيتواصل معك الفريق لمساعدتك في اختيار المسار المناسب</small>
@@ -1031,23 +1039,23 @@ textarea.form-control { resize: vertical; min-height: 90px; }
               <label>نوع الدورات المستقبلية التي ترغب بتوفرها في المركز</label>
               <div class="check-group">
                 <label class="check-opt">
-                  <input type="checkbox" name="entry.1733108173_sentinel" value="لغات">
+                  <input type="checkbox" name="future_courses" value="لغات">
                   <span>لغات</span>
                 </label>
                 <label class="check-opt">
-                  <input type="checkbox" name="entry.1733108173_sentinel" value="دورات ادارية">
+                  <input type="checkbox" name="future_courses" value="دورات ادارية">
                   <span>دورات إدارية</span>
                 </label>
                 <label class="check-opt">
-                  <input type="checkbox" name="entry.1733108173_sentinel" value="اساسيات الحاسوب">
+                  <input type="checkbox" name="future_courses" value="اساسيات الحاسوب">
                   <span>أساسيات الحاسوب</span>
                 </label>
                 <label class="check-opt">
-                  <input type="checkbox" name="entry.1733108173_sentinel" value="دورات متخصصة (هندسية، محاسبة، إدارية، قانونية)">
+                  <input type="checkbox" name="future_courses" value="دورات متخصصة">
                   <span>دورات متخصصة (هندسية، محاسبة، إدارية، قانونية)</span>
                 </label>
               </div>
-              <input type="text" name="entry.1733108173_sentinel" class="form-control" placeholder="أخرى: اكتب هنا..." style="margin-top:10px;">
+              <input type="text" name="future_courses_other" class="form-control" placeholder="أخرى: اكتب هنا..." style="margin-top:10px;">
             </div>
 
             <div class="form-group full">
@@ -1060,15 +1068,16 @@ textarea.form-control { resize: vertical; min-height: 90px; }
           </div>
 
           <button type="submit" class="form-submit">
-            <i class="fas fa-external-link-alt"></i>
-            أكمل التسجيل عبر الاستمارة الرسمية
+            <i class="fas fa-paper-plane"></i>
+            إرسال استمارة التسجيل
           </button>
           <div class="form-privacy">
-            <i class="fas fa-shield-alt"></i>
-            ستُفتح استمارة Google الرسمية في نافذة جديدة — بياناتك محمية
+            <i class="fas fa-lock"></i>
+            بياناتك محمية — لن تُشارَك مع أي طرف ثالث
           </div>
         </form>
-        <!-- SUCCESS MESSAGE (hidden by default) -->
+
+        <!-- رسالة نجاح: تظهر عند العودة من Formspree بعد الإرسال -->
         <div id="success-msg" style="display:none;text-align:center;padding:40px 20px;">
           <i class="fas fa-check-circle" style="font-size:3rem;color:var(--green);margin-bottom:16px;display:block;"></i>
           <h3 style="font-size:1.3rem;font-weight:900;color:var(--black);margin-bottom:8px;">وصل طلبك بنجاح!</h3>
@@ -1163,10 +1172,8 @@ textarea.form-control { resize: vertical; min-height: 90px; }
 </footer>
 
 <script>
-var FORMS_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdTX143HkF7TYjArZXjpQ4XApi41dGh10Jk-BD8IW9Et834bQ/viewform?usp=header';
-
 // Show training path note based on selected mode
-document.querySelectorAll('input[name="entry.419844542_sentinel"]').forEach(function(radio) {
+document.querySelectorAll('input[name="participation_mode"]').forEach(function(radio) {
   radio.addEventListener('change', function() {
     var note = document.getElementById('path-note');
     var text = document.getElementById('path-note-text');
@@ -1174,18 +1181,37 @@ document.querySelectorAll('input[name="entry.419844542_sentinel"]').forEach(func
     var paths = {
       'حضوري في ود مدني':       ' جلسات أسبوعية في مقر آفريكارد بود مدني. ستتلقى تأكيداً بالعنوان التفصيلي والجدول الزمني خلال 24 ساعة.',
       'حضوري في الخرطوم':       ' جلسات حضورية بالخرطوم. سيتواصل معك الفريق لتأكيد المقر والجدول بعد اكتمال المجموعة.',
-      'التدريب عن بعد (اونلاين)': ' جلسات مباشرة عبر Zoom/Teams بنفس توقيت المجموعة الحضورية. ستصلك رابط الانضمام قبل 48 ساعة من البدء.',
-      'أخرى': ' سيتواصل معك أحد أعضاء الفريق للتحدث معك عن الخيار الأنسب لظروفك ومكان إقامتك.'
+      'عن بعد - أونلاين':       ' جلسات مباشرة عبر Zoom/Teams بنفس توقيت المجموعة الحضورية. ستصلك رابط الانضمام قبل 48 ساعة من البدء.',
+      'أخرى / لم أحدد بعد':    ' سيتواصل معك أحد أعضاء الفريق للتحدث معك عن الخيار الأنسب لظروفك ومكان إقامتك.'
     };
     text.textContent = paths[this.value] || '';
   });
 });
 
-function submitForm(e) {
-  e.preventDefault();
-  // فتح Google Forms مباشرةً في تبويب جديد
-  window.open(FORMS_URL, '_blank');
+// Show success message if redirected back after Formspree submission
+if (window.location.search.indexOf('sent=1') !== -1) {
+  document.getElementById('reg-form').style.display = 'none';
+  document.getElementById('success-msg').style.display = 'block';
 }
+
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(function(q) {
+  q.addEventListener('click', function() {
+    var item = this.closest('.faq-item');
+    var body = item.querySelector('.faq-a');
+    var icon = this.querySelector('i');
+    var open = body.style.display === 'block';
+    // close all
+    document.querySelectorAll('.faq-a').forEach(function(a){ a.style.display = 'none'; });
+    document.querySelectorAll('.faq-q i').forEach(function(i){ i.style.transform = 'rotate(0deg)'; });
+    if (!open) {
+      body.style.display = 'block';
+      icon.style.transform = 'rotate(180deg)';
+    }
+  });
+  // default: hide FAQ bodies
+  q.closest('.faq-item').querySelector('.faq-a').style.display = 'none';
+});
 </script>
 
 </body>
