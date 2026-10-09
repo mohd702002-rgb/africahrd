@@ -1,0 +1,285 @@
+<title>التسجيل في برامج أفريكارد</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"></script>
+<style>
+:root{
+  --blue:#004B8D;--blue-dk:#003470;--teal:#006494;
+  --gold:#C9A227;--gold2:#e8c547;
+  --bg:#fff;--fg:#0a0f1e;--card:#fff;--muted:#5a6275;
+  --border:#dde3ef;--wash:#F4F7FB;
+  --grad-blue:linear-gradient(135deg,#003470,#004B8D 50%,#006494);
+  --grad-gold:linear-gradient(90deg,#C9A227,#e8c547,#C9A227);
+  --shadow:0 2px 16px rgba(0,75,141,.09);
+  --shadow-md:0 8px 32px rgba(0,75,141,.14);
+  color-scheme:light;
+}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0d1117;--fg:#e8ecf3;--card:#161b24;--muted:#8b95a8;
+    --border:#2a3042;--wash:#0d1117;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0d1117;--fg:#e8ecf3;--card:#161b24;--muted:#8b95a8;
+  --border:#2a3042;--wash:#0d1117;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:'Cairo',system-ui,sans-serif;direction:rtl;
+  background:var(--bg);color:var(--fg);-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:100;
+  height:68px;background:var(--blue);
+  display:flex;align-items:center;padding-inline:clamp(1rem,4vw,2.5rem);
+  gap:1.5rem;box-shadow:0 2px 16px rgba(0,0,0,.22)}
+.nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:var(--grad-gold)}
+.nav-logo{display:flex;align-items:center;gap:.7rem}
+.nav-logo-txt{color:#fff;font-size:.9rem;font-weight:700;line-height:1.25}
+.nav-logo-sub{font-size:.62rem;color:rgba(255,255,255,.6);font-weight:400}
+.nav-back{margin-inline-start:auto;color:rgba(255,255,255,.8);font-size:.82rem;
+  display:flex;align-items:center;gap:.4rem;
+  background:rgba(255,255,255,.1);border-radius:8px;padding:.35rem .8rem;
+  border:1px solid rgba(255,255,255,.2);transition:all .2s}
+.nav-back:hover{background:rgba(255,255,255,.2);color:#fff}
+
+/* HERO */
+.hero{background:var(--grad-blue);padding:4rem clamp(1rem,5vw,3rem) 3rem;text-align:center;
+  position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% -20%,rgba(201,162,39,.18) 0%,transparent 65%)}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(255,255,255,.15);backdrop-filter:blur(8px);
+  color:#fff;border-radius:999px;border:1px solid rgba(255,255,255,.3);
+  padding:.35rem 1rem;font-size:.78rem;font-weight:700;margin-bottom:1.2rem}
+.hero h1{color:#fff;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;
+  line-height:1.2;margin-bottom:.8rem;text-wrap:balance}
+.hero h1 em{font-style:normal;color:var(--gold2)}
+.hero p{color:rgba(255,255,255,.82);font-size:1rem;line-height:1.85;
+  max-width:540px;margin:0 auto 2rem}
+.hero-stats{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;
+  margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.15)}
+.stat-n{font-size:1.6rem;font-weight:800;color:#fff}
+.stat-n span{color:var(--gold2)}
+.stat-l{font-size:.72rem;color:rgba(255,255,255,.6)}
+
+/* MAIN */
+.main{max-width:900px;margin:0 auto;padding:3rem clamp(1rem,4vw,2rem)}
+
+/* REGISTERED LIST */
+.reg-section{margin-bottom:3rem}
+.section-head{display:flex;align-items:center;gap:.8rem;margin-bottom:1.5rem}
+.section-head h2{font-size:1.2rem;font-weight:800;color:var(--fg)}
+.count-badge{background:var(--blue);color:#fff;border-radius:999px;
+  padding:.2rem .7rem;font-size:.75rem;font-weight:700}
+.reg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
+.reg-card{background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:1.25rem;display:flex;flex-direction:column;align-items:center;gap:.7rem;
+  text-align:center;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}
+.reg-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.reg-avatar{width:56px;height:56px;border-radius:50%;
+  background:var(--grad-blue);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;font-weight:800;letter-spacing:-.02em;flex-shrink:0}
+.reg-name{font-size:.85rem;font-weight:700;line-height:1.4;color:var(--fg)}
+.reg-status{display:inline-flex;align-items:center;gap:.3rem;
+  background:#d4edda;color:#155724;border-radius:999px;
+  padding:.15rem .6rem;font-size:.68rem;font-weight:700}
+:root[data-theme="dark"] .reg-status,
+@media(prefers-color-scheme:dark){.reg-status}{background:#0f2d1a;color:#4caf84}
+
+/* CTA */
+.cta-box{background:var(--grad-blue);border-radius:24px;padding:2.5rem 2rem;
+  text-align:center;position:relative;overflow:hidden}
+.cta-box::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% -30%,rgba(201,162,39,.2) 0%,transparent 60%)}
+.cta-box h2{color:#fff;font-size:clamp(1.3rem,3vw,1.9rem);font-weight:900;
+  margin-bottom:.7rem;position:relative}
+.cta-box p{color:rgba(255,255,255,.8);font-size:.93rem;line-height:1.8;
+  max-width:480px;margin:0 auto 1.8rem;position:relative}
+.cta-btn{display:inline-flex;align-items:center;gap:.6rem;
+  background:var(--gold);color:#fff;border-radius:12px;
+  padding:1rem 2.2rem;font-family:inherit;font-size:1rem;font-weight:800;
+  cursor:pointer;border:none;
+  box-shadow:0 4px 24px rgba(201,162,39,.55);
+  transition:all .22s;position:relative;text-decoration:none}
+.cta-btn:hover{background:var(--gold2);transform:translateY(-2px);
+  box-shadow:0 8px 32px rgba(201,162,39,.65)}
+.cta-note{color:rgba(255,255,255,.55);font-size:.75rem;margin-top:1rem;position:relative}
+
+/* FEATURES */
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:1rem;margin:2.5rem 0}
+.feat{background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:1.25rem;display:flex;align-items:flex-start;gap:.8rem}
+.feat-icon{font-size:1.5rem;flex-shrink:0}
+.feat-title{font-size:.85rem;font-weight:700;margin-bottom:.2rem}
+.feat-desc{font-size:.78rem;color:var(--muted);line-height:1.6}
+
+/* FOOTER */
+footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem;
+  border-top:1px solid var(--border);margin-top:2rem}
+footer a{color:var(--blue);font-weight:600}
+</style>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">
+    <div class="nav-logo-txt">أفريكارد
+      <div class="nav-logo-sub">للتدريب وتنمية الموارد البشرية</div>
+    </div>
+  </div>
+  <a href="/" class="nav-back"><i class="fa-solid fa-arrow-right"></i> الرئيسية</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge"><i class="fa-solid fa-certificate"></i> برامج مجانية معتمدة</div>
+  <h1>سجّل في برامج <em>أفريكارد</em> التدريبية</h1>
+  <p>انضم إلى مئات المتدربين من أفريقيا والعالم العربي — شهادات معتمدة، تدريب مجاني، مدربون متخصصون</p>
+  <div class="hero-stats">
+    <div><div class="stat-n">٨<span>+</span></div><div class="stat-l">متدرب مسجّل</div></div>
+    <div><div class="stat-n">٧</div><div class="stat-l">مجالات تدريبية</div></div>
+    <div><div class="stat-n">١٠٠<span>٪</span></div><div class="stat-l">مجاني بالكامل</div></div>
+  </div>
+</section>
+
+<main class="main">
+
+  <!-- REGISTERED -->
+  <div class="reg-section">
+    <div class="section-head">
+      <h2>المتدربون المسجّلون</h2>
+      <span class="count-badge">٨ متدربين</span>
+    </div>
+    <div class="reg-grid" id="regGrid">
+      <!-- Cards injected by script -->
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="features">
+    <div class="feat">
+      <span class="feat-icon">🎓</span>
+      <div>
+        <div class="feat-title">شهادة معتمدة</div>
+        <div class="feat-desc">شهادة إتمام رسمية من أفريكارد عند اكتمال البرنامج</div>
+      </div>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">🌍</span>
+      <div>
+        <div class="feat-title">تدريب إقليمي</div>
+        <div class="feat-desc">مدربون من السودان، مصر، السعودية وأكثر من ١٥ دولة</div>
+      </div>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">💬</span>
+      <div>
+        <div class="feat-title">عبر واتساب</div>
+        <div class="feat-desc">جلسات تفاعلية مباشرة على واتساب — بدون تطبيقات إضافية</div>
+      </div>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">✅</span>
+      <div>
+        <div class="feat-title">مجاني بالكامل</div>
+        <div class="feat-desc">لا رسوم ولا اشتراكات — التدريب حق للجميع</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <h2>انضم إلينا الآن</h2>
+    <p>لا تزال أماكن متاحة — سجّل الآن عبر استمارة التسجيل الإلكترونية وسنتواصل معك فور تأكيد تسجيلك</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdTX143HkF7TYjArZXjpQ4XApi41dGh10Jk-BD8IW9Et834bQ/viewform?usp=header"
+       target="_blank" rel="noopener" class="cta-btn">
+      <i class="fa-solid fa-pen-to-square"></i> سجّل الآن — مجاناً
+    </a>
+    <p class="cta-note">يفتح في نافذة جديدة · لا يحتاج حساب جوجل</p>
+  </div>
+
+</main>
+
+<footer>
+  <p>© ٢٠٢٦ أفريكارد للتدريب وتنمية الموارد البشرية · <a href="/">africahrd.com</a></p>
+</footer>
+
+<!-- BOT FAB -->
+<style>
+.bot-fab{position:fixed;bottom:24px;left:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.bot-fab-btn{width:54px;height:54px;border-radius:50%;border:none;cursor:pointer;
+  background:linear-gradient(135deg,#004B8D,#0066cc);color:#fff;font-size:1.4rem;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(0,75,141,.45);transition:transform .2s}
+.bot-fab-btn:hover{transform:scale(1.08)}
+.bot-panel{position:fixed;bottom:90px;left:24px;z-index:9998;
+  width:min(360px,calc(100vw - 48px));height:min(560px,calc(100vh - 120px));
+  border-radius:20px;overflow:hidden;
+  box-shadow:0 12px 48px rgba(0,0,0,.22);display:none;
+  flex-direction:column;border:1px solid rgba(0,75,141,.2)}
+.bot-panel.open{display:flex}
+.bot-ph{background:#004B8D;color:#fff;padding:.65rem 1rem;
+  display:flex;align-items:center;justify-content:space-between;font-size:.83rem;font-weight:700;flex-shrink:0}
+.bot-ph button{background:none;border:none;color:#fff;cursor:pointer;font-size:1rem;opacity:.8}
+.bot-ph button:hover{opacity:1}
+.bot-panel iframe{width:100%;flex:1;border:none;background:#fff}
+</style>
+<div class="bot-fab">
+  <div class="bot-panel" id="bp">
+    <div class="bot-ph"><span>🎓 مستشار أفريكارد</span><button onclick="closeBt()">✕</button></div>
+    <iframe id="bf" src="" title="مستشار أفريكارد التدريبي" loading="lazy"></iframe>
+  </div>
+  <button class="bot-fab-btn" onclick="togBt()" title="مستشار التدريب">🎓</button>
+</div>
+
+<script>
+// Registrants data
+var regs = [
+  {name:'نادر عبدالحميد محمد محمود'},
+  {name:'Nahla Abdallah Abdelgader'},
+  {name:'عائشة عبدالغفار'},
+  {name:'حاتم بابكر أحمد علي'},
+  {name:'حسنة أبكر إبراهيم عيسى'},
+  {name:'نهال عبدالرحمن محمد خلف الله'},
+  {name:'Manal Mahadi Ibrahim Salim'},
+  {name:'أماني صديق تبيدي'}
+];
+
+function initials(n){
+  var p=n.trim().split(/\s+/);
+  if(p.length>=2) return (p[0][0]+(p[1][0]||'')).toUpperCase();
+  return p[0].slice(0,2).toUpperCase();
+}
+
+var colors=['linear-gradient(135deg,#004B8D,#006494)',
+  'linear-gradient(135deg,#1b5e20,#388e3c)',
+  'linear-gradient(135deg,#4a148c,#7b1fa2)',
+  'linear-gradient(135deg,#bf360c,#e64a19)',
+  'linear-gradient(135deg,#006064,#00838f)',
+  'linear-gradient(135deg,#0d47a1,#1565c0)',
+  'linear-gradient(135deg,#33691e,#558b2f)',
+  'linear-gradient(135deg,#880e4f,#c2185b)'];
+
+var grid=document.getElementById('regGrid');
+regs.forEach(function(r,i){
+  grid.innerHTML+='<div class="reg-card">'+
+    '<div class="reg-avatar" style="background:'+colors[i%colors.length]+'">'+initials(r.name)+'</div>'+
+    '<div class="reg-name">'+r.name+'</div>'+
+    '<span class="reg-status"><i class="fa-solid fa-circle-check"></i> مسجّل</span>'+
+    '</div>';
+});
+
+// Bot
+var bo=false;
+function togBt(){bo=!bo;var p=document.getElementById('bp'),f=document.getElementById('bf');
+  p.classList.toggle('open',bo);if(bo&&!f.src)f.src='/tools/training-bot/index.html';}
+function closeBt(){bo=false;document.getElementById('bp').classList.remove('open');}
+
+// Theme from localStorage
+try{var t=localStorage.getItem('afr-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}
+</script>
