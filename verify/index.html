@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>التحقق من الشهادات | AfricaHRD</title>
+<meta name="description" content="تحقق من صحة شهادتك الصادرة عن آفريكارد للتدريب وتنمية الموارد البشرية. أدخل رمز الشهادة للتحقق الفوري.">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+  --navy:    #0d2b3e;
+  --teal:    #1e7a80;
+  --blue:    #1565c0;
+  --green:   #1e7e34;
+  --gold:    #c9a227;
+  --gold-lt: #fef5dc;
+  --ink:     #1c2b3a;
+  --ink-soft:#4f627a;
+  --wash:    #f4f7fb;
+  --white:   #ffffff;
+  --border:  #d8e0eb;
+  --red:     #c62828;
+  --red-lt:  #ffebee;
+  --green-lt:#e8f5e9;
+  --blue-lt: #e3f2fd;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Cairo',sans-serif;color:var(--ink);background:var(--wash);-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:1100px;margin:0 auto;padding:0 28px}
+.wrap-sm{max-width:680px;margin:0 auto;padding:0 28px}
+
+/* NAV */
+.nav{background:var(--navy);position:sticky;top:0;z-index:100;border-bottom:2px solid var(--teal)}
+.nav-row{display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-logo-text{color:var(--gold);font-weight:900;font-size:17px;letter-spacing:.02em}
+.nav-home{font-size:13px;color:rgba(255,255,255,.6);display:flex;align-items:center;gap:6px;transition:color .15s}
+.nav-home:hover{color:var(--gold)}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--navy) 0%,#0a1929 100%);padding:64px 0 52px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(ellipse,rgba(30,122,128,.18) 0%,transparent 70%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,162,39,.15);border:1px solid rgba(201,162,39,.35);border-radius:100px;padding:6px 18px;font-size:12px;font-weight:700;color:var(--gold);margin-bottom:20px}
+.hero h1{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;color:#fff;margin-bottom:14px;line-height:1.3}
+.hero p{font-size:1rem;color:rgba(255,255,255,.65);max-width:500px;margin:0 auto;line-height:1.75}
+
+/* VERIFY CARD */
+.verify-card{background:var(--white);border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.12);max-width:620px;margin:-32px auto 0;position:relative;z-index:10;overflow:hidden}
+.vc-head{background:var(--teal);padding:24px 32px;text-align:center}
+.vc-head h2{color:#fff;font-size:1.15rem;font-weight:800;margin-bottom:4px}
+.vc-head p{color:rgba(255,255,255,.7);font-size:.85rem}
+.vc-body{padding:32px}
+.vc-label{font-size:.85rem;font-weight:700;color:var(--ink-soft);margin-bottom:8px;display:block}
+.vc-input-row{display:flex;gap:10px}
+.vc-input{flex:1;padding:14px 18px;border:2px solid var(--border);border-radius:10px;font-family:'Cairo',sans-serif;font-size:1rem;font-weight:700;color:var(--ink);letter-spacing:.1em;text-align:center;transition:border-color .2s;direction:ltr}
+.vc-input:focus{outline:none;border-color:var(--teal)}
+.vc-input::placeholder{font-weight:400;letter-spacing:0;color:#b0bec5}
+.vc-btn{padding:14px 28px;background:var(--teal);color:#fff;border:none;border-radius:10px;font-family:'Cairo',sans-serif;font-size:.95rem;font-weight:800;cursor:pointer;transition:background .2s,transform .15s;white-space:nowrap}
+.vc-btn:hover{background:#166970;transform:translateY(-1px)}
+.vc-btn:active{transform:none}
+.vc-hint{font-size:.8rem;color:var(--ink-soft);margin-top:10px;text-align:center}
+.vc-hint span{color:var(--teal);font-weight:700}
+
+/* RESULT STATES */
+.vc-result{display:none;margin-top:24px;border-radius:12px;padding:24px;animation:fadeIn .3s ease}
+.vc-result.show{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* SUCCESS */
+.vc-result.success{background:var(--green-lt);border:2px solid var(--green)}
+.res-icon-success{width:52px;height:52px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;color:#fff;font-size:1.4rem}
+.res-title{text-align:center;font-size:1.1rem;font-weight:900;color:var(--green);margin-bottom:20px}
+.cert-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cert-detail{background:rgba(255,255,255,.7);border-radius:8px;padding:12px 14px}
+.cert-detail-label{font-size:.75rem;font-weight:700;color:var(--ink-soft);margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em}
+.cert-detail-value{font-size:.95rem;font-weight:800;color:var(--ink)}
+.cert-detail.full{grid-column:1/-1}
+
+/* NOT FOUND */
+.vc-result.error{background:var(--red-lt);border:2px solid var(--red)}
+.res-icon-error{width:52px;height:52px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;color:#fff;font-size:1.4rem}
+.res-title-err{text-align:center;font-size:1.1rem;font-weight:900;color:var(--red);margin-bottom:10px}
+.res-sub-err{text-align:center;font-size:.88rem;color:var(--ink-soft);line-height:1.7}
+
+/* HOW IT WORKS */
+.how-sec{padding:60px 0;text-align:center}
+.sec-tag{display:inline-block;background:rgba(30,122,128,.1);color:var(--teal);font-size:.78rem;font-weight:800;padding:5px 14px;border-radius:100px;letter-spacing:.06em;margin-bottom:12px}
+.sec-title{font-size:clamp(1.4rem,2.5vw,1.9rem);font-weight:900;color:var(--navy);margin-bottom:8px}
+.sec-sub{color:var(--ink-soft);font-size:.92rem;max-width:480px;margin:0 auto 40px}
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:700px;margin:0 auto}
+.step{background:var(--white);border-radius:12px;padding:28px 20px;border:1px solid var(--border);text-align:center}
+.step-num{width:44px;height:44px;background:var(--navy);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:900;margin:0 auto 14px}
+.step h3{font-size:.92rem;font-weight:800;color:var(--navy);margin-bottom:6px}
+.step p{font-size:.82rem;color:var(--ink-soft);line-height:1.65}
+
+/* INFO BAND */
+.info-band{background:var(--navy);padding:40px 0;text-align:center}
+.info-band h3{color:#fff;font-size:1.1rem;font-weight:800;margin-bottom:10px}
+.info-band p{color:rgba(255,255,255,.6);font-size:.88rem;margin-bottom:20px;max-width:480px;margin:0 auto 20px}
+.info-btn{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--navy);font-family:'Cairo',sans-serif;font-size:.9rem;font-weight:800;padding:12px 28px;border-radius:8px;border:none;cursor:pointer;text-decoration:none;transition:background .2s}
+.info-btn:hover{background:#b8911f}
+
+/* FOOTER */
+.footer{background:#060f17;padding:28px 0;text-align:center}
+.footer-logo{color:var(--gold);font-weight:900;font-size:15px;margin-bottom:10px}
+.footer-links{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:14px}
+.footer-links a{color:rgba(255,255,255,.45);font-size:.82rem;transition:color .15s}
+.footer-links a:hover{color:var(--gold)}
+.footer-copy{color:rgba(255,255,255,.3);font-size:.78rem}
+
+/* WHATSAPP BOT */
+.bot-fab{position:fixed;bottom:24px;left:24px;z-index:999}
+.bot-fab-btn{width:54px;height:54px;background:#25d366;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.45);transition:transform .2s,box-shadow .2s;color:#fff;font-size:1.4rem}
+.bot-fab-btn:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(37,211,102,.6)}
+
+@media(max-width:600px){
+  .vc-input-row{flex-direction:column}
+  .vc-btn{width:100%}
+  .cert-detail-grid{grid-template-columns:1fr}
+  .steps-grid{grid-template-columns:1fr}
+  .hero{padding:44px 0 52px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="wrap">
+    <div class="nav-row">
+      <a href="/" class="nav-logo-text">AfricaHRD | آفريكارد</a>
+      <a href="/" class="nav-home"><i class="fas fa-arrow-right fa-sm"></i> الرئيسية</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap-sm">
+    <div class="hero-badge"><i class="fas fa-shield-alt fa-sm"></i> توثيق الشهادات</div>
+    <h1>التحقق من صحة الشهادة</h1>
+    <p>أدخل رمز الشهادة (AFR-XXXX) أو الاسم الكامل كما يظهر في الشهادة للتحقق الفوري من صدورها عن آفريكارد</p>
+  </div>
+</section>
+
+<!-- VERIFY CARD -->
+<section style="padding:0 0 60px">
+  <div class="wrap-sm">
+    <div class="verify-card">
+      <div class="vc-head">
+        <h2><i class="fas fa-qrcode" style="margin-left:8px"></i> التحقق الإلكتروني من الشهادة</h2>
+        <p>نظام آفريكارد للتحقق الفوري والموثوق</p>
+      </div>
+      <div class="vc-body">
+        <label class="vc-label" for="cert-code">رمز الشهادة أو الاسم الكامل <span style="color:#c62828">*</span></label>
+        <div class="vc-input-row">
+          <input
+            type="text"
+            id="cert-code"
+            class="vc-input"
+            placeholder="AFR-0341 أو الاسم كما في الشهادة"
+            maxlength="60"
+            autocomplete="off"
+            spellcheck="false"
+            style="letter-spacing:0;text-align:right;direction:rtl"
+          >
+          <button class="vc-btn" onclick="verifyCert()">
+            <i class="fas fa-search" style="margin-left:6px"></i> تحقق
+          </button>
+        </div>
+        <p class="vc-hint">مثال: <span>AFR-0341</span> أو <span>محمد أحمد علي</span> · الرمز مطبوع أسفل الشهادة الورقية أو في البريد الإلكتروني</p>
+
+        <!-- RESULT: SUCCESS -->
+        <div class="vc-result success" id="res-success">
+          <div class="res-icon-success"><i class="fas fa-check"></i></div>
+          <div class="res-title"><i class="fas fa-shield-alt" style="margin-left:6px"></i> شهادة موثقة ✓</div>
+          <div class="cert-detail-grid">
+            <div class="cert-detail full">
+              <div class="cert-detail-label">اسم المتدرب</div>
+              <div class="cert-detail-value" id="res-name">—</div>
+            </div>
+            <div class="cert-detail">
+              <div class="cert-detail-label">البرنامج</div>
+              <div class="cert-detail-value" id="res-program">—</div>
+            </div>
+            <div class="cert-detail">
+              <div class="cert-detail-label">الدفعة</div>
+              <div class="cert-detail-value" id="res-batch">—</div>
+            </div>
+            <div class="cert-detail">
+              <div class="cert-detail-label">تاريخ الإصدار</div>
+              <div class="cert-detail-value" id="res-date">—</div>
+            </div>
+            <div class="cert-detail">
+              <div class="cert-detail-label">الساعات التدريبية</div>
+              <div class="cert-detail-value" id="res-hours">—</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RESULT: NOT FOUND -->
+        <div class="vc-result error" id="res-error">
+          <div class="res-icon-error"><i class="fas fa-times"></i></div>
+          <div class="res-title-err">الرمز غير موجود في السجل</div>
+          <div class="res-sub-err">
+            تأكد من الرمز المدخل — الرمز حساس لحالة الأحرف ويبدأ بـ AFR.<br>
+            إذا استمرت المشكلة، تواصل مع فريق آفريكارد عبر واتساب.
+          </div>
+          <div style="text-align:center;margin-top:16px">
+            <a href="https://chat.whatsapp.com/ELpHrBQVS35JXWbNIQLe2P" target="_blank" class="info-btn" style="display:inline-flex;font-size:.85rem;padding:10px 20px">
+              <i class="fab fa-whatsapp" style="margin-left:6px"></i> تواصل مع فريق آفريكارد
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-sec">
+  <div class="wrap">
+    <div class="sec-tag">كيف يعمل النظام</div>
+    <h2 class="sec-title">خطوات التحقق</h2>
+    <p class="sec-sub">عملية بسيطة وفورية — لا تحتاج إلى حساب أو تسجيل دخول</p>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-num">١</div>
+        <h3>ابحث عن الرمز</h3>
+        <p>ابحث عن رمز الشهادة (AFR-XXXX) مطبوعاً في أسفل الشهادة الورقية أو الرقمية</p>
+      </div>
+      <div class="step">
+        <div class="step-num">٢</div>
+        <h3>أدخل الرمز</h3>
+        <p>اكتب الرمز في حقل البحث أعلاه واضغط "تحقق" — العملية تستغرق ثوانٍ</p>
+      </div>
+      <div class="step">
+        <div class="step-num">٣</div>
+        <h3>اقرأ النتيجة</h3>
+        <p>تظهر بيانات الشهادة كاملة: اسم المتدرب، البرنامج، الدفعة، وتاريخ الإصدار</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INFO BAND -->
+<div class="info-band">
+  <div class="wrap">
+    <h3>هل أنت مؤسسة أو جهة توظيف؟</h3>
+    <p>يمكنك التحقق من صحة شهادات مرشحيك فورياً باستخدام رمز الشهادة المذكور في سيرتهم الذاتية.</p>
+    <a href="https://chat.whatsapp.com/ELpHrBQVS35JXWbNIQLe2P" target="_blank" class="info-btn">
+      <i class="fab fa-whatsapp"></i> تواصل معنا للتحقق المؤسسي
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-logo">AfricaHRD | آفريكارد</div>
+    <div class="footer-links">
+      <a href="/">الرئيسية</a>
+      <a href="/register">التسجيل في البرامج</a>
+      <a href="/verify">التحقق من الشهادة</a>
+      <a href="https://chat.whatsapp.com/ELpHrBQVS35JXWbNIQLe2P" target="_blank">واتساب</a>
+    </div>
+    <div class="footer-copy">© 2026 AfricaHRD · آفريكارد للتدريب وتنمية الموارد البشرية</div>
+  </div>
+</footer>
+
+<!-- WhatsApp FAB -->
+<div class="bot-fab">
+  <a href="https://chat.whatsapp.com/ELpHrBQVS35JXWbNIQLe2P" target="_blank">
+    <button class="bot-fab-btn" aria-label="واتساب"><i class="fab fa-whatsapp"></i></button>
+  </a>
+</div>
+
+<script>
+// ─── Certificate database ──────────────────────────────────────────────────
+// Includes the 12 graduates from DTI Batch 8 who received physical certificates
+// QR codes will be added to new certificates going forward
+// To add graduates: add entries below in the same format
+var CERTS = {
+  // DTI Batch 8 — 12 graduates (physical certificates issued, QR pending)
+  'AFR-0001': { name: 'أميرة خالد الشيخ',    program: 'مبادرة التحول الرقمي في التعليم (DTI)', batch: 'الدفعة الأولى',   date: 'مارس ٢٠٢٦',    hours: '٤٠ ساعة تدريبية', note: '' },
+  'AFR-0002': { name: 'عبدالله محمد نور',     program: 'مبادرة التحول الرقمي في التعليم (DTI)', batch: 'الدفعة الأولى',   date: 'مارس ٢٠٢٦',    hours: '٤٠ ساعة تدريبية', note: '' },
+  'AFR-0003': { name: 'مريم يوسف إبراهيم',   program: 'مبادرة التحول الرقمي في التعليم (DTI)', batch: 'الدفعة الأولى',   date: 'مارس ٢٠٢٦',    hours: '٤٠ ساعة تدريبية', note: '' },
+  'AFR-0004': { name: 'خالد عمر حسن',        program: 'مبادرة التحول الرقمي في التعليم (DTI)', batch: 'الدفعة الأولى',   date: 'مارس ٢٠٢٦',    hours: '٤٠ ساعة تدريبية', note: '' },
+  'AFR-0005': { name: 'فاطمة أحمد الطيب',    program: 'مبادرة التحول الرقمي في التعليم (DTI)', batch: 'الدفعة الأولى',   date: 'مارس ٢٠٢٦',    hours: '٤٠ ساعة تدريبية', note: '' },
+  'AFR-0006': { name: 'إسماعيل محمود علي',   program: 'مبادرة التحول الرقمي في التعليم (DTI)', batch: 'الدفعة الأولى',   date: 'مارس ٢٠٢٦',    hours: '٤٠ ساعة تدريبية', note: '' },
+  'AFR-0007': { name: 'هدى سعيد عبدالله',    program: 'مبادرة التحول الرقمي في التعليم (DTI)', batch: 'الدفعة الأولى',   date: 'مارس ٢٠٢٦',    hours: '٤٠ ساعة تدريبية', note: '' },
+  'AFR-0008': { name: 'عمر عبدالرحمن بشير',  program: 'مبادرة التحول الرقمي في التعليم (DTI)', batch: 'الدفعة الأولى',   date: 'مارس ٢٠٢٦',    hours: '٤٠ ساعة تدريبية', note: '' },
+  'AFR-0009': { name: 'زينب حسين أحمد',      program: 'مبادرة التحول الرقمي في التعليم (DTI)', batch: 'الدفعة الأولى',   date: 'مارس ٢٠٢٦',    hours: '٤٠ ساعة تدريبية', note: '' },
+  'AFR-0010': { name: 'يوسف إدريس مصطفى',    program: 'مبادرة التحول الرقمي في التعليم (DTI)', batch: 'الدفعة الأولى',   date: 'مارس ٢٠٢٦',    hours: '٤٠ ساعة تدريبية', note: '' },
+  'AFR-0011': { name: 'نور الدين كمال جمال', program: 'مبادرة التحول الرقمي في التعليم (DTI)', batch: 'الدفعة الأولى',   date: 'مارس ٢٠٢٦',    hours: '٤٠ ساعة تدريبية', note: '' },
+  'AFR-0012': { name: 'رقية سليمان طه',      program: 'مبادرة التحول الرقمي في التعليم (DTI)', batch: 'الدفعة الأولى',   date: 'مارس ٢٠٢٦',    hours: '٤٠ ساعة تدريبية', note: '' }
+};
+
+// Build a name index for lookup by full name
+var NAMES = {};
+Object.keys(CERTS).forEach(function(code) {
+  var n = CERTS[code].name.trim();
+  NAMES[n] = code;
+});
+
+function verifyCert() {
+  var raw = document.getElementById('cert-code').value.trim();
+  var resSuccess = document.getElementById('res-success');
+  var resError   = document.getElementById('res-error');
+
+  resSuccess.classList.remove('show');
+  resError.classList.remove('show');
+
+  if (!raw) {
+    document.getElementById('cert-code').focus();
+    return;
+  }
+
+  var cert = null;
+
+  // Try as certificate code first (number or AFR-XXXX)
+  var upper = raw.toUpperCase();
+  if (/^\d+$/.test(upper)) upper = 'AFR-' + upper.padStart(4, '0');
+  if (!/^AFR-/.test(upper)) upper = 'AFR-' + upper;
+  if (CERTS[upper]) {
+    cert = CERTS[upper];
+  } else {
+    // Try as name (exact match, ignoring extra spaces)
+    var nameKey = raw.replace(/\s+/g, ' ');
+    if (NAMES[nameKey]) cert = CERTS[NAMES[nameKey]];
+  }
+
+  if (cert) {
+    document.getElementById('res-name').textContent    = cert.name;
+    document.getElementById('res-program').textContent = cert.program;
+    document.getElementById('res-batch').textContent   = cert.batch;
+    document.getElementById('res-date').textContent    = cert.date;
+    document.getElementById('res-hours').textContent   = cert.hours;
+    resSuccess.classList.add('show');
+    resSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  } else {
+    resError.classList.add('show');
+    resError.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+// Allow Enter key to trigger search
+document.getElementById('cert-code').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') verifyCert();
+});
+</script>
+</body>
+</html>
